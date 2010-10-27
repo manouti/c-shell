@@ -4,7 +4,7 @@ Post your opinions and suggestions about anything related to the language syntax
 
 This is the first wiki page of the project! Throughout the project term, we are going to add more content to it as we update the language definition.
 
-Feel free to add any comment.
+Feel free to add any improving comment.
 
 
 = Details =
@@ -24,7 +24,4 @@ GUI currently is a painful behavior and involves manual record and replay testin
 small change in the resolution of a screen can render a test suite obsolete. With Guolice and a
 proper checker that checks whether a trace of a GUI execution violates a Guolice specification, GUI testing should become much easier.
 
-You can find a short file about what things would be for now in the *Download* (http://code.google.com/p/c-shell/downloads/list) section:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+You can find a short file about what things would be for now in the [http://code.google.com/p/c-shell/downloads/list Downloads] section.
