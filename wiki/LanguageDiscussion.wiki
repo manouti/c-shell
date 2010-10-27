@@ -1,0 +1,13 @@
+#summary One-sentence summary of this page.
+Post your opinions and suggestions about anything related to the language syntax and semantics here on this page.
+
+= Introduction =
+
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
