@@ -10,7 +10,7 @@ program
  	
 
 workSpace:
-		'WorkSpace'ID ':' 
+		'WorkSpace' ':' ID  
 		'{'
 		 ( procedureDec |functionDec | statement | guiType )*
 		'}'
@@ -33,7 +33,7 @@ guiCommonProperty
 	;
 	 
 box
-	: 'Box' ID '('
+	: 'Box' ':' ID '('
 	   (boxProperty (','boxProperty)*)?
 	')'
 	;
@@ -46,7 +46,7 @@ boxProperty
 	
 
 circle
-	: 'Circle' ID '(' 
+	: 'Circle' ':'ID  '(' 
 	   (circleProperty (','circleProperty)*)?	   
 	 ')'
 	;
@@ -57,7 +57,7 @@ circleProperty
 	;
 
 textBox
-	: ('TextBox'| 'Button') ID '('   				//the textBox here can be textBox or Button
+	: ('TextBox'| 'Button')  ':' ID '('   				//the textBox here can be textBox or Button
 	   (textBoxProperty (',' textBoxProperty)*)?
 	')'
 	;		
@@ -72,15 +72,15 @@ position
 	;
 	
 point
-	: 'StartPoint'':' '('INTEGER ',' INTEGER ')'
+	: 'StartPoint'':' '('number ',' number ')'
 	;
 	
 width
-	: 'Width' ':' INTEGER
+	: 'Width' ':' number
 	;
 	
 hight
-	: 'Hight' ':' INTEGER
+	: 'Hight' ':' number
 	;
 	 	
 color
@@ -88,37 +88,62 @@ color
 	;
 
 radius
-	: 'R'':' INTEGER
+	: 'R'':' number
 	;	
 	
 textProperty
-	: 'Text' ':' STRING	  
+	: 'Text' ':' string	  
 	;
 
 event
-	: EVENTTYPE	'(' ( statement | guiType )*')'
-	;	
-type
-	: 'int'
-	| 'float'
-	| 'color'
-	| 'string'
+	: EVENTTYPE	'(' 
+	//( statement | guiType )*   // I'm thinking that I don't want it to be here
+	')'
 	;	
 	
+evntHabdleStatement
+	: ID '.' EVENTTYPE '('
+	( statement | guiType )*
+	')' ';'
+	;	
+
+
+/*	
+propertyHandlerStatement
+	: ID '.' PROPERTY_NAME '.' ( 'set'| 'get' )  '(' expression? ')' ';'
+	;
+	
+PROPERTY_NAME_1
+	: 'Width'
+	| 'Hight'
+	| 'Raduis'
+	| 'Position'
+	| 'StartPoint'
+	| 'Text'
+	;
+	
+PROPERTY_NAME_2
+	:COLOR_AREA
+	
+*/
+
+
 functionDec
-	: 'function' ID '(' parameters? ')' ':' type 
+//	: 'function' ID '(' parameters? ')' ':' type    // here type is the return type
+	: 'function' type ':' ID  '(' parameters? ')'  
+
 		( statement | returnStatement)*
 	  'end' 'function'
 	;
 
 procedureDec
-	: 'procedure' ID '(' parameters? ')'
+	: 'procedure' ':'ID  '(' parameters? ')'
 		( statement | exitStatement)*
 	  'end' 'procedure'
 	;
 	
 parameters
-	: ID ':' type ( ',' ID ':' type)*
+	: type  ':' term ( ',' type  ':' term)*
 	;
 	
 statement
@@ -128,6 +153,8 @@ statement
 	| ifStatement
 	| whileStatement
 	| procedureCallStatement
+// new line for even handler
+	| evntHabdleStatement
 	;
 
 assignmentStatement
@@ -135,11 +162,13 @@ assignmentStatement
 	;
 		
 constantDecStatement
-	: 'constant'ID ':' type ':=' expression ';'
+//	: 'constant'ID ':' type ':=' expression ';'
+	: 'constant' type ':' ID  ':=' expression ';'
 	;
 
 variableDecStatement
-	: 'var' ID (','ID)* ':' type (':=' expression)?';'
+//  : 'var' ID (','ID)* ':' type (':=' expression)?';'
+	: 'var' type ':' ID (':=' expression)?(','ID (':=' expression)?)*   ';'
 	;
 	
 ifStatement
@@ -179,10 +208,11 @@ returnStatement
 	;
 	
 term
-	: INTEGER
+	: number
 	| '(' expression ')'
 	| ID
-	| ID '(' actualParameters? ')' // this works as function call since it has to return somthing
+	| ID '(' actualParameters? ')'  // this works as function call since it has to return somthing
+	| string			// I just added it for now because of the function call
 	;
 // I still need to add the comparison for  the guiTypes that's why I didn't add them to terms :) 
 
@@ -215,15 +245,27 @@ expression
 	: compare (('AND' | 'OR') compare)*
 	;
 	
+type
+	: 'int'
+	| 'float'
+	| 'color'
+	| 'string'
+	;	
 	
-	
+number
+	: INTEGER ('.' INTEGER )?
+	;		
+
+string : '"' 
+	  ~('"' | '\n'| '\r')
+	 '"'
+	 ;	
 	
 EVENTTYPE : 'OnClick'| 'KeyPress';	
 POSITION_KEYWORD
 	: 'LeftOf'  | 'RightOf'  | 'Above'  | 'Below'  | 'Inside' ;
 COLOR_AREA
 	: 'BackColor'| 'TextColor';
-STRING : '"'	  ~('"' | '\n'| '\r')	  '"' ; 
 fragment LETTER : ('a'..'z' | 'A'..'Z');
 fragment DIGIT : '0'..'9' ;
 ID	: LETTER (LETTER| DIGIT)*;	
