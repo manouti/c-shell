@@ -1,13 +1,67 @@
 grammar Guolice;
 
 options {
-  language = C;
+	k = 2;
+	language = C;
 }
 
+/* ------------------------ Define grammar tokens ------------------------ */
+tokens
+{
+	PLUS       = '+';
+	MINUS      = '-';
+	MULT       = '*';
+	DIV        = '/';
+	EQUALS     = '=';
+	INCR       = '++';
+	DECR       = '--';
+	PLUSEQUAL  = '+=';
+	MINUSEQUAL = '-=';
+	MULTEQUAL  = '*=';
+	//DIVEQUAL   = '/=';
+	LESSTHAN   = '<';
+	GRTRTHAN   = '>';
+	ISEQUAL    = '==';
+	NOTEQUAL   = '/=';
+	AND_OP     = 'AND';
+	OR_OP      = 'OR';
+	MODULO     = 'MOD';
+	NOT_OP     = 'NOT';
+}
+
+/*------------------------------------------------------------------------------------------
+ * PARSER RULES
+ *------------------------------------------------------------------------------------------
+*/
+
 program
-	: ( procedureDec |functionDec | statement | workSpace)*
+	: ( procedureDec | functionDec | statement | workSpace)*
  	;
  	
+procedureDec
+	: 'procedure' ':'ID  '(' parameters? ')'
+		( statement | exitStatement)*
+	  'end' 'procedure'
+	;
+
+functionDec
+//	: 'function' ID '(' parameters? ')' ':' type    // here type is the return type
+	: 'function' type ':' ID  '(' parameters? ')'  
+
+		( statement | returnStatement)*
+	  'end' 'function'
+	;
+
+statement
+	: assignmentStatement
+	| constantDecStatement 
+	| variableDecStatement
+	| ifStatement
+	| whileStatement
+	| procedureCallStatement
+// new line for even handler
+	| evntHabdleStatement
+	;
 
 workSpace:
 		'WorkSpace' ':' ID  
@@ -25,6 +79,7 @@ guiType
 //	| button   // I dind't see any diffirence between button and textBox except the events  
 	;
 
+
 guiCommonProperty
 	: position
 	| point
@@ -41,7 +96,7 @@ box
 boxProperty
 	: guiCommonProperty
 	| width
-	| hight
+	| height
 	;	
 	
 
@@ -79,8 +134,8 @@ width
 	: 'Width' ':' number
 	;
 	
-hight
-	: 'Hight' ':' number
+height
+	: 'Height' ':' number
 	;
 	 	
 color
@@ -128,34 +183,11 @@ PROPERTY_NAME_2
 */
 
 
-functionDec
-//	: 'function' ID '(' parameters? ')' ':' type    // here type is the return type
-	: 'function' type ':' ID  '(' parameters? ')'  
 
-		( statement | returnStatement)*
-	  'end' 'function'
-	;
-
-procedureDec
-	: 'procedure' ':'ID  '(' parameters? ')'
-		( statement | exitStatement)*
-	  'end' 'procedure'
-	;
-	
 parameters
 	: type  ':' term ( ',' type  ':' term)*
 	;
 	
-statement
-	: assignmentStatement
-	| constantDecStatement 
-	| variableDecStatement
-	| ifStatement
-	| whileStatement
-	| procedureCallStatement
-// new line for even handler
-	| evntHabdleStatement
-	;
 
 assignmentStatement
 	: ID ':=' expression ';'
@@ -218,11 +250,11 @@ term
 
 
 negation
-	: 'not'* term
+	: NOT_OP * term
 	;
 
 sign
-	: ( '+' | '-' )* negation
+	: ( PLUS | MINUS )* negation
 	;
 	
 power
@@ -230,19 +262,19 @@ power
 	;
 	
 multdiv
-	: power (('*' | '/' | 'mod' ) power )*
+	: power ((MULT | DIV | MODULO ) power )*
 	;
 
 addsub
-	: multdiv ( ('+' | '-') multdiv)*
+	: multdiv ( (PLUS | MINUS) multdiv)*
 	;
 	
 compare
-	: addsub (('=' | '/=' | '<' | '<=' | '>' | '>=') addsub)*
+	: addsub ((EQUALS | NOTEQUAL | LESSTHAN | LESSTHAN EQUALS | GRTRTHAN | GRTRTHAN EQUALS) addsub)*
 	;
 	
 expression
-	: compare (('AND' | 'OR') compare)*
+	: compare (( AND_OP | OR_OP ) compare)*
 	;
 	
 type
@@ -261,14 +293,28 @@ string : '"'
 	 '"'
 	 ;	
 	
+/*------------------------------------------------------------------------------------------
+ * LEXER RULES
+ *------------------------------------------------------------------------------------------
+*/
+
 EVENTTYPE : 'OnClick'| 'KeyPress';	
+
 POSITION_KEYWORD
-	: 'LeftOf'  | 'RightOf'  | 'Above'  | 'Below'  | 'Inside' ;
-COLOR_AREA
-	: 'BackColor'| 'TextColor';
-fragment LETTER : ('a'..'z' | 'A'..'Z');
-fragment DIGIT : '0'..'9' ;
+	:	 'leftOf'  | 'rightOf'  | 'above'  | 'below'  | 'inside' ;
+
+COLOR_AREA : 'backColor'| 'textColor';
+
+fragment
+LETTER : ('a'..'z' | 'A'..'Z');
+
+fragment
+DIGIT : '0'..'9' ;
+
 ID	: LETTER (LETTER| DIGIT)*;	
+
 INTEGER : DIGIT+ ;
-COMMENT : '//' .* ('\n'|'\r') {$channel=HIDDEN;};	 
-WS      : ( ' ' | '\t' | '\n' | '\r' | '\f' )+ {$channel=HIDDEN;};
+
+COMMENT : '//' .* ('\n'|'\r') { $channel=HIDDEN; }; 
+
+WS      : ( ' ' | '\t' | '\n' | '\r' | '\f' )+ { $channel=HIDDEN; };
