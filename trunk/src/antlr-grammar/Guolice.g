@@ -1,212 +1,63 @@
 grammar Guolice;
 
 options {
-	k = 2;
-	language = C;
+  language = C;
 }
-
-/* ------------------------ Define grammar tokens ------------------------ */
-tokens
-{
-	PLUS       = '+';
-	MINUS      = '-';
-	MULT       = '*';
-	DIV        = '/';
-	EQUALS     = '=';
-	INCR       = '++';
-	DECR       = '--';
-	PLUSEQUAL  = '+=';
-	MINUSEQUAL = '-=';
-	MULTEQUAL  = '*=';
-	//DIVEQUAL   = '/=';
-	LESSTHAN   = '<';
-	GRTRTHAN   = '>';
-	ISEQUAL    = '==';
-	NOTEQUAL   = '/=';
-	AND_OP     = 'AND';
-	OR_OP      = 'OR';
-	MODULO     = 'MOD';
-	NOT_OP     = 'NOT';
-}
-
-/*------------------------------------------------------------------------------------------
- * PARSER RULES
- *------------------------------------------------------------------------------------------
-*/
 
 program
-	: ( procedureDec | functionDec | statement | workSpace)*
+	: ( procedureDec |functionDec | statement )*
  	;
  	
+functionDec
+	: 'function' type ':' ID  '(' parameters? ')'  // here (type) is the return value type of the function
+		( statement | returnStatement)*
+	  'end' 'function'
+	;
+
 procedureDec
 	: 'procedure' ':'ID  '(' parameters? ')'
 		( statement | exitStatement)*
 	  'end' 'procedure'
 	;
-
-functionDec
-//	: 'function' ID '(' parameters? ')' ':' type    // here type is the return type
-	: 'function' type ':' ID  '(' parameters? ')'  
-
-		( statement | returnStatement)*
-	  'end' 'function'
+	
+parameters
+	: type  ':' term ( ',' type  ':' term)*
 	;
 
+	
 statement
-	: assignmentStatement
+	: ';'
+	| assignmentStatement
 	| constantDecStatement 
 	| variableDecStatement
 	| ifStatement
 	| whileStatement
 	| procedureCallStatement
-// new line for even handler
+	| guiStatement
 	| evntHabdleStatement
 	;
 
-workSpace:
-		'WorkSpace' ':' ID  
-		'{'
-		 ( procedureDec |functionDec | statement | guiType )*
-		'}'
-		'Finish' 'WorkSpace'
-	 ;
-
-guiType
-	: box 
-	| circle 
-//	| triangle 
-	| textBox  // with that I mean that box, circle and triangle wont contain text 
-//	| button   // I dind't see any diffirence between button and textBox except the events  
-	;
-
-
-guiCommonProperty
-	: position
-	| point
-	| color
-	| event
-	;
-	 
-box
-	: 'Box' ':' ID '('
-	   (boxProperty (','boxProperty)*)?
-	')'
-	;
-
-boxProperty
-	: guiCommonProperty
-	| width
-	| height
-	;	
-	
-
-circle
-	: 'Circle' ':'ID  '(' 
-	   (circleProperty (','circleProperty)*)?	   
-	 ')'
-	;
-	
-circleProperty
-	: guiCommonProperty
-	| radius
-	;
-
-textBox
-	: ('TextBox'| 'Button')  ':' ID '('   				//the textBox here can be textBox or Button
-	   (textBoxProperty (',' textBoxProperty)*)?
-	')'
-	;		
-
-textBoxProperty
-	:  boxProperty
-	|  textProperty
-	;
-
-position
-	: 'Position'':'POSITION_KEYWORD (ID | guiType)
-	;
-	
-point
-	: 'StartPoint'':' '('number ',' number ')'
-	;
-	
-width
-	: 'Width' ':' number
-	;
-	
-height
-	: 'Height' ':' number
-	;
-	 	
-color
-	:  COLOR_AREA ':' '(' INTEGER ','INTEGER ',' INTEGER ')'
-	;
-
-radius
-	: 'R'':' number
-	;	
-	
-textProperty
-	: 'Text' ':' string	  
-	;
-
-event
-	: EVENTTYPE	'(' 
-	//( statement | guiType )*   // I'm thinking that I don't want it to be here
-	')'
-	;	
-	
-evntHabdleStatement
-	: ID '.' EVENTTYPE '('
-	( statement | guiType )*
-	')' ';'
-	;	
-
-
-/*	
-propertyHandlerStatement
-	: ID '.' PROPERTY_NAME '.' ( 'set'| 'get' )  '(' expression? ')' ';'
-	;
-	
-PROPERTY_NAME_1
-	: 'Width'
-	| 'Hight'
-	| 'Raduis'
-	| 'Position'
-	| 'StartPoint'
-	| 'Text'
-	;
-	
-PROPERTY_NAME_2
-	:COLOR_AREA
-	
-*/
 
 
 
-parameters
-	: type  ':' term ( ',' type  ':' term)*
-	;
-	
+//begin regular programing grammar
 
 assignmentStatement
 	: ID ':=' expression ';'
 	;
 		
 constantDecStatement
-//	: 'constant'ID ':' type ':=' expression ';'
 	: 'constant' type ':' ID  ':=' expression ';'
 	;
 
 variableDecStatement
-//  : 'var' ID (','ID)* ':' type (':=' expression)?';'
 	: 'var' type ':' ID (':=' expression)?(','ID (':=' expression)?)*   ';'
 	;
 	
 ifStatement
-	: 'if' expression 'do' 
+	: 'if' (expression | guiComparsionExpression) 'then' 			// that's mean that I can't put ( C1 SmallerThan C2 AND C2 BiggerThan C3 )
 	     statement*
-	  ( 'elseif' expression 'do' 
+	  ( 'elseif' (expression | guiComparsionExpression) 'then' 
 	  	statement*)*
 	  ( 'else'   
 	  	statement*)?
@@ -218,7 +69,6 @@ whileStatement
 	  ( statement | exitStatement)*
 	  'end' 'loop'
 	;
-	
 
 procedureCallStatement
 	: ID '(' actualParameters? ')' ';'
@@ -233,88 +83,117 @@ exitStatement
 	| 'exit''now'';'
 	;
 	
-
-	
 returnStatement
 	: 'return' expression ';'
 	;
 	
 term
-	: number
+	: INTEGER
 	| '(' expression ')'
 	| ID
 	| ID '(' actualParameters? ')'  // this works as function call since it has to return somthing
-	| string			// I just added it for now because of the function call
+	| STRING_LITERAL		        
 	;
-// I still need to add the comparison for  the guiTypes that's why I didn't add them to terms :) 
-
 
 negation
-	: NOT_OP * term
+	: 'NOT'* term
 	;
 
-sign
-	: ( PLUS | MINUS )* negation
-	;
-	
-power
-	: sign ('^' sign)*
+unary
+	: ( '+' | '-' )* negation
 	;
 	
 multdiv
-	: power ((MULT | DIV | MODULO ) power )*
+	: unary (('*' | '/' | 'mod' ) unary )*
 	;
 
 addsub
-	: multdiv ( (PLUS | MINUS) multdiv)*
+	: multdiv ( ('+' | '-') multdiv)*
 	;
 	
 compare
-	: addsub ((EQUALS | NOTEQUAL | LESSTHAN | LESSTHAN EQUALS | GRTRTHAN | GRTRTHAN EQUALS) addsub)*
+	: addsub (('=' | '!=' | '<' | '<=' | '>' | '>=') addsub)*
 	;
 	
 expression
-	: compare (( AND_OP | OR_OP ) compare)*
+	: compare (('AND' | 'OR') compare)*
 	;
 	
 type
 	: 'int'
-	| 'float'
-	| 'color'
+	| 'bool'
 	| 'string'
 	;	
+
+	 
+guiDecStatement
+	: guiType ':' ID  ( ','ID )* ';'
+	;
+
+guiTerm
+	: ID
+	| '(' guiPositionExpression ')'
+	;
 	
-number
-	: INTEGER ('.' INTEGER )?
-	;		
-
-string : '"' 
-	  ~('"' | '\n'| '\r')
-	 '"'
-	 ;	
+guiPositionExpression
+	:  guiTerm  (positionKeyword guiTerm )+
+	;
 	
-/*------------------------------------------------------------------------------------------
- * LEXER RULES
- *------------------------------------------------------------------------------------------
-*/
+guiComparsionExpression
+	:  ID 	guiComparsionTerm 	ID
+	;
+	
 
-EVENTTYPE : 'OnClick'| 'KeyPress';	
+guiStatement
+	: guiDecStatement
+	| guiPositionExpression ';'
+	| guiComparsionExpression ';'
+	;
 
-POSITION_KEYWORD
-	:	 'leftOf'  | 'rightOf'  | 'above'  | 'below'  | 'inside' ;
+evntHabdleStatement
+	: ID '.' eventType '('
+	( statement )*
+	')' ';'
+	;	
 
-COLOR_AREA : 'backColor'| 'textColor';
+guiType
+	: 'Box' 
+	| 'Circle' 
+	| 'Triangle'
+	| 'Label'
+	;	
+		
+eventType 
+	: 'OnClick'
+	| 'KeyPress'
+	;			
 
-fragment
-LETTER : ('a'..'z' | 'A'..'Z');
+positionKeyword
+	: 'LeftOf'  
+	| 'RightOf'  
+	| 'Above'  
+	| 'Below'  
+	| 'Contains' 
+	| 'Intersect' 
+	;
+	
+guiComparsionTerm 
+	: 'SmallerThan' 
+	| 'BiggerThan' 
+	| 'EqualTo' 
+	;
 
-fragment
-DIGIT : '0'..'9' ;
+fragment LETTER : ('a'..'z' | 'A'..'Z');
+fragment DIGIT : '0'..'9' ;	
 
-ID	: LETTER (LETTER| DIGIT)*;	
-
+STRING_LITERAL    // we can write any thing here including (\") which will be understood it as  (")
+	: '"' 
+		 ( '\\' '\"'      				
+	 	 	|~('"' |  '\n'| '\r')
+	 	 )*
+	 	'"' 
+	;	
+ID	: LETTER ( LETTER | DIGIT | '_')*;	
 INTEGER : DIGIT+ ;
-
-COMMENT : '//' .* ('\n'|'\r') { $channel=HIDDEN; }; 
-
-WS      : ( ' ' | '\t' | '\n' | '\r' | '\f' )+ { $channel=HIDDEN; };
+COMMENT : '//' .* ('\n'|'\r') {$channel=HIDDEN;};	 
+WS      : ( ' ' | '\t' | '\n' | '\r' | '\f' )+ {$channel=HIDDEN;};
