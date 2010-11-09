@@ -1,0 +1,7 @@
+Circle 		: C1 ;
+Circle 		: C2 ;
+Box    		: B1 ;
+Box	   		: B2 ;
+Triangle 	: T1 ;
+
+B1 Contains ( (C1 LeftOf C2 ) Above ( B2 Below T1))
