@@ -1,4 +1,4 @@
-############################## Makefile for building: NodeTest ##############################
+############################## Makefile for building: Guolice ##############################
 #
 # Targets marked as phony have been added for convenience in case the user would build
 # step-by-step (generating the lexer and parser code from Antlr, then building the lexer and
