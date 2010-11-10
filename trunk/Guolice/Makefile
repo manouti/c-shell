@@ -29,14 +29,15 @@ ARTIFACT_DIR_Release = ./dist/Release/
 ARTIFACT_NAME_Release = Guolice
 ARTIFACT_PATH_Release = ./dist/Release/Guolice
 
-# BUILDFLAG = 
-# ifeq ($( findstring $( MAKECMDGOALS ), clean ),)
-# ifeq ($(findstring release,$(MAKECMDGOALS)), release)
-	# BUILDFLAG = -O3
-# else
-	# ifeq($(findstring debug,$(MAKECMDGOALS)), debug)
-		# BUILDFLAG = $(DBGFLAG)
-# endif
+
+BUILDFLAG = 
+ifeq ($(findstring debug,$(MAKECMDGOALS)),debug)
+    BUILDFLAG = $(DBGFLAG)
+endif
+ 
+ifeq ($(findstring release,$(MAKECMDGOALS)),release)
+    BUILDFLAG = -O3
+endif
 
 ####### Compiler, tools and options
 JAVA           = java
@@ -78,7 +79,7 @@ all : $(TARGET)
 $(TARGET) : $(OBJECTS)
 	$(MKDIR) $(OBJECTS_DIR)
 	$(MKDIR) $(ARTIFACT_DIR)
-	$(LINK) -o $(BUILDFLAG) $@ $(LIBS) $(OBJECTS)
+	$(LINK) -o $@ $(BUILDFLAG) $(LIBS) $(OBJECTS)
 	$(MOVE) $(ANTLROUTPUT_C) ./src
 	$(MOVE) $(ANTLROUTPUT_H) ./include
 	$(MOVE) $(OBJECTS) $(OBJECTS_DIR)
