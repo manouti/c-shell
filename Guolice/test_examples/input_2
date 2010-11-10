@@ -1,0 +1,10 @@
+Box : B1 ;
+Box : B2 ;
+var string : message  ;
+
+
+if B1 BiggerThan B2  then
+	message := "Great!!"  ;
+else
+	message := " OK!!"  ;
+end if
