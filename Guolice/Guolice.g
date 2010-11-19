@@ -14,15 +14,11 @@ options {
 	MULT       = '*';
 	DIV        = '/';
 	EQUALS     = '=';
-	INCR       = '++';
-	DECR       = '--';
 	LESSTHAN   = '<';
 	GRTRTHAN   = '>';
-	ISEQUAL    = '==';
 	NOTEQUAL   = '!=';
 	AND_OP     = 'AND';
 	OR_OP      = 'OR';
-	MODULO     = 'MOD';
 	NOT_OP     = 'NOT';
 	CIRCLE     = 'CIRCLE';//('C'|'c') ('I'|'i') ('R'|'r') ('C'|'c') ('L'|'l') ('E'|'e');
 	TEXTBOX    = 'TEXTBOX';//('T'|'t')('E'|'e')('X'|'x')('T'|'t')('B'|'b')('O'|'o')('X'|'x') ;
@@ -209,7 +205,7 @@ assignmentStatement returns [Node* node]
 	;
 		
 constantDecStatement returns [Node* node]
-//	: 'constant'ID ':' type ':=' expression ';'
+
 	: 'constant' type ':' ID  ':=' expression ';' {
 	     $node = new Node(":=");
 	     
@@ -227,7 +223,7 @@ constantDecStatement returns [Node* node]
 
 variableDecStatement
 @init{ Node * temp; }
-//  : 'var' ID (','ID)* ':' type (':=' expression)?';'
+'
 	: 'var' type ':' i1=ID {
 			 string varText ("var ");
 			 varText += (string)(char*)($type.text->chars);
@@ -322,7 +318,7 @@ term returns [Node * node]
 		
 		$node = new Node(tempText);
 	}
-	| STRING_LITERAL	// I just added it for now because of the function call
+	| STRING_LITERAL	
 	 { $node = new Node((string)(char*)($STRING_LITERAL.text->chars)); }
 	;
 	
@@ -457,8 +453,8 @@ compare returns [Node* node]
 		comparatorExists = true;
 	})
 	
-	| ( '/=' a2=addsub {
-		comparatorNode = new Node("/=");
+	| ( '!=' a2=addsub {
+		comparatorNode = new Node("!=");
 		comparatorNode->addChild($a1.node);
 		
 		comparatorNode->addChild($a2.node);
