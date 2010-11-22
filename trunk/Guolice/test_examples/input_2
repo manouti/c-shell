@@ -25,7 +25,7 @@ function int : func1 ( int : x  )
 end function
 
 foo ();
-var2 := function1 (4);
+var2 := func1 (4);
 
 
 if  B1 Contains (B2 Intersect T3)  then
