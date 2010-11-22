@@ -54,17 +54,17 @@ class FunctionNode : public Node {
 		}
 		
 		string toString() {
-			string nodeString ("Node [value = ");
+			string nodeString ("Node\t ");
 			nodeString += getValue();
 			nodeString += "(";
 			nodeString += printParameters();
-			nodeString += ") returns: ";
+			nodeString += ") \n\t\treturns: ";
 			nodeString += returnType;
-			nodeString += ", parent = ";
+			nodeString += "\n\t\tparent -> ";
 			nodeString += ((getParent() == NULL)?"NULL":getParent()->getValue());
-			nodeString += ", children = ";
+			nodeString += "\n\t\tchildren -> ";
 			nodeString += printChildren();
-			nodeString += "]";
+			nodeString += "\n\n";
 
 			return nodeString;
 

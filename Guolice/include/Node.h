@@ -56,18 +56,19 @@ class Node {
 					childrenString += children[i]->getValue();
 				}
 			}
-    	
+			if (childrenString == ""|| childrenString == " ")
+				childrenString = "NULL";    			
 			return childrenString;
 		}
 		
 		string toString() {
-			string nodeString ("Node [value = ");
+			string nodeString ("Node \t ");
 			nodeString += value;
-			nodeString += ", parent = ";
+			nodeString += "\n\t\t parent \t-> ";
 			nodeString += ((parent == NULL)?"NULL":parent->getValue());
-			nodeString += ", children = ";
+			nodeString += "\n\t\t children \t-> ";
 			nodeString += printChildren();
-			nodeString += "]";
+			nodeString += "";
 			
 			return nodeString;
 	}
