@@ -1,7 +1,12 @@
-Circle 		: C1 ;
-Circle 		: C2 ;
 Box    		: B1 ;
-Box	   		: B2 ;
-Triangle 	: T1 ;
+Label		: L1 ;
+var int : var1;
+var int : var2 := 6;
+var int : var3 := 7 ;
+constant int : const1 := 3 ;
 
-B1 Contains ( (C1 LeftOf C2 ) Above ( B2 Below T1))
+var1 := 5 ;
+
+if var1 > const1 AND (var2 = 3 OR var3 < 0)  then
+	B1 Contains L1 ;
+end if

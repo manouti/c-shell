@@ -9,4 +9,4 @@ Required resources to build the project:
 The makefile includes some phony targets in case the user would like to build step-by-step
 without knowing the object file(s) to compile or link (e.g. compile target).
 
-Note: The project has been built and tested with the library provided for Windows.
+Note: The project has been built and tested with the library provided for Windows. and for Ububtu 32bit.
