@@ -1,38 +1,20 @@
 grammar Guolice;
 
 options {
-	k =3 ;
+	k = 3 ;
 	language = C;
 }
 
-
-/* ------------------------ Define grammar tokens ------------------------ */
-/*tokens
-{
-	PLUS       = '+';
-	MINUS      = '-';
-	MULT       = '*';
-	DIV        = '/';
-	EQUALS     = '=';
-	LESSTHAN   = '<';
-	GRTRTHAN   = '>';
-	NOTEQUAL   = '!=';
-	AND_OP     = 'AND';
-	OR_OP      = 'OR';
-	NOT_OP     = 'NOT';
-	CIRCLE     = 'CIRCLE';//('C'|'c') ('I'|'i') ('R'|'r') ('C'|'c') ('L'|'l') ('E'|'e');
-	TEXTBOX    = 'TEXTBOX';//('T'|'t')('E'|'e')('X'|'x')('T'|'t')('B'|'b')('O'|'o')('X'|'x') ;
-	BUTTON     = 'BUTTON';//('B'|'b')('U'|'u')('T'|'t')('T'|'t') ('O'|'o')('N'|'n');
-	BOX        = 'BOX';//('B'|'b')('O'|'o')('X'|'x') ;
-}*/
-
 @parser::includes
 {
-	#include	<Node.h>
 	#include	<iostream>
+	#include	<cstdlib>
+	#include	<fstream>
 	#include	<string>
 	#include	<vector>
 	#include	<map>
+	#include	<ParseTree.h>
+	#include	<Node.h>	
 	#include	<FunctionNode.h>
 
 	using namespace std;
@@ -45,9 +27,10 @@ options {
 	vector<FunctionNode*> functionList;
 	map<string, string> functionParameters;
 	vector<Node*> statements;
-
-	void printTree(Node* node) 
-	{
+	
+	map<Node*, string> variableIDs;
+	
+	void printTree(Node* node) {
 		cout << "\nNode: " << node->toString() << endl;
 		for(int i = 0; i < node->getChildren().size(); i++) 
 		{
@@ -55,8 +38,7 @@ options {
 		}
 	}
 
-	void printFunctionList() 
-	{
+	void printFunctionList() {
 		cout << "[ ";
 		for (int i=0; i < functionList.size(); i++) 
 		{
@@ -69,6 +51,97 @@ options {
 		}
 		cout << "]\n";
 	}
+	
+	/**
+	  Prints the node information in the dot format.
+	*/
+	/*string visitNode(Node* node) {
+		string nodeDot ("node");
+		
+		stringstream oss;
+		oss << dotNodeCount++;
+		nodeDot += oss.str();
+		
+		nodeNames[node] = nodeDot; // Store the label of the node in the dot file, e.g. node13 in the map "nodeNames"
+		
+		nodeDot += "[label=\"";
+		nodeDot += node->getValue();
+		nodeDot += "\",";
+		switch(node->getType()) {
+			case Node::VAR:
+				{
+				string variableColor;
+				
+				if (varColors.find(node->getValue()) != varColors.end()) {
+					variableColor = varColors[node->getValue()];
+				}
+				else {
+					double red = static_cast<double> (rand()) / static_cast<double> (RAND_MAX);
+					double green = static_cast<double> (rand()) / static_cast<double> (RAND_MAX);
+					double blue = static_cast<double> (rand()) / static_cast<double> (RAND_MAX);
+					
+					oss.flush();
+					oss << red << " " << green << " " << blue;
+					variableColor = oss.str();
+					
+					varColors[node->getValue()] = variableColor;
+				}
+				
+				nodeDot += "rank=sink,style=filled,color=\"" + variableColor +  "\"];\n";
+				}
+				break;
+			case Node::CONST:
+				nodeDot += "shape=box];\n";
+				break;
+			case Node::OP:
+				 nodeDot += "shape=diamond];\n";
+		}
+		
+		return nodeDot;
+	}*/
+	
+	/**
+	  Prints the edge information in the dot format.
+	*/
+	/*string visitEdge(Node* node1, Node* node2) {
+		string edgeDot ("\n");
+		edgeDot += nodeNames[node1] + " -> " + nodeNames[node2] + ";";
+		return edgeDot;
+	}
+	
+  	void getNodesDot(Node* node, ofstream& dotFile) {
+		dotFile << visitNode(node);
+  		
+  		for(int i = 0; i < node->getChildren().size(); i++) 
+		{
+			getNodesDot(node->getChildren().at(i), dotFile);
+		}
+	}
+
+	void getEdgesDot(Node* parent, ofstream& dotFile) {
+		for(int i = 0; i < parent->getChildren().size(); i++) {
+			dotFile << visitEdge(parent, parent->getChildren().at(i));
+			getEdgesDot(parent->getChildren().at(i), dotFile);
+		}
+	}
+	
+	void getDot(char* fileName) {
+		ofstream dotFile;
+  		dotFile.open(fileName);
+  		
+  		dotFile << "digraph GuoliceParseGraph  {\n";
+  		dotFile << "graph[ordering=out];\n";
+
+		dotFile << "//------------------- Node declarations -------------------\n";  		
+  		getNodesDot(root, dotFile);
+
+		dotFile << "//------------------- Edge declarations -------------------\n";  		
+		getEdgesDot(root, dotFile);
+				
+		dotFile << "}";
+		
+  		dotFile.close();
+  	}*/
 }
 
 
@@ -79,21 +152,79 @@ options {
 */
 
 program
-@init { root = new Node("Program");}
+@init { root = new Node("PROGRAM"); }
 @after {
 
 		vector<Node*>::iterator i;
 		for (i = statements.begin(); i != statements.end(); ++i)
 		{
-			cout << " " << *i;
+			//cout << " " << *i;
 			root->addChild(*i);
 		}
 
 		printTree(root);
 
-		cout <<  "The list of functions is: " << endl;
+		cout <<  "The list of functions is: \n" << endl;
 		printFunctionList();
+		
+		//getDot("Graph.dot"); // Dump the dot output to a file
 
+		ParseTree *pTree = new ParseTree(root);
+		
+		pTree->varIDs = variableIDs;
+		
+		ofstream dotFile; // Output file stream for the dot file.
+		dotFile.open("Graph.dot");
+  		
+  		dotFile << "digraph GuoliceParseGraph  {\n";
+  		dotFile << "graph[ordering=out];\n";
+
+		pTree->traverse(root); // Get the dot output.
+		
+		dotFile << "\n//-------------------- Node Declarations --------------------\n";	
+		
+		for(int i = 0; i < pTree->nodeDeclarations.size(); i++) {
+			dotFile << pTree->nodeDeclarations[i];
+		}
+		
+		dotFile << "\n//-------------------- Edge Declarations --------------------\n";
+		
+		for(int j = 0; j < pTree->edgeDeclarations.size(); j++) {
+			dotFile << pTree->edgeDeclarations[j];
+		}
+		
+		dotFile << "\n\n";
+		/*
+		for (int i=0; i < functionList.size(); i++) 
+		{
+			// TODO: Separate variableIDs from each other to separate the parsegraphs.
+			
+			ParseTree *functionParseTree = new ParseTree(functionList[i]);
+			
+			functionParseTree->varIDs = variableIDs;
+		
+			functionParseTree->traverse(functionList[i]);
+			
+			dotFile << "\n//-------------------- Node Declarations for Function " << functionList[i]->getValue() << "--------------------\n";	
+		
+			for(int i = 0; i < functionParseTree->nodeDeclarations.size(); i++) {
+				dotFile << functionParseTree->nodeDeclarations[i];
+			}
+		
+			dotFile << "\n//-------------------- Edge Declarations for Function " << functionList[i]->getValue() << "--------------------\n";
+		
+			for(int j = 0; j < functionParseTree->edgeDeclarations.size(); j++) {
+				dotFile << functionParseTree->edgeDeclarations[j];
+			}
+			
+			dotFile << "\n";
+		}
+		*/
+		dotFile << "}";
+		
+  		dotFile.close();
+		
+		cout << "\nNUMBER OF NODES: " << pTree->getNodeCount() << endl;
 		/*FunctionNode* first = functionList.at(0);
 		cout << "The first procedure is: " << first->toString() << endl;
 		FunctionNode* second = functionList.at(1);
@@ -220,13 +351,16 @@ assignmentStatement returns [Node* node]
 	: ID ':=' expression ';' 
 		{
 			Node* idNode = new Node((string)(char*)($ID.text->chars));   // Create a node for the identifier
+			idNode->setType(Node::VAR); // Set this node as a variable node
+			
 			Node* equalsNode = new Node(":=");   // Create a node for the assignment symbol
 
 			// Now add the identifier node and the node returned by the expression rule to the assignment symbol node
 			equalsNode->addChild(idNode);
 
 			equalsNode->addChild($expression.node);
-
+			equalsNode->setType(Node::OP);  // Set this node as an operation node (assignment)
+			
 			$node = equalsNode;   // Return the assignment symbol node
 		}
 	;
@@ -242,16 +376,20 @@ constantDecStatement returns [Node* node]
 			constantText += (string)(char*)($type.text->chars);
 			constantText += " constant ) ";
 			
-
 			Node * idNode = new Node(constantText);
-
+			idNode->setType(Node::VAR);
+			
+			variableIDs[idNode] = (string)(char*)($ID.text->chars);
+			
 			$node->addChild(idNode);
 			$node->addChild($expression.node);
+			
+			$node->setType(Node::OP);
 		}
 	;
 
 variableDecStatement returns [Node* node]
-@init{ Node * temp; }
+@init{ /*Node * temp;*/ }
 	: 'var' type ':' i1=ID 
 		{
 			//string varText ("var ");
@@ -264,10 +402,16 @@ variableDecStatement returns [Node* node]
 
 			//temp = new Node(varText);
 			$node = new Node (varText);
+			$node->setType(Node::VAR);
+			
+			variableIDs[$node] = (string)(char*)($ID.text->chars);
+			
 	    }
 	(':=' e1=expression 
 		{
 			Node * equalsNode = new Node(":=");
+			equalsNode->setType(Node::OP);
+			
 			//equalsNode->addChild(temp);
 			equalsNode->addChild($node);
 			equalsNode->addChild($e1.node);
@@ -297,9 +441,10 @@ ifStatement returns [Node* node]
 	: 'if' (e1=expression | e1=guiComparisonExpression | '(' e1=guiComparisonExpression ')' | e1=guiPositionExpression ) 'then' 
 		{
 			$node = new Node("if");                      //i.e     "if"
-				    				     //       /    \
+			$node->setType(Node::OP);	 		     //       /    \
 			$node->addChild($e1.node);                   //   "expr"   "then"
 			thenNode = new Node("then");
+			thenNode->setType(Node::OP);
 			$node->addChild(thenNode);
 		}
 	( s1=statement { thenNode->addChild($s1.node); } )*
@@ -307,6 +452,7 @@ ifStatement returns [Node* node]
 	( 'else'   
 		{ 
 			elseNode = new Node("else");
+			elseNode->setType(Node::OP);
 	      		$node->addChild(elseNode);
 	   	}
 	(s2=statement { elseNode->addChild($s2.node); } )* )?
@@ -314,7 +460,7 @@ ifStatement returns [Node* node]
 	;
 
 whileStatement returns [Node * node]
-	: 'while' { $node = new Node("while"); } expression { $node->addChild($expression.node); }'loop'
+	: 'while' { $node = new Node("while"); $node->setType(Node::OP); } expression { $node->addChild($expression.node); }'loop'
 	  ( statement { $node->addChild($statement.node); } | exitStatement)*
 	  'end' 'loop'
 	;
@@ -328,6 +474,7 @@ procedureCallStatement returns [Node * node]
 			procedureCallText += ")";
 
 			$node = new Node(procedureCallText);
+			$node->setType(Node::OP);
 			for(int i = 0; i < $actualParameters.node->getChildren().size(); i++) 
 			{
 				$node->addChild($actualParameters.node->getChildren().at(i));
@@ -339,6 +486,7 @@ procedureCallStatement returns [Node * node]
 			string procedureCallText ((string)(char*)($ID.text->chars));
 			procedureCallText += " ( )";
 			$node = new Node(procedureCallText);
+			$node->setType(Node::OP);
 		}
 	) ';'
 	;
@@ -366,33 +514,39 @@ returnStatement
 	;
 
 term returns [Node * node]
-@init { string nodeText (""); }
+@init { string tempText (""); }
 	: INTEGER 
-		{ $node = new Node((string)(char*)($INTEGER.text->chars)); }
+		{ $node = new Node((string)(char*)($INTEGER.text->chars));
+		  $node->setType(Node::CONST); }
 	| '(' expression ')' 
 		{ $node = $expression.node; }
 	| ID 
-		{ $node = new Node((string)(char*)($ID.text->chars)); }
+		{ $node = new Node((string)(char*)($ID.text->chars)); $node->setType(Node::VAR); }
 	| ID '(' actualParameters ')'
-		{ 	nodeText = (string)(char*)($actualParameters.text->chars);    
-			string tempText ((string)(char*)($ID.text->chars));
-			tempText += "(";
-			tempText += nodeText;
-			tempText += ")";
-			$node = new Node(tempText);
-
+		{ 	tempText = (string)(char*)($actualParameters.text->chars);    
+			string nodeText ((string)(char*)($ID.text->chars));
+			nodeText += "(";
+			nodeText += tempText;
+			nodeText += ")";
+			$node = new Node(nodeText);
+			$node->setType(Node::OP);
+			
 			for(int i = 0; i < $actualParameters.node->getChildren().size(); i++) 
 			{
 				$node->addChild($actualParameters.node->getChildren().at(i));
 			}
 		} 
 	| ID '(' ')' 
-		{ 	string tempText ((string)(char*)($ID.text->chars));
-			tempText += "( )";
-			$node = new Node(tempText);
+		{ 	string nodeText ((string)(char*)($ID.text->chars));
+			nodeText += "( )";
+			$node = new Node(nodeText);
+			$node->setType(Node::OP);
 		}
 	| STRING_LITERAL
-		{ $node = new Node((string)(char*)($STRING_LITERAL.text->chars)); }
+		{
+		string nodeText ((string)(char*)($STRING_LITERAL.text->chars));
+		nodeText = nodeText.substr(1, nodeText.length() - 2);
+		$node = new Node(nodeText); $node->setType(Node::CONST); }
 	;
 
 
@@ -406,6 +560,7 @@ negation returns [Node * node]
 			for(int i = 0; i < numberOfNots; i++) 
 			{
 				Node * notNode = new Node("NOT");
+				notNode->setType(Node::OP);
 				notNode->addChild(returnNode);
 				
 				returnNode = notNode;
@@ -425,13 +580,11 @@ unary returns [Node * node]
 			}
 
 		else
-			{
-				
-				$node = new Node("negative");
-				$node->addChild($negation.node);
-					
-			}
-		
+			{			
+				$node = new Node("-");  // Why the heck would we need a labeled node for a minus sign?
+				$node->setType(Node::OP);
+				$node->addChild($negation.node);			
+			}	
 	}
 	;
 
@@ -451,7 +604,8 @@ multdiv returns [Node* node]
 			}
 
 			Node* multNode = new Node("*");
-
+			multNode->setType(Node::OP);
+			
 			multNode->addChild(temp);
 
 			multNode->addChild($u2.node);
@@ -466,7 +620,8 @@ multdiv returns [Node* node]
 			}
 
 			Node* divNode = new Node("/");
-
+			divNode->setType(Node::OP);
+			
 			divNode->addChild(temp);
 
 			divNode->addChild($u2.node);
@@ -481,7 +636,8 @@ multdiv returns [Node* node]
 			}
 
 			Node* moduloNode = new Node("mod");
-
+			moduloNode->setType(Node::OP);
+			
 			moduloNode->addChild(temp);
 
 			moduloNode->addChild($u2.node);
@@ -508,6 +664,8 @@ addsub returns [Node* node]
 			}
 
 			Node* plusNode = new Node("+");
+			plusNode->setType(Node::OP);
+			
 			plusNode->addChild(temp);
 			plusNode->addChild($m2.node);
 			temp = plusNode;
@@ -520,6 +678,8 @@ addsub returns [Node* node]
 			}
 
 			Node* minusNode = new Node("-");
+			minusNode->setType(Node::OP);
+			
 			minusNode->addChild(temp);
 			minusNode->addChild($m2.node);
 			temp = minusNode;
@@ -536,6 +696,7 @@ compare returns [Node* node]
 	: a1=addsub ( ( '=' a2=addsub 
 		{
 			comparatorNode = new Node("=");
+			
 			comparatorNode->addChild($a1.node);
 
 			comparatorNode->addChild($a2.node);
@@ -593,6 +754,7 @@ compare returns [Node* node]
 	{
 		if(comparatorExists) 
 		{
+			comparatorNode->setType(Node::OP);
 			$node = comparatorNode;
 		}
 		else $node = $a1.node;
@@ -616,7 +778,8 @@ expression returns [Node* node]
 			}
 
 		 	Node* andNode = new Node("AND");
-
+			andNode->setType(Node::OP);
+			
 		 	andNode->addChild(temp);
 	
 			andNode->addChild($c2.node);
@@ -632,7 +795,8 @@ expression returns [Node* node]
 			}
 
 		 	Node* orNode = new Node("OR");
-
+			orNode->setType(Node::OP);
+			
 		 	orNode->addChild(temp);
 
 			orNode->addChild($c2.node);
@@ -651,7 +815,7 @@ type
 
 
 guiDecStatement returns [Node* node]
-@init { Node* temp; }
+@init { /*Node* temp;*/ }
 //@after { /*System.out.println(nodes); */}
 	: guiType ':' i1=ID  
 		{
@@ -663,6 +827,10 @@ guiDecStatement returns [Node* node]
 
 			//temp = new Node(guiTypeText);
 			$node = new Node(guiTypeText);
+			$node->setType(Node::VAR);
+			
+			variableIDs[$node] = (string)(char*)($ID.text->chars);
+			
 			//guiDeclNodes.push_back(temp);
 		}
 /*	( ',' i2=ID  
@@ -677,7 +845,7 @@ guiDecStatement returns [Node* node]
 	;
 
 guiTerm returns [Node* node]
-	: ID { $node = new Node((string)(char*)($ID.text->chars)); }
+	: ID { $node = new Node((string)(char*)($ID.text->chars)); $node->setType(Node::VAR); }
 	| '(' guiPositionExpression ')' { $node = $guiPositionExpression.node; }
 	;
 
@@ -687,7 +855,8 @@ guiPositionExpression returns [Node* node]
 	 (positionKeyword g2=guiTerm 
 		{
 			Node* positionNode = new Node((string)(char*)($positionKeyword.text->chars));
-
+			positionNode->setType(Node::OP);
+			
 			positionNode->addChild(temp);
 			positionNode->addChild($g2.node);
 
@@ -701,9 +870,12 @@ guiComparisonExpression returns [Node* node]
 	:  i1=ID 	guiComparsionTerm 	i2=ID
 		{
 			Node* idNode1 = new Node((string)(char*)($i1.text->chars));
+			idNode1->setType(Node::VAR);
 			Node* idNode2 = new Node((string)(char*)($i2.text->chars));
+			idNode2->setType(Node::VAR);
 
 			$node = new Node((string)(char*)($guiComparsionTerm.text->chars));
+			$node->setType(Node::OP);
 			$node->addChild(idNode1);
 			$node->addChild(idNode2);
 		}
@@ -725,8 +897,10 @@ evntHandleStatement returns [Node* node]
 	: ID '.' eventType 
 			{
 				$node = new Node((string)(char*)($eventType.text->chars));
-				Node* IDNode = new Node((string)(char*)($ID.text->chars));
-				$node->addChild(IDNode);
+				Node* idNode = new Node((string)(char*)($ID.text->chars));
+				idNode->setType(Node::VAR);
+				$node->addChild(idNode);
+				$node->setType(Node::OP);
 				
 			}'('
 	( statement 
@@ -776,6 +950,7 @@ STRING_LITERAL    // we can write any thing here including (\") which will be un
 		 ( '\\' '\"'  |   ~('"' |  '\n'| '\r')	 )*
 	  '"'
 	;
+	
 ID	: LETTER ( LETTER | DIGIT | '_')*;
 
 INTEGER : DIGIT+ ;

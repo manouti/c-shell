@@ -3,77 +3,39 @@
 
 #include <string>
 #include <vector>
-#include <Node.h>
 #include <map>
+#include <Node.h>
 
 using namespace std;
 
 #ifdef __cplusplus
-class FunctionNode : public Node {
+class FunctionNode: public Node {
     private:
 		string returnType;
-		map<string, string> parameters;
-		
+		map<string, string> parameters;	
 	
     public:
-		FunctionNode():Node(){}
+		FunctionNode();
 		
-		FunctionNode(string v):Node(v){}
+		FunctionNode(string v);
 
-		FunctionNode(Node* node):Node(node) {}
+		FunctionNode(Node* node);
 
 		//FunctionNode(string v, vector<Node*> children, Node * parent):Node(v, children, parent){}
 
-		string getReturnType(){
-			return returnType;
-		}
+		string getReturnType() const;
 
-		void setReturnType(string type){
-			returnType = type;
-		}
+		void setReturnType(string type);
 
-		map<string, string> getParameters(){
-			return parameters;
-		}
+		map<string, string> getParameters() const;
 		
-		void setParameters( map<string, string>  param){
-			parameters = param;
-		}
+		void setParameters( map<string, string>  param);
 
-		string printParameters(){
-			string params = "";
-			map<string, string>::iterator i;
-			for (i = parameters.begin(); i != parameters.end(); ++i){
-
-				params += i->first;
-				params += ": ";
-				params += i->second;
-				params += ";";
-			}
-			return params;
-		}
+		string printParameters();
 		
-		string toString() {
-			string nodeString ("Node\t ");
-			nodeString += getValue();
-			nodeString += "(";
-			nodeString += printParameters();
-			nodeString += ") \n\t\treturns: ";
-			nodeString += returnType;
-			nodeString += "\n\t\tparent -> ";
-			nodeString += ((getParent() == NULL)?"NULL":getParent()->getValue());
-			nodeString += "\n\t\tchildren -> ";
-			nodeString += printChildren();
-			nodeString += "\n\n";
-
-			return nodeString;
-
-		}
-		
+		string toString();
 };
 
 #endif
 
 #endif
-
-

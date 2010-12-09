@@ -8,70 +8,44 @@ using namespace std;
 
 #ifdef __cplusplus
 class Node {
-    private:
-		string value;
-		vector<Node*> children;
-		Node* parent;
+
+	public:
+		enum NodeType { VAR, CONST, OP };	// Define the possible node types.
+
+		Node();
 		
+		Node(string v);
 		
-	
-    public:
-		Node() {}	
-		Node(string v) { value = v; }
-		
-		Node(Node * node) {
-			this->value = node->value;
-			this->children = node->children;
-			this->parent = node->parent;
-		}
+		Node(Node* node);
 		//~Node(void);
-
 		
-		string getValue() { return value; }
+		string getValue() const;
 		
-		void setValue(string v) { value = v; }
+		void setValue(string v);
 
+		NodeType getType() const;
+            
+		void setType(NodeType type);
 		
-		vector<Node*> getChildren() { return children; }
+		vector<Node*> getChildren() const;
 
-		void setChildren(vector<Node*> c) { children = c; }
+		void setChildren(vector<Node*> c);
 
+		Node* getParent() const;
+
+		void setParent(Node* p);
 		
-		Node* getParent() { return parent; }
-
-		void addChild(Node* child) {
-			children.push_back(child);
-			child->setParent(this);
-		}
+		void addChild(Node* child);
 	
-		void setParent(Node* p) { parent = p; }
-	
-		string printChildren() {
-			string childrenString = "";
-			for(int i = 0; i < children.size(); i++) {
-				if(i == 0) { childrenString += children[0]->getValue(); }
-    		
-				else {
-					childrenString += ", ";
-					childrenString += children[i]->getValue();
-				}
-			}
-			if (childrenString == ""|| childrenString == " ")
-				childrenString = "NULL";    			
-			return childrenString;
-		}
+		string printChildren() const;
 		
-		string toString() {
-			string nodeString ("Node \t ");
-			nodeString += value;
-			nodeString += "\n\t\t parent \t-> ";
-			nodeString += ((parent == NULL)?"NULL":parent->getValue());
-			nodeString += "\n\t\t children \t-> ";
-			nodeString += printChildren();
-			nodeString += "";
-			
-			return nodeString;
-	}
+		string toString() const;
+	
+    private:
+		string value;			// The text value of the node.
+		vector<Node*> children; // Vector of children of the node.
+		Node* parent;			// Parent of the node.
+		NodeType type;			// Type of the node (VAR, CONST, OP).
 };
 
 #endif
