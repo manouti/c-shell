@@ -68,7 +68,7 @@ GRAMMARFILE   = Guolice.g
 SOURCES       = ./src/GuoliceLexer.c ./src/GuoliceParser.c ./src/main.c
 ANTLROUTPUT_H = GuoliceLexer.h GuoliceParser.h
 ANTLROUTPUT_C = GuoliceLexer.c GuoliceParser.c Guolice.tokens
-OBJECTS       = GuoliceLexer.o GuoliceParser.o main.o
+OBJECTS       = GuoliceLexer.o GuoliceParser.o main.o FunctionNode.o Node.o ParseTree.o
 TARGET        = Guolice
 
 
@@ -93,7 +93,18 @@ GuoliceParser.o : GuoliceParser.c ./include/Node.h
 	
 main.o : ./src/main.c ./include/Guolice.h
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
- 
+
+
+FunctionNode.o : ./src/FunctionNode.cpp ./include/FunctionNode.h 
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
+Node.o : ./src/Node.cpp ./include/Node.h 
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
+ParseTree.o : ./src/ParseTree.cpp ./include/ParseTree.h 
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
+
 GuoliceLexer.c GuoliceLexer.h GuoliceParser.c GuoliceParser.h Guolice.tokens : $(GRAMMARFILE)
 	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
 
