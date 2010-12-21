@@ -1,3 +1,6 @@
+/** \file ParseTree.cpp
+*	
+*/
 #include "ParseTree.h"
 
 ParseTree::ParseTree(Node *root)
