@@ -30,6 +30,12 @@ options {
 	
 	map<Node*, string> variableIDs;
 	
+/** \function
+*	\param Node* pointer from the Type Node
+*	
+*	\brief Print the nodes in the tree
+*
+*/
 	void printTree(Node* node) {
 		cout << "\nNode: " << node->toString() << endl;
 		for(int i = 0; i < node->getChildren().size(); i++) 
@@ -38,6 +44,10 @@ options {
 		}
 	}
 
+/** \function
+*	\brief Print the list of the Function or the procedure members
+*
+*/ 
 	void printFunctionList() {
 		cout << "[ ";
 		for (int i=0; i < functionList.size(); i++) 
@@ -232,7 +242,9 @@ program
 	   }
 	
 	: ( procedureDec | functionDec | statement {
-
+/**
+*	in the main program you can declare functions, procedures, or statements
+*/
 
 		if($statement.node ->getValue() != "emptyMark") 
 		{
@@ -255,8 +267,23 @@ program
  	;
 
 procedureDec
-@init { FunctionNode* procedureNode; }
-//@after { /*System.out.println("The procedure list is: " + functionList + "\n"); */}
+@init { FunctionNode* procedureNode;
+/** to declare the procedure use the syntax
+*******************************************
+*	procedure : ID ( <parameters> )
+*	<statemets> or <exit statement>
+*	end procedure
+*******************************************
+*	the parameters are optional and when using more than one parameter
+*	you should seperet them with ','
+*	when using parameters you should specify the type of the parameter
+*
+*	Ex: procedure : pro1 (int : param1 , int : param2)
+*		<statements>
+*		end procedure		
+*/
+ }
+
 	: 'procedure' ':' ID  { procedureNode = new FunctionNode((string)(char*)($ID.text->chars)); }
 	'(' (parameters { procedureNode->setParameters(functionParameters); } )? ')'
 		( statement 
@@ -287,7 +314,24 @@ procedureDec
 
 
 functionDec
-@init { FunctionNode* functionNode; }
+@init { FunctionNode* functionNode; 
+/** to declare the function use the syntax
+*******************************************
+*	function <type> : ID ( <parameters> )
+*	<statemets>
+*	<return statement>
+*	end function
+*******************************************
+*	the parameters are optional and when using more than one parameter
+*	you should seperet them with ','
+*	when using parameters you should specify the type of the parameter
+*
+*	Ex: function int : FUNC1 (int : param1 , int : param2)
+*		<statements>
+*		return val1;
+*		end function		
+*/
+}
 //@after { /*System.out.println("The procedure list is: " + functionList + "\n"); */}
 	: 'function' type ':' ID  { functionNode = new FunctionNode((string)(char*)($ID.text->chars)); }
 	'(' (parameters { functionNode->setParameters(functionParameters); } )? ')'  // here (type) is the return value type of the function
@@ -321,14 +365,21 @@ parameters
 	  )*
 	;
 
-statement returns [Node* node]
+statement returns [Node* node] 
+@init{
+/** 
+*	the statemets could be assignment Statement, constant Decleration Statement,
+*	variable Decleration Statement, if Statement, while Statement, procedure Call Statement,
+*	gui Statement or event Handle Statement.
+*
+*/
+}
 	: ';'
 	| assignmentStatement 
 		{ $node = $assignmentStatement.node;}
 	| constantDecStatement 
 		{ $node = $constantDecStatement.node;}
 	| variableDecStatement 
-		//{ $node = new Node("emptyMark"); }
 		{ $node = $variableDecStatement.node;}
 	| ifStatement  
 		{ $node =$ifStatement.node; }
@@ -348,6 +399,18 @@ statement returns [Node* node]
 //begin regular programing grammar
 
 assignmentStatement returns [Node* node]
+@init{
+/** 
+*	the  assignment Statement syntax is:
+******************************************
+*	ID := <expression> ;
+******************************************
+*	the assignment Statement ends with ;
+*	and the expression could be an integer or string
+*	or a mathmatical expression like 4+(5*2)
+*
+*/
+}
 	: ID ':=' expression ';' 
 		{
 			Node* idNode = new Node((string)(char*)($ID.text->chars));   // Create a node for the identifier
@@ -366,6 +429,18 @@ assignmentStatement returns [Node* node]
 	;
 
 constantDecStatement returns [Node* node]
+@init{
+/** 
+*	the  constant Decleration Statement syntax is:
+******************************************
+*	constant <type> : ID  := <expression> ; 
+******************************************
+*	the constant Decleration Statement ends with ;
+*	and the expression could be an int or string
+*	or a mathmatical expression like 4+(5*2)
+*	the <type> could be int, bool or string.
+*/
+}
 	: 'constant' type ':' ID  ':=' expression ';' 
 		{
 			$node = new Node(":=");
@@ -389,7 +464,19 @@ constantDecStatement returns [Node* node]
 	;
 
 variableDecStatement returns [Node* node]
-@init{ /*Node * temp;*/ }
+@init{ /*Node * temp;*/
+/** 
+*	the  variable Decleration Statement syntax is:
+******************************************
+*	var <type> : ID  := <expression> ; 
+******************************************
+*	the variable Decleration Statement ends with ;
+*	the expression is optional.
+*	the expression could be an int or string
+*	or a mathmatical expression like 4+(5*2)
+*	the <type> could be int, bool or string.
+*/
+ }
 	: 'var' type ':' i1=ID 
 		{
 			//string varText ("var ");
@@ -418,31 +505,31 @@ variableDecStatement returns [Node* node]
 			$node = equalsNode;
 	    })? //{ variableDeclNodes.push_back(temp); }
 
-/*	(',' i2=ID 
-		{
-			string varText ("var ");
-			varText += (string)(char*)($type.text->chars);
-			varText += " ";
-			varText += (string)(char*)($i2.text->chars);
-			temp = new Node(varText);
-        }
-    (':=' e2=expression
-        {
-			Node * equalsNode = new Node(":=");
-			equalsNode->addChild(temp);
-			equalsNode->addChild($e2.node);
-			temp = equalsNode;
-        })? { variableDeclNodes.push_back(temp); } )*  
-	*/ ';'
+	 ';'
 	;
 
 ifStatement returns [Node* node]
-@init { Node* thenNode; Node* elseNode; }
+@init { Node* thenNode; Node* elseNode;
+/** 
+*	the  if Statement syntax is:
+***********************************
+*	if <expression> then
+*	<statements>
+*	else
+*	<statements>
+*	end if
+***********************************
+* 
+*	the expression is either a regular expression or gui Comparison Expression 
+*	or guiPositionExpression.
+*	the expression could be put between Parentheses. (i.e. (expression) )
+*/
+ }
 	: 'if' (e1=expression | e1=guiComparisonExpression | '(' e1=guiComparisonExpression ')' | e1=guiPositionExpression ) 'then' 
 		{
-			$node = new Node("if");                      //i.e     "if"
-			$node->setType(Node::OP);	 		     //       /    \
-			$node->addChild($e1.node);                   //   "expr"   "then"
+			$node = new Node("if");                      
+			$node->setType(Node::OP);	 		     	 
+			$node->addChild($e1.node);                  
 			thenNode = new Node("then");
 			thenNode->setType(Node::OP);
 			$node->addChild(thenNode);
@@ -460,12 +547,40 @@ ifStatement returns [Node* node]
 	;
 
 whileStatement returns [Node * node]
-	: 'while' { $node = new Node("while"); $node->setType(Node::OP); } expression { $node->addChild($expression.node); }'loop'
+@init{
+/** 
+*	the  while Statement syntax is:
+***********************************
+*	while <expression> loop
+*	<statements>
+*	end loop
+***********************************
+* 
+*	the expression is  a regular expression (i.e. int)
+*	or a mathmatical expression like ( iterator < 5 ) which can be valued as a boolean
+*/
+}
+	: 'while' { $node = new Node("while"); $node->setType(Node::OP); } 
+		expression { $node->addChild($expression.node); }
+		'loop'
 	  ( statement { $node->addChild($statement.node); } | exitStatement)*
 	  'end' 'loop'
 	;
 
 procedureCallStatement returns [Node * node]
+@init{
+/** 
+*	the  procedure Call Statement syntax is:
+***********************************
+*	ID ( <parameters> );
+***********************************
+* 	
+*	the parameters are optional and when using more than one parameter
+*	you should seperet them with ','
+*	and when calling the procedure we don't specify the type of the parameters.
+*
+*/
+}
 	: ID  ('(' actualParameters ')' 
 		{
 			string procedureCallText ((string)(char*)($ID.text->chars));
@@ -505,11 +620,35 @@ actualParameters returns [Node * node]
 	;
 
 exitStatement
+@init{
+/** 
+*	the  exit Statement syntax is:
+***********************************
+*	exit when <expression> ;
+***********************************
+* 	OR
+***********************************
+*	exit now ;
+***********************************
+*	we use this statement inside while statement
+*
+*/
+}
 	: 'exit''when' expression ';'
 	| 'exit''now'';'
 	;
 
 returnStatement
+@init{
+/** 
+*	the  return Statement syntax is:
+***********************************
+*	return <expression> ;
+***********************************
+*	we use this statement inside the function declaration
+*
+*/
+}
 	: 'return' expression ';'
 	;
 
@@ -815,7 +954,17 @@ type
 
 
 guiDecStatement returns [Node* node]
-@init { /*Node* temp;*/ }
+@init { /*Node* temp;*/
+/** 
+*	the  GUI Declaration Statement syntax is:
+******************************************
+*	<guiType> : ID ;
+******************************************
+*	the GUI Declaration Statement ends with ;
+*	the <guiType> can be either: Circle, Box, Triangle or Label.
+*
+*/
+ }
 //@after { /*System.out.println(nodes); */}
 	: guiType ':' i1=ID  
 		{
@@ -833,24 +982,33 @@ guiDecStatement returns [Node* node]
 			
 			//guiDeclNodes.push_back(temp);
 		}
-/*	( ',' i2=ID  
-		{
-			string guiTypeText = (string)(char*)($guiType.text->chars);
-			guiTypeText += " ";
-			guiTypeText += (string)(char*)($i2.text->chars);
-			temp = new Node(guiTypeText);
-			guiDeclNodes.push_back(temp);
-		} )*  */
+
 	';'
 	;
 
 guiTerm returns [Node* node]
+@init { Node* temp;
+/** 
+*	the  GUI Term is either a gui which we expressed it with its ID
+*	or it's a guiPositionExpression which represents a position relation between gui terms. 
+*
+*/
+}
 	: ID { $node = new Node((string)(char*)($ID.text->chars)); $node->setType(Node::VAR); }
 	| '(' guiPositionExpression ')' { $node = $guiPositionExpression.node; }
 	;
 
 guiPositionExpression returns [Node* node]
-@init { Node* temp; }
+@init { Node* temp;
+/** 
+*	the  GUI Position Expression syntax is:
+******************************************
+*	<guiTerm> <positionKeyword> <guiTerm>
+******************************************
+*	the <positionKeyword>s are: LeftOf, RightOf, Above, Below, Contains and Intersect.
+*
+*/
+ }
 	: g1=guiTerm { temp = $g1.node; }
 	 (positionKeyword g2=guiTerm 
 		{
@@ -867,6 +1025,16 @@ guiPositionExpression returns [Node* node]
 	;
 
 guiComparisonExpression returns [Node* node]
+@init {
+/** 
+*	the  GUI Comparison Expression syntax is:
+******************************************
+*	ID <guiComparsionTerm> ID
+******************************************
+*	the <guiComparsionTerm>s are: SmallerThan, BiggerThan and EqualTo.
+*
+*/
+ }
 	:  i1=ID 	guiComparsionTerm 	i2=ID
 		{
 			Node* idNode1 = new Node((string)(char*)($i1.text->chars));
@@ -883,17 +1051,36 @@ guiComparisonExpression returns [Node* node]
 
 
 guiStatement returns [Node* node]
+@init {
+/** 
+*	the  GUI Statements are either GUI Declaration Statemet, GUI Position Expression
+*	or GUI Comparison Expression.
+*	and the GUI staements are like the regular statements should end with ';'
+*
+*/
+ }
 	: guiDecStatement
 		{ $node = $guiDecStatement.node ;}
 	| guiPositionExpression 
-		//{  statements.push_back(new Node($guiPositionExpression.node));}
 		{ $node = $guiPositionExpression.node ;}  ';'
 	| guiComparisonExpression 
-		//{ statements.push_back(new Node($guiComparisonExpression.node)); } 
 		{ $node = $guiComparisonExpression.node ;} ';'
 	;
 
 evntHandleStatement returns [Node* node]
+@init {
+/** 
+*	the  event Handle Statement syntax is:
+******************************************
+*	ID.<eventType>
+*	(
+*	<statements>
+*	) ;
+******************************************
+*	the <eventType>s are: OnClick and KeyPress.
+*
+*/
+ }
 	: ID '.' eventType 
 			{
 				$node = new Node((string)(char*)($eventType.text->chars));
