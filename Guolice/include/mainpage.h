@@ -4,6 +4,10 @@
 */ 
 /** @mainpage Guolice
 *
+*
+* \image html aub-logo.gif 
+* 
+*<a href="http://code.google.com/p/c-shell/">Project Homepage</a>
 * @authors 	
 *	- Mahmoud Anouti
 *	- Lama Ghusn

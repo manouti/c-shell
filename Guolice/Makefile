@@ -42,7 +42,7 @@ endif
 ####### Compiler, tools and options
 JAVA           = java
 ANTLR          = org.antlr.Tool
-JAVAFLAGS      = -cp ./antlr/antlr-3.2.jar
+JAVAFLAGS      = -cp ./third/antlr/antlr-3.2.jar
 CPP            = g++
 CPPFLAGS       = -pipe -Wall -W
 DBGFLAG        = -g
