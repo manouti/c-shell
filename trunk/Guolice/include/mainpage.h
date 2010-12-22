@@ -1,5 +1,4 @@
 /** @file mainpage.h
-* @brief Definition of class Template
 *
 * 
 */ 
