@@ -39,12 +39,8 @@
 using namespace std;
 // Main entry point for this example
 //
-void functionTest(){
-    cout<<"This is function test."<<endl;
-
-}
 //intilizing here will overright in grammar
-//ParseTree* Graph::pTree = new ParseTree();
+ParseTree* Graph::pTree = new ParseTree();
 
 int ANTLR3_CDECL
 main	(int argc, char *argv[])
