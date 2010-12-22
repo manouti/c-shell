@@ -1,6 +1,3 @@
-/** \file FunctionNode.cpp
-*	
-*/
 #include "FunctionNode.h"
 
 FunctionNode::FunctionNode()
