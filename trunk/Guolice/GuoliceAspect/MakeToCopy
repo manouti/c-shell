@@ -1,0 +1,14 @@
+INCPATH = -I. -I../antlr/libantlr3c-3.2/include -I./include -I../antlr/libantlr3c-3.2/
+LIBS    = -L../antlr/libantlr3c-3.2/.libs -lantlr3c
+CC	=g++
+SOURCES	= main.cc GuoliceParser.cc GuoliceLexer.cc ParseTree.cc FunctionNode.cc Node.cc 
+
+
+GuoliceGraph: $(SOURCES)
+	g++ -o ../dist/GuoliceGraph $(SOURCES) $(INCPATH) $(LIBS)
+
+
+
+
+
+

@@ -1,0 +1,138 @@
+#ifndef __GuoliceAspect_ah__
+#define __GuoliceAspect_ah__
+
+#include "Node.h"
+#include "ParseTree.h"
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <map>
+#include <sstream>
+#include <algorithm>
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+aspect GuoliceAspect{
+
+    advice execution(" % ParseTree::randomStupidFunction(...) " ):after(){
+
+        cout<<"Inside random function."<<endl;
+        cout<<"inshalla"<<endl;
+
+    }
+   advice execution(" % ParseTree::traverse(...) ") && args(node) && that(parseTree) :around(Node& node, ParseTree& parseTree){
+
+        ofstream dotFile; // Output file stream for the dot file.
+        dotFile.open("Graph.dot");
+
+        dotFile << "digraph GuoliceParseGraph  {\n";
+        dotFile << "graph[ordering=out];\n";
+
+        if(&node != NULL) {
+                parseTree.visitNode(&node);
+
+                for(int i = 0; i < node.getChildren().size(); i++) {
+                        parseTree.traverse(node.getChildren().at(i));
+                        parseTree.visitEdge(&node, i);
+                }
+        }
+
+        dotFile << "\n//-------------------- Node Declarations --------------------\n";
+
+        for(int i = 0; i < parseTree.nodeDeclarations.size(); i++) {
+                dotFile << parseTree.nodeDeclarations[i];
+        }
+
+        dotFile << "\n//-------------------- Edge Declarations --------------------\n";
+
+        for(int j = 0; j < parseTree.edgeDeclarations.size(); j++) {
+                dotFile << parseTree.edgeDeclarations[j];
+        }
+
+        dotFile << "\n\n";
+        dotFile << "}";
+        dotFile.close();
+
+
+
+    }
+
+
+   advice execution(" % ParseTree::visitNode(...) ") && args(node) && that(parseTree) :around(Node& node, ParseTree& parseTree){
+
+        string nodeDot ("node");
+
+        ostringstream oss;
+        oss << parseTree.dotNodeCount++;
+        nodeDot += oss.str();
+
+        parseTree.nodeNames[&node] = nodeDot; // Store the label of the node in the dot file, e.g. node13 in the map "nodeNames".
+
+        nodeDot += "[label=\"";
+
+        string nodeText(node.getValue());
+        replace(nodeText.begin(), nodeText.end(), '\"', '\'' );   // Replace the double-quote by a single-quote in case of a string for it to
+                                                                                                                          // to be added correctly in the dot layout text.
+        nodeDot += nodeText + "\",";
+
+        switch(node.getType()) {
+                case Node::VAR:
+                        {
+                        string variableColor;
+
+                        string varID = parseTree.varIDs[&node];
+
+                        if (parseTree.varColors.find(varID) != parseTree.varColors.end()) {
+                                variableColor = parseTree.varColors[node.getValue()];
+                        }
+                        else {
+                                double red = (static_cast<double> (rand()) / static_cast<double> (RAND_MAX) + 1.0) / 2.0;
+                                double green = (static_cast<double> (rand()) / static_cast<double> (RAND_MAX) + 1.0) / 2.0;
+                                double blue = (static_cast<double> (rand()) / static_cast<double> (RAND_MAX) + 1.0) / 2.0;
+
+                                oss.flush();
+                                oss << red << " " << green << " " << blue;
+                                variableColor = oss.str();
+
+                                parseTree.varColors[varID] = variableColor;
+                        }
+
+                        nodeDot += "rank=sink,style=filled,color=\"" + variableColor +  "\"];\n";
+                        }
+                        break;
+                case Node::CONST:
+                        nodeDot += "shape=box];\n";
+                        break;
+                case Node::OP:
+                         nodeDot += "shape=diamond];\n";
+        }
+
+        parseTree.nodeDeclarations.push_back(nodeDot);
+        //dotFile << nodeDot;
+}
+
+advice execution(" % ParseTree::visitEdge(...)" ) && args(parent, childNumber) && that(parseTree) : around(Node& parent, int& childNumber, ParseTree& parseTree)
+{
+        string edgeDot (parseTree.nodeNames[&parent]);
+        edgeDot += " -> " + parseTree.nodeNames[parent.getChildren().at(childNumber)] + "[label=";
+
+        ostringstream oss;
+        oss << childNumber + 1;
+        edgeDot += oss.str() + "];\n";
+
+        parseTree.edgeDeclarations.push_back(edgeDot);
+        //dotFile << edgeDot;
+}
+
+
+
+
+
+
+};
+
+
+
+
+#endif
