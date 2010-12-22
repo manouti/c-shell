@@ -6,7 +6,11 @@ Required resources to build the project:
 
 - The library of the Antlr3 C runtime according to your platform.
 
+
+
 The makefile includes some phony targets in case the user would like to build step-by-step
 without knowing the object file(s) to compile or link (e.g. compile target).
+
+To use the aspect dot generation please run make clean, then make aspect.
 
 Note: The project has been built and tested with the library provided for Windows and for Ubuntu 32bit. Sample graph output is in the Downloads section.
