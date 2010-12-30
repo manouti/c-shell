@@ -2,7 +2,7 @@ ACFLAGS ?= -v1 -k
 AC      ?= ../lib/ac++
 AG      ?= ../lib/ag++
 PCONFIG ?= ../lib/puma.config
-INCPATH ?= -I. -I../antlr/libantlr3c-3.2/include/ -I../antlr/libantlr3c-3.2/ -I../include -I../src
+INCPATH ?= -I. -I../antlr/libantlr3c-3.2/include/ -I../antlr/libantlr3c-3.2/ -I./include
 files	?= GuoliceLexer.cc GuoliceParser.cc ParseTree.cc Node.cc FunctionNode.cc main.cc 
 dollar	?= $
 
