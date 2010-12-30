@@ -1,0 +1,53 @@
+Overall: A
+
+Good structure and organization and concise and to the point readme file. 
+Good documentation. 
+Issue with understanding the purpose of the aspect. 
+Please check the comments below. 
+
+Guolice.g:
+good use of init and after. 
+good use of space in grammar file.
+excellent documentation.
+Good naming convention and nice use of antlr structure. 
+I would have used typedef to name the stl complex structures. 
+Why is the dotfile opened in the regular code? 
+186: It should be an aspect that should be totaly discarded if we do
+not include the aspect file. 
+
+One thing the traversal should happen after parsing from the main and not from the grammar file. 
+
+Guolice.tokens: should not be checked in
+
+FunctionNode.cpp/h:
+ParseTree.cpp/h:
+Node.cpp/h:
+What you should have under the outer include directory are the 
+include files exported for external use only. 
+Good separation of declaration and implementation. 
+
+In general, did you use an automatic java/CSharp to c++ converter? 
+Please be honest, this might be a plus!
+
+
+mainpage.h:
+Nice!!!
+
+
+main.c:
+it is nice to cite original work, however, do it in a good way. check how Jim Idle did it when he used Terence Par's on the top lines of this very same file
+
+
+GuoliceAspect.ah:
+Warning: Do not call names! use foo and bar instead of random and stupid. 
+The aspect should not traverse the graph! The aspect should just 
+print on visits to the nodes on any traversal. 
+Your aspect does the traversal again. 
+It is also duplicating code that still exists in the .g file. 
+Clean that up. 
+
+
+
+
+
+
