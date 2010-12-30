@@ -235,6 +235,9 @@ program
   		dotFile.close();
 		
 		cout << "\nNUMBER OF NODES: " << pTree->getNodeCount() << endl;
+		
+		system("dot -Tsvg Graph.dot -o G.svg");  // Create the svg file
+		
 		/*FunctionNode* first = functionList.at(0);
 		cout << "The first procedure is: " << first->toString() << endl;
 		FunctionNode* second = functionList.at(1);
