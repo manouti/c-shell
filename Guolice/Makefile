@@ -42,15 +42,14 @@ endif
 ####### Compiler, tools and options
 JAVA           = java
 ANTLR          = org.antlr.Tool
-JAVAFLAGS      = -cp ./third/antlr/antlr-3.2.jar
+JAVAFLAGS      = -cp ./antlr/antlr-3.2.jar
 CPP            = g++
 CPPFLAGS       = -pipe -Wall -W
 DBGFLAG        = -g
-INCPATH        = -I./include -I.
-LIBS           = -L./lib -lantlr3c
+INCPATH        = -I. -I./antlr/libantlr3c-3.2/include -I./include -I./antlr/libantlr3c-3.2/
+LIBS           = -L./antlr/libantlr3c-3.2/.libs -lantlr3c
 COPY           = cp -f
 LINK           = g++
-DOC            = doxygen
 COPY_FILE      = $(COPY)
 COPY_DIR       = $(COPY) -r
 DEL_FILE       = rm -f
@@ -58,6 +57,7 @@ DEL_DIR        = rm -r -f
 MOVE           = mv -f
 CHK_DIR_EXISTS = test -d
 MKDIR          = mkdir -p
+DOC            = doxygen
 
 
 ####### Output directory
@@ -75,10 +75,15 @@ TARGET        = Guolice
 DOXYFILE      = DoxyFile
 
 
+
 all : $(TARGET)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
-	$(DOC) $(DOXYFILE)
+	#$(DOC) $(DOXYFILE)
+
+$(PCONFIG):
+	$(AG) --gen_config -o $@
+
 
 $(TARGET) : $(OBJECTS)
 	$(MKDIR) $(OBJECTS_DIR)
@@ -141,18 +146,33 @@ link : $(OBJECTS)
 	$(MKDIR) $(ARTIFACT_DIR)
 	$(LINK) -o $(TARGET) $(LIBS) $(OBJECTS)
 	$(MOVE) $(TARGET) $(ARTIFACT_DIR)
-	
+
 ####################### Doc Target #######################
 . PHONY : doc
 
 doc :
 	$(DOC) $(DOXYFILE)
+
+###################### Aspect Target#######################
+
+aspect: $(GRAMMARFILE)
+	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
+	$(MOVE) $(ANTLROUTPUT_C) ./src
+	$(MOVE) $(ANTLROUTPUT_H) ./include
+	$(MKDIR) $(ARTIFACT_DIR)
+	cp $(SOURCES) ./GuoliceAspect
+	cp -r ./include  ./GuoliceAspect
+	cd ./GuoliceAspect; make
+	
+	
 	
 ####################### Clean Target #######################
 . PHONY : clean
 
 clean :
 	$(DEL_DIR) $(OBJECTS_DIR) $(ARTIFACT_DIR) $(DOC_DIR)
+	cd ./GuoliceAspect; make clean
+	clear
 
 ####################### Help Option ########################
 . PHONY : help
