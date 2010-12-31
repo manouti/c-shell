@@ -33,9 +33,17 @@
 // -I on the compile line (which vs2005 now handles, where vs2003 did not).
 //
 #include    <Guolice.h>
-
+#include    "ParseTree.h"
+#include    "Node.h"
+#include <iostream>
+using namespace std;
 // Main entry point for this example
 //
+
+
+//intilizing here will overright in grammar
+ParseTree* Graph::pTree = new ParseTree();
+
 int ANTLR3_CDECL
 main	(int argc, char *argv[])
 {
@@ -98,7 +106,7 @@ main	(int argc, char *argv[])
     //
     if (argc < 2 || argv[1] == NULL)
     {
-		fName	=(pANTLR3_UINT8)"../test_examples/input_3"; // Note in VS2005 debug, working directory must be configured
+		fName	=(pANTLR3_UINT8)"../test_examples/input_2"; // Note in VS2005 debug, working directory must be configured
     }
     else
     {
@@ -188,12 +196,20 @@ main	(int argc, char *argv[])
 
     // We did not return anything from this parser rule, so we can finish. It only remains
     // to close down our open objects, in the reverse order we created them
-    //
+
     psr	    ->free  (psr);	    psr = NULL;
     tstream ->free  (tstream);	    tstream = NULL;
     lxr	    ->free  (lxr);	    lxr = NULL;
     input   ->close (input);	    input = NULL;
 
+    //traversing the graph
+   Graph::pTree->traverse( Graph::pTree->getRootNode() ); // Get the dot output.
+
+
+
+
+
     return 0;
 }
+
 
