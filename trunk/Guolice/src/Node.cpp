@@ -6,6 +6,30 @@ Node::Node(string v)
 {
 	value = v;
 }
+Node::Node(string v, DataType dType){
+    value =v;
+
+
+}
+void Node::setDataType(DataType dType){
+    dataType = dType;
+
+}
+
+string Node::getDataType(){
+    string dataStringArray [] = { "INT", "STRING", "BOOL", "BOX", "CIRCLE", "TRIANGLE", "LABEL"};
+    return dataStringArray[dataType];
+}
+
+void Node::addChild(Node* child, string weight){
+        children.push_back(child);
+        child->setParent(this);
+        childrenWeight.push_back(weight);
+}
+
+vector<string> Node::getChildrenWeight(){
+    return childrenWeight;
+}
 
 Node::Node(Node* node)
 {
