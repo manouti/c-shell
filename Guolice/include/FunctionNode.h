@@ -1,8 +1,3 @@
-/** \file FunctionNode.h
-*	\class FunctionNode
-*	this class inherits from the Node class and it's used to store the members
-*	of the functions and procedures. 
-*/
 #ifndef FUNCTIONNODE_H
 #define FUNCTIONNODE_H
 
