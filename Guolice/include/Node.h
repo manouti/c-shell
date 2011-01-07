@@ -7,13 +7,12 @@
 using namespace std;
 
 
-enum DataType{ INT, STRING, BOOL, BOX, CIRCLE, TRIANGLE, LABEL};
+enum DataType{ INTEGER, STRING_LITERAL, BOOL, BOX, CIRCLE, TRIANGLE};
 
 class Node {
 
 	public:
 		enum NodeType { VAR, CONST, OP };	// Define the possible node types.
-
 
 		Node();
 		
@@ -48,11 +47,15 @@ class Node {
 
                 void addChild(Node* child, string weight);
 
-                vector<string> getChildrenWeight();
+                string getChildrenWeight(int i);
 	
 		string printChildren() const;
 		
 		string toString() const;
+
+                void setVisited();
+
+                bool isVisited();
 	
     private:
 		string value;			// The text value of the node.
@@ -61,6 +64,7 @@ class Node {
 		Node* parent;			// Parent of the node.
 		NodeType type;			// Type of the node (VAR, CONST, OP).
                 DataType dataType;              // Data type of node(INT, STRING, BOOL, BOX, CIRCLE, TRIANGLE, LABEL).
+                bool visited;
 };
 
 
