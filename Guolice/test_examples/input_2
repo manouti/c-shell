@@ -1,49 +1,10 @@
 Circle 		: C1 ;
 Circle 		: C2 ;
 Box    		: B1 ;
-Box	   	: B2 ;
+Box	   		: B2 ;
 Triangle 	: T1 ;
-Label		: L1 ;
 
-constant int : const1 := 3 ;
-constant int :  const2   := 45 ;
-var int : var1;
-var int : var2 := -4;
-var int : var4 := 5 ;
-var string : message  ;
-
-procedure : foo ()
-	var1 := (2 + 1) * 5 + 6 ;
-end procedure
-
-B1 Contains ( (C1 LeftOf C2 ) Above ( B2 Below T1));
-
-function int : func1 ( int : x  )
-	var int : var3 ;	
-	var3 := x + 1 ;
-	return var3;
-end function
-
-foo ();
-var2 := func1 (4);
-
-
-if  B1 Contains (B2 Intersect T3)  then
-	message := "Wrong GUI!!"  ;
-end if
-
-
-if  B1 BiggerThan B2 then
-	message := "Great!!"  ;
-else
-	message := " OK!!"  ;
-end if
-
-
-B2.OnClick ( 
-	var int : x := 3 ;	
-	Circle : C3 ;	
-	x:= 4 ;
-	);
+(C1 Below C2) LeftOf (B1 Above (B2 RightOf T1));
+B2 Below ((C1 LeftOf C2) Above (B2 Below T1));
 
 

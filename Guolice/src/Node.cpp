@@ -31,6 +31,11 @@ vector<string> Node::getChildrenWeight(){
     return childrenWeight;
 }
 
+//the following function was missing
+string Node::getChildrenWeight(int i){
+    return childrenWeight.at(i);
+}
+
 Node::Node(Node* node)
 {
 	this->value = node->value;
@@ -112,4 +117,26 @@ string Node::toString() const
 	nodeString += printChildren() + "";
 	
 	return nodeString;
+}
+
+
+
+string Node::getMode() const
+{
+	return mode;
+}
+
+void Node::setMode(string m)
+{
+	mode = m;
+}
+
+Metadata* Node::getMetadata() const
+{
+	return node_metadata;
+}
+
+void Node::setMetadata(Metadata* m)
+{
+	node_metadata = m;
 }
