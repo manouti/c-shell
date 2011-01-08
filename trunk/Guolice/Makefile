@@ -42,7 +42,7 @@ endif
 ####### Compiler, tools and options
 JAVA           = java
 ANTLR          = org.antlr.Tool
-JAVAFLAGS      = -cp ./antlr/antlr-3.2.jar
+JAVAFLAGS      = -cp ./third/antlr/antlr-3.2.jar
 CPP            = g++
 CPPFLAGS       = -pipe -Wall -W
 DBGFLAG        = -g
@@ -70,7 +70,7 @@ GRAMMARFILE   = Guolice.g
 SOURCES       = ./src/GuoliceLexer.c ./src/GuoliceParser.c ./src/ParseTree.cpp ./src/Node.cpp ./src/FunctionNode.cpp ./src/main.c
 ANTLROUTPUT_H = GuoliceLexer.h GuoliceParser.h
 ANTLROUTPUT_C = GuoliceLexer.c GuoliceParser.c Guolice.tokens
-OBJECTS       = GuoliceLexer.o GuoliceParser.o ParseTree.o Node.o FunctionNode.o main.o
+OBJECTS       = GuoliceLexer.o GuoliceParser.o ParseTree.o Node.o FunctionNode.o main.o guiPositionCompare.o guiReadMetadata.o CircleMetadata.o BoxMetadata.o TriangleMetadata.o
 TARGET        = Guolice
 DOXYFILE      = DoxyFile
 
@@ -79,7 +79,7 @@ DOXYFILE      = DoxyFile
 all : $(TARGET)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
-	#$(DOC) $(DOXYFILE)
+	$(DOC) $(DOXYFILE)
 
 $(PCONFIG):
 	$(AG) --gen_config -o $@
@@ -111,7 +111,22 @@ FunctionNode.o : ./src/FunctionNode.cpp ./include/FunctionNode.h
 	
 main.o : ./src/main.c ./include/Guolice.h
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
- 
+
+guiPositionCompare.o : ./src/guiPositionCompare.cpp ./include/guiPositionCompare.h
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
+CircleMetadata.o : ./src/CircleMetadata.cpp ./include/CircleMetadata.h ./include/Metadata.h
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
+BoxMetadata.o : ./src/BoxMetadata.cpp ./include/BoxMetadata.h ./include/Metadata.h
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
+TriangleMetadata.o : ./src/TriangleMetadata.cpp ./include/TriangleMetadata.h ./include/Metadata.h
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
+guiReadMetadata.o : ./src/guiReadMetadata.cpp ./include/guiReadMetadata.h
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
 GuoliceLexer.c GuoliceLexer.h GuoliceParser.c GuoliceParser.h Guolice.tokens : $(GRAMMARFILE)
 	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
 
