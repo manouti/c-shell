@@ -5,19 +5,20 @@ Node::Node() {}
 Node::Node(string v)
 {
 	value = v;
+        visited = false;
 }
 Node::Node(string v, DataType dType){
     value =v;
-
+    visited = false;
 
 }
 void Node::setDataType(DataType dType){
     dataType = dType;
-
+    visited = false;
 }
 
 string Node::getDataType(){
-    string dataStringArray [] = { "INT", "STRING", "BOOL", "BOX", "CIRCLE", "TRIANGLE", "LABEL"};
+    string dataStringArray [] = { "INTEGER", "STRING_LITERAL", "BOOL", "BOX", "CIRCLE", "TRIANGLE", "LABEL"};
     return dataStringArray[dataType];
 }
 
@@ -27,13 +28,9 @@ void Node::addChild(Node* child, string weight){
         childrenWeight.push_back(weight);
 }
 
-vector<string> Node::getChildrenWeight(){
-    return childrenWeight;
-}
-
-//the following function was missing
 string Node::getChildrenWeight(int i){
-    return childrenWeight.at(i);
+    return childrenWeight[i];
+
 }
 
 Node::Node(Node* node)
@@ -46,6 +43,14 @@ Node::Node(Node* node)
 string Node::getValue() const
 {
 	return value;
+}
+
+void Node::setVisited(){
+   visited = true;
+}
+
+bool Node::isVisited(){
+    return visited;
 }
 
 void Node::setValue(string v)
@@ -75,7 +80,7 @@ void Node::setChildren(vector<Node*> c)
 
 Node* Node::getParent() const
 { 
-	return parent;
+        return parent;
 }
 
 void Node::setParent(Node* p)
@@ -120,23 +125,22 @@ string Node::toString() const
 }
 
 
-
 string Node::getMode() const
 {
-	return mode;
+        return mode;
 }
 
 void Node::setMode(string m)
 {
-	mode = m;
+        mode = m;
 }
 
 Metadata* Node::getMetadata() const
 {
-	return node_metadata;
+        return node_metadata;
 }
 
 void Node::setMetadata(Metadata* m)
 {
-	node_metadata = m;
+        node_metadata = m;
 }
