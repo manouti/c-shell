@@ -5,10 +5,10 @@ Node::Node() {}
 Node::Node(string v)
 {
 	value = v;
-        visited = false;
+    visited = false;
 }
 Node::Node(string v, DataType dType){
-    value =v;
+    value = v;
     visited = false;
 
 }
@@ -30,7 +30,6 @@ void Node::addChild(Node* child, string weight){
 
 string Node::getChildrenWeight(int i){
     return childrenWeight[i];
-
 }
 
 Node::Node(Node* node)
@@ -80,7 +79,7 @@ void Node::setChildren(vector<Node*> c)
 
 Node* Node::getParent() const
 { 
-        return parent;
+    return parent;
 }
 
 void Node::setParent(Node* p)
@@ -127,7 +126,7 @@ string Node::toString() const
 
 string Node::getMode() const
 {
-        return mode;
+    return mode;
 }
 
 void Node::setMode(string m)
@@ -137,10 +136,10 @@ void Node::setMode(string m)
 
 Metadata* Node::getMetadata() const
 {
-        return node_metadata;
+    return node_metadata;
 }
 
 void Node::setMetadata(Metadata* m)
 {
-        node_metadata = m;
+    node_metadata = m;
 }
