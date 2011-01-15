@@ -9,21 +9,39 @@ class AbstractGui{
 protected:
     Point * point;
     int vertices; //should be added as a decorator
+	int leftX , rightX , upperY , bottomY;
+
 public:
-    AbstractGui(){
-        point = new Point();
 
-
-    }
-    AbstractGui(int numberOfVertcies){
+    AbstractGui(int numberOfVertcies)
+	{
         point = new Point[numberOfVertcies];
         vertices = numberOfVertcies;
-
     }
-
-    Point * getPoints(){
+	
+	int getLeftX() 
+	{
+		return leftX;
+	}
+	
+	int getUpperY() 
+	{
+		return upperY;
+	}
+	
+	int getRightX() 
+	{
+		return rightX;
+	}
+	
+	int getBottomY() 
+	{
+		return bottomY;
+	}
+	/*
+    Point * getPoints()
+	{
         return point;
-
     }
 
     void print();
@@ -48,7 +66,7 @@ public:
 
     }
 
-
+*/
 
 
 

@@ -134,12 +134,12 @@ void Node::setMode(string m)
         mode = m;
 }
 
-Metadata* Node::getMetadata() const
+AbstractGui* Node::getGui() const
 {
-    return node_metadata;
+    return gui;
 }
 
-void Node::setMetadata(Metadata* m)
+void Node::setGui(AbstractGui* m)
 {
-    node_metadata = m;
+    gui = m;
 }
