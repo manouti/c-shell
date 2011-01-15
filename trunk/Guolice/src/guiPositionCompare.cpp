@@ -579,12 +579,7 @@ int guiIsContains(Node* g1, Node* g2)
 			bool condition2 = g1BottomY <= g2BottomY;
 			bool condition3 = g1LeftX <= g2LeftX;
 			bool condition4 = g1RightX >= g2RightX;
-		
-			std::cout << "haha hoho : " << g1TopY << "   " << g2TopY << std::endl;
-			std::cout << "haha hoho : " << g1BottomY << "   " << g2BottomY << std::endl;
-			std::cout << "haha hoho : " << g1LeftX << "   " << g2LeftX << std::endl;
-			std::cout << "haha hoho : " << g1RightX << "   " << g2RightX << std::endl;
-			
+	
 			if (condition1 && condition2 && condition3 && condition4)
 			{
 				return 0;
