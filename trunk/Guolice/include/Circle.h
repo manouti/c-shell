@@ -1,31 +1,56 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
-#include "Point.h"
+
 #include "AbstractGui.h"
 
 
 class Circle: public AbstractGui{
 private:
-    double radius;
+    int radius;
 
 public:
-    Circle(){
-        AbstractGui(2);
-    }
-    Circle(Point center, double length){
-        AbstractGui(2);
-        radius = length;
+
+    Circle(Point center, int r) : AbstractGui(1) 
+	{
+        radius = r;
         point[0]= center;
+
+		leftX = getLeftX();
+		rightX = getRightX();
+		upperY = getUpperY();
+		bottomY = getBottomY();
     }
-    void print(){
-        cout<<"Circle: with center"<<point[0].toString()<<" and radius "<<radius<<endl;
 
-    }
-
-
-
-
+	int getRadius() const
+	{
+		return radius;
+	}
+	
+	Point getCenter() const
+	{ 
+		return point[0];
+	}
+	
+	int getLeftX() 
+	{
+		return point[0].getX() - radius;
+	}
+	
+	int getUpperY() 
+	{
+		return point[0].getY() + radius;
+	}
+	
+	int getRightX() 
+	{
+		return point[0].getX() + radius;
+	}
+	
+	int getBottomY() 
+	{
+		return point[0].getY() - radius;
+	}
 };
 
 

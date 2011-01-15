@@ -3,7 +3,9 @@ Circle 		: C2 ;
 Box    		: B1 ;
 Box	   		: B2 ;
 Triangle 	: T1 ;
-
+B1 Contains T1;
+B1 Contains C1;
+B1 Contains B2;
 (C1 Below C2) LeftOf (B1 Above (B2 RightOf T1));
 B2 Below ((C1 LeftOf C2) Above (B2 Below T1));
 

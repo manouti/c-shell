@@ -1,47 +1,54 @@
 #ifndef BOX_H
 #define BOX_H
 
-#include "AbstractGui.h"
+
+#include <AbstractGui.h>
 
 class Box: public AbstractGui {
-  private:
-    double length, width;
-  public:
-    Box(){
-       AbstractGui(4);
-   }
-    Box(Point bottomLeft, Point bottomRight, Point topRight, Point topLeft){ // defined ccw
-        AbstractGui(4);
-        point[0] = bottomLeft;
-        point[1] = bottomRight;
-        point[2] = topRight;
-        point[3] = topLeft;
-        length = bottomRight.x -  bottomLeft.x;
-        width =  topRight.y - bottomRight.y;
+private:
+	int width, height;
 
+public:
 
-    }
-    Box(Point bottomLeft, int length, int width){
-        AbstractGui(4);
-        point[0] = bottomLeft;
-        point[1] = Point(bottomLeft.x + length, bottomLeft.y);
-        point[2] = Point(point[1].x, point[1].y + width);
-        point[3]  =Point(bottomLeft.x, point[2].y);
-        this->length = length;
-        this->width = width;
-
-    }
-
-    void print(){
-        cout<<"Box: with points";
-        for(int i =0; i< 4; i++)
-            cout<<point[i].toString()<<", ";
-        cout<<endl;
-    }
-
-
-
-
+	Box(Point bottomLeft, int w, int h) : AbstractGui(4)
+	{
+		point[0] = bottomLeft;
+		point[1] = Point(bottomLeft.getX() + w, bottomLeft.getY());
+		point[2] = Point(point[1].getX(), point[1].getY() + h);
+		point[3]  =Point(bottomLeft.getX(), point[2].getY());
+		width = w;
+		height = h;
+		
+		leftX = getLeftX();
+		rightX = getRightX();
+		upperY = getUpperY();
+		bottomY = getBottomY();
+	}
+	
+	Point* getBLCorner() const
+	{ 
+		return &point[0];
+	}
+	
+	int getLeftX() 
+	{
+		return point[0].getX();
+	}
+	
+	int getUpperY() 
+	{
+		return point[3].getY();
+	}
+	
+	int getRightX() 
+	{
+		return point[1].getX();
+	}
+	
+	int getBottomY() 
+	{
+		return point[0].getY();
+	}
 
 };
 

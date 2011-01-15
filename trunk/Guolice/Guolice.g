@@ -17,13 +17,17 @@ options {
 	#include	<Node.h>	
 	#include	<FunctionNode.h>
 	#include	<guiPositionCompare.h>
-	#include	<guiReadMetadata.h>
+	#include	<guiConstract.h>
+	#include	<AbstractGui.h>	
+	#include 	<Circle.h>
+	#include 	<Box.h>
+	#include 	<Triangle.h>
 
 	using namespace std;
 }
 
 @parser::members{
-        ParseTree* tree;
+    ParseTree* tree;
 	Node* root;
 	vector<Node*> variableDeclNodes;
 	vector<Node*> guiDeclNodes;
@@ -34,7 +38,7 @@ options {
 	map<Node*, string> variableIDs;
 
 	map<string, string> guiNodeModes;
-	map<string, Metadata*> guiNodeMetadata;
+	map<string, AbstractGui*> guiObject;
 
 	char* metadata_file = "../test_examples/gui_metadata";
 	string comparision_output = "";
@@ -869,15 +873,15 @@ guiDecStatement returns [Node* node]
 
 			if (guiNodeModes[variableIDs[$node]] == "Circle")
 			{
-				guiNodeMetadata[variableIDs[$node]] = ReadMetadata::guiReadCircle(metadata_file, variableIDs[$node]);
+				guiObject[variableIDs[$node]] = guiConstract::guiCircleConstract(metadata_file, variableIDs[$node]);
 			}
 			else if (guiNodeModes[variableIDs[$node]] == "Box")
 			{
-				guiNodeMetadata[variableIDs[$node]] = ReadMetadata::guiReadBox(metadata_file, variableIDs[$node]);
+				guiObject[variableIDs[$node]] = guiConstract::guiBoxConstract(metadata_file, variableIDs[$node]);
 			}
 			else if (guiNodeModes[variableIDs[$node]] == "Triangle")
 			{
-				guiNodeMetadata[variableIDs[$node]] = ReadMetadata::guiReadTriangle(metadata_file, variableIDs[$node]);
+				guiObject[variableIDs[$node]] = guiConstract::guiTriangleConstract(metadata_file, variableIDs[$node]);
 			}
 		}
 	';'
@@ -903,13 +907,13 @@ guiTerm returns [Node* node]
 				$node->setMode(guiNodeModes[(string)(char*)($ID.text->chars)]);
 			}
 
-			if (guiNodeMetadata[(string)(char*)($ID.text->chars)] == NULL)
+			if (guiObject[(string)(char*)($ID.text->chars)] == NULL)
 			{
-				$node->setMetadata(NULL);
+				$node->setGui(NULL);
 			}
 			else
 			{
-				$node->setMetadata(guiNodeMetadata[(string)(char*)($ID.text->chars)]);
+				$node->setGui(guiObject[(string)(char*)($ID.text->chars)]);
 			}
 		}
 	| '(' guiPositionExpression ')' { $node = $guiPositionExpression.node; $node->setType(Node::OP); }
@@ -948,15 +952,14 @@ guiPositionExpression returns [Node* node]
 				comparision_output += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
 			}
 
-			if (($g1.node->getType() == Node::VAR) && ($g1.node->getMetadata() == NULL))
+			if (($g1.node->getType() == Node::VAR) && ($g1.node->getGui() == NULL))
 			{
 				comparision_output += "*** error: '" + $g1.node->getValue() + "' has no metadata provided.\n";
 			}
-			if (($g2.node->getType() == Node::VAR) && ($g2.node->getMetadata() == NULL))
+			if (($g2.node->getType() == Node::VAR) && ($g2.node->getGui() == NULL))
 			{
 				comparision_output += "*** error: '" + $g2.node->getValue() + "' has no metadata provided.\n";
 			}
-
 
 			if ((string)(char*)($positionKeyword.text->chars) == "LeftOf")
 			{
@@ -1053,8 +1056,25 @@ guiPositionExpression returns [Node* node]
 			}
 			else if ((string)(char*)($positionKeyword.text->chars) == "Contains")
 			{
-				if (guiIsContains($g1.node, $g2.node) == false)
+				comparision_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
+							(string)(char*)($g2.text->chars) + "':   ";
+				if (guiIsContains($g1.node, $g2.node) == 0)
 				{
+					comparision_output += "True\n";
+				}
+				else if (guiIsContains($g1.node, $g2.node) == 1)
+				{
+					comparision_output += "False\n";
+				}
+				else if (guiIsContains($g1.node, $g2.node) == 2)
+				{
+					comparision_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
+											"or does not have metadata.\n";
+				}
+				else if (guiIsContains($g1.node, $g2.node) == 3)
+				{
+					comparision_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
+											"or does not have metadata.\n";
 				}
 			}
 		} )+

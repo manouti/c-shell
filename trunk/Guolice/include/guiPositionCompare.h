@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <Node.h>
-#include <Metadata.h>
-#include <CircleMetadata.h>
-#include <BoxMetadata.h>
-#include <TriangleMetadata.h>
+#include <Circle.h>
+#include <Box.h>
+#include <Triangle.h>
+#include <GuoliceUtil.h>
 
 using std::cout;
 using std::endl;

@@ -44,7 +44,7 @@ JAVA           = java
 ANTLR          = org.antlr.Tool
 JAVAFLAGS      = -cp ./third/antlr/antlr-3.2.jar
 CPP            = g++
-CPPFLAGS       = -pipe -Wall -W
+CPPFLAGS       = -pipe #-Wall -W
 DBGFLAG        = -g
 INCPATH        = -I. -I./antlr/libantlr3c-3.2/include -I./include -I./antlr/libantlr3c-3.2/
 LIBS           = -L./antlr/libantlr3c-3.2/.libs -lantlr3c
@@ -70,7 +70,7 @@ GRAMMARFILE   = Guolice.g
 SOURCES       = ./src/GuoliceLexer.c ./src/GuoliceParser.c ./src/ParseTree.cpp ./src/Node.cpp ./src/FunctionNode.cpp ./src/main.c
 ANTLROUTPUT_H = GuoliceLexer.h GuoliceParser.h
 ANTLROUTPUT_C = GuoliceLexer.c GuoliceParser.c Guolice.tokens
-OBJECTS       = GuoliceLexer.o GuoliceParser.o ParseTree.o Node.o FunctionNode.o main.o guiPositionCompare.o guiReadMetadata.o CircleMetadata.o BoxMetadata.o TriangleMetadata.o
+OBJECTS       = GuoliceLexer.o GuoliceParser.o ParseTree.o Node.o FunctionNode.o main.o guiPositionCompare.o guiConstract.o 
 TARGET        = Guolice
 DOXYFILE      = DoxyFile
 
@@ -79,7 +79,7 @@ DOXYFILE      = DoxyFile
 all : $(TARGET)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
-	$(DOC) $(DOXYFILE)
+	#$(DOC) $(DOXYFILE)
 
 $(PCONFIG):
 	$(AG) --gen_config -o $@
@@ -115,16 +115,7 @@ main.o : ./src/main.c ./include/Guolice.h
 guiPositionCompare.o : ./src/guiPositionCompare.cpp ./include/guiPositionCompare.h
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
-CircleMetadata.o : ./src/CircleMetadata.cpp ./include/CircleMetadata.h ./include/Metadata.h
-	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
-
-BoxMetadata.o : ./src/BoxMetadata.cpp ./include/BoxMetadata.h ./include/Metadata.h
-	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
-
-TriangleMetadata.o : ./src/TriangleMetadata.cpp ./include/TriangleMetadata.h ./include/Metadata.h
-	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
-
-guiReadMetadata.o : ./src/guiReadMetadata.cpp ./include/guiReadMetadata.h
+guiConstract.o : ./src/guiConstract.cpp ./include/guiConstract.h
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
 GuoliceLexer.c GuoliceLexer.h GuoliceParser.c GuoliceParser.h Guolice.tokens : $(GRAMMARFILE)
