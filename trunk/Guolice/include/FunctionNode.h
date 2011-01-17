@@ -4,21 +4,17 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <Node.h>
+#include "ParseTree.h"
 
 using namespace std;
 
 #ifdef __cplusplus
-class FunctionNode: public Node {
+class FunctionNode: public ParseTree {
     private:
 		string returnType;
 		map<string, string> parameters;	
 	
     public:
-		FunctionNode();
-		
-		FunctionNode(string v);
-
 		FunctionNode(Node* node);
 
 		//FunctionNode(string v, vector<Node*> children, Node * parent):Node(v, children, parent){}
@@ -33,7 +29,17 @@ class FunctionNode: public Node {
 
 		string printParameters();
 		
+		string printFunctionName();
+		
+		string printBody();
+		
 		string toString();
+		
+		void visitFunctionNode();
+		
+		void visitFunctionChild(int childNumber);
+		
+		Node* getFunctionRoot() const;
 };
 
 #endif

@@ -20,7 +20,7 @@ using namespace std;
 class ParseTree {
 
 	public:
-                ParseTree(){}
+        ParseTree(){}
 		ParseTree(Node *root);
 		  // Constructor using a start node.
 		  
@@ -31,9 +31,9 @@ class ParseTree {
 		  // Determines whether the tree is empty.
 		  // Postcondition: Returns true if the tree is empty, false otherwise.
 		  
-                void traverse(Node* node);
-                  // Traversal function for the tree structure. It has calls to visitNode and visitEdge.
-                  // Postcondition: The specified node and all its children are visited in a recursive way.
+		void traverse(Node* node);
+	    // Traversal function for the tree structure. It has calls to visitNode and visitEdge.
+		// Postcondition: The specified node and all its children are visited in a recursive way.
 
 		int getNodeCount() const;
 		  // Gets the number of nodes in the tree.
@@ -46,17 +46,17 @@ class ParseTree {
 		map<string, string> varColors;
 		map<Node*, string> varIDs;
 
-                void visitNode(Node* node);
-                void visitEdge(Node* parent, int childNumber);
-                void destroy(Node* &node); // Used by the destructor to free memory.
-                Node* getRootNode();
-                void setRootNode(Node* root);
-                void setFunctionList(vector<FunctionNode*> funcList);
-                void printTree(Node * node);
+		void visitNode(Node* node);
+		void visitEdge(Node* parent, int childNumber);
+		void destroy(Node* &node); // Used by the destructor to free memory.
+		Node* getRootNode();
+		void setRootNode(Node* root);
+		void setFunctionList(vector<FunctionNode*> funcList);
+		void printTree(Node * node);
+		
         private:
-                Node *root;   // Root node
-                vector<FunctionNode*> functionList;
-
+			Node *root;   // Root node
+			vector<FunctionNode*> functionList;
 };
 
 class Graph{
