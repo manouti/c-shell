@@ -12,7 +12,6 @@
 #include <algorithm>
 #include <iostream>
 
-
 typedef ProgGraph<string, string> progGraph;
 
 using namespace std;
@@ -65,6 +64,5 @@ class Graph{
         static progGraph* translatedGraph;
 
 };
-
 
 #endif
