@@ -15,11 +15,6 @@ public:
 	{
         radius = r;
         point[0]= center;
-
-		leftX = getLeftX();
-		rightX = getRightX();
-		upperY = getUpperY();
-		bottomY = getBottomY();
     }
 
 	int getRadius() const
@@ -32,22 +27,22 @@ public:
 		return point[0];
 	}
 	
-	int getLeftX() 
+	virtual int getLeftX() const
 	{
 		return point[0].getX() - radius;
 	}
 	
-	int getUpperY() 
+	virtual int getUpperY() const
 	{
 		return point[0].getY() + radius;
 	}
 	
-	int getRightX() 
+	virtual int getRightX() const
 	{
 		return point[0].getX() + radius;
 	}
 	
-	int getBottomY() 
+	virtual int getBottomY() const
 	{
 		return point[0].getY() - radius;
 	}

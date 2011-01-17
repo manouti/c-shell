@@ -18,11 +18,6 @@ public:
 		point[3]  =Point(bottomLeft.getX(), point[2].getY());
 		width = w;
 		height = h;
-		
-		leftX = getLeftX();
-		rightX = getRightX();
-		upperY = getUpperY();
-		bottomY = getBottomY();
 	}
 	
 	Point* getBLCorner() const
@@ -30,22 +25,22 @@ public:
 		return &point[0];
 	}
 	
-	int getLeftX() 
+	virtual int getLeftX() const
 	{
 		return point[0].getX();
 	}
 	
-	int getUpperY() 
+	virtual int getUpperY() const
 	{
 		return point[3].getY();
 	}
 	
-	int getRightX() 
+	virtual int getRightX() const
 	{
 		return point[1].getX();
 	}
 	
-	int getBottomY() 
+	virtual int getBottomY() const
 	{
 		return point[0].getY();
 	}
