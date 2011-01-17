@@ -9,7 +9,6 @@ class AbstractGui{
 protected:
     Point * point;
     int vertices; //should be added as a decorator
-	int leftX , rightX , upperY , bottomY;
 
 public:
 
@@ -19,25 +18,14 @@ public:
         vertices = numberOfVertcies;
     }
 	
-	int getLeftX() 
-	{
-		return leftX;
-	}
-	
-	int getUpperY() 
-	{
-		return upperY;
-	}
-	
-	int getRightX() 
-	{
-		return rightX;
-	}
-	
-	int getBottomY() 
-	{
-		return bottomY;
-	}
+	virtual int getLeftX() const = 0;
+
+	virtual int getUpperY() const = 0;
+
+	virtual int getRightX() const = 0;
+
+	virtual int getBottomY() const = 0;
+
 	/*
     Point * getPoints()
 	{

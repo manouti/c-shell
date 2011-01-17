@@ -11,11 +11,6 @@ public:
         point[0] = A;
         point[1] = B;
         point[2] = C;
-
-		leftX = getLeftX();
-		rightX = getRightX();
-		upperY = getUpperY();
-		bottomY = getBottomY();
     }
 
 	Point* getPoint_A() const
@@ -23,7 +18,7 @@ public:
 		return &point[0];
 	}
 
-	int getLeftX() 
+	virtual int getLeftX() const
 	{
 		int leftX = point[0].getX();
 		if (point[1].getX() < leftX)
@@ -37,7 +32,7 @@ public:
 		return leftX;
 	}
 	
-	int getUpperY() 
+	virtual int getUpperY() const
 	{
 		int upperY = point[0].getY();
 		if (point[1].getY() > upperY)
@@ -48,10 +43,10 @@ public:
 		{
 			upperY = point[2].getY();
 		}
-		return upperY;
+		return upperY; 
 	}
 	
-	int getRightX() 
+	virtual int getRightX() const
 	{
 		int rightX = point[0].getX();
 		if (point[1].getX() > rightX)
@@ -62,10 +57,10 @@ public:
 		{
 			rightX = point[2].getX();
 		}
-		return rightX;
+		return rightX; 
 	}
 	
-	int getBottomY() 
+	virtual int getBottomY() const
 	{
 		int bottomY = point[0].getY();
 		if (point[1].getY() < bottomY)
@@ -76,7 +71,7 @@ public:
 		{
 			bottomY = point[2].getY();
 		}
-		return bottomY;
+		return bottomY; 
 	}
 };
 
