@@ -76,7 +76,6 @@ options {
 }
 
 
-
 /*------------------------------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------------------------------
@@ -99,13 +98,13 @@ program
 		printFunctionList();
 
 
-	        tree = new ParseTree(root);
-	        tree->varIDs = variableIDs;
-	        Graph::pTree = tree;
+		tree = new ParseTree(root);
+		tree->varIDs = variableIDs;
+		Graph::pTree = tree;
 
 
-	        cout << "\nNUMBER OF NODES: " << tree->getNodeCount() << endl;
-	        /*FunctionNode* first = functionList.at(0);
+		cout << "\nNUMBER OF NODES: " << tree->getNodeCount() << endl;
+		/*FunctionNode* first = functionList.at(0);
 		cout << "The first procedure is: " << first->toString() << endl;
 		FunctionNode* second = functionList.at(1);
 		cout << "The second procedure is: " << second->toString() << endl;*/
@@ -281,18 +280,16 @@ statement returns [Node* node]
 	;
 
 
-
-
-//begin regular programing grammar
+// begin regular programming grammar
 
 assignmentStatement returns [Node* node]
 @init{
 /** 
-*	the  assignment Statement syntax is:
+*	The  assignment statement syntax is:
 ******************************************
 *	ID := <expression> ;
 ******************************************
-*	the assignment Statement ends with ;
+*	The assignment Statement ends with ;
 *	and the expression could be an integer or string
 *	or a mathmatical expression like 4+(5*2)
 *
@@ -318,13 +315,13 @@ assignmentStatement returns [Node* node]
 constantDecStatement returns [Node* node]
 @init{
 /** 
-*	the  constant Decleration Statement syntax is:
+*	The  constant declaration statement syntax is:
 ******************************************
 *	constant <type> : ID  := <expression> ; 
 ******************************************
-*	the constant Decleration Statement ends with ;
+*	The constant declaration statement ends with ;
 *	and the expression could be an int or string
-*	or a mathmatical expression like 4+(5*2)
+*	or a mathematical expression like 4+(5*2)
 *	the <type> could be int, bool or string.
 */
 }
@@ -353,14 +350,14 @@ constantDecStatement returns [Node* node]
 variableDecStatement returns [Node* node]
 @init{
 /** 
-*	the  variable Decleration Statement syntax is:
+*	the  variable declaration statement syntax is:
 ******************************************
 *	var <type> : ID  := <expression> ; 
 ******************************************
-*	the variable Decleration Statement ends with ;
+*	the variable declaration statement ends with ;
 *	the expression is optional.
 *	the expression could be an int or string
-*	or a mathmatical expression like 4+(5*2)
+*	or a mathematical expression like 4+(5*2)
 *	the <type> could be int, bool or string.
 */
 }
@@ -397,7 +394,7 @@ variableDecStatement returns [Node* node]
 ifStatement returns [Node* node]
 @init { Node* thenNode; Node* elseNode;
 /** 
-*	the  if Statement syntax is:
+*	The if statement syntax is:
 ***********************************
 *	if <expression> then
 *	<statements>
@@ -406,7 +403,7 @@ ifStatement returns [Node* node]
 *	end if
 ***********************************
 * 
-*	the expression is either a regular expression or gui Comparison Expression 
+*	The expression is either a regular expression or gui comparison expression 
 *	or guiPositionExpression.
 *	the expression could be put between Parentheses. (i.e. (expression) )
 */
@@ -435,15 +432,15 @@ ifStatement returns [Node* node]
 whileStatement returns [Node * node]
 @init{
 /** 
-*	the  while Statement syntax is:
+*	The while statement syntax is:
 ***********************************
 *	while <expression> loop
 *	<statements>
 *	end loop
 ***********************************
 * 
-*	the expression is  a regular expression (i.e. int)
-*	or a mathmatical expression like ( iterator < 5 ) which can be valued as a boolean
+*	The expression is a regular expression (i.e. int)
+*	or a mathematical expression like iterator < 5 which can be valued as a boolean
 */
 }
 	: 'while' { $node = new Node("while"); $node->setType(Node::OP); } expression { $node->addChild($expression.node); }'loop'
@@ -454,13 +451,13 @@ whileStatement returns [Node * node]
 procedureCallStatement returns [Node * node]
 @init{
 /** 
-*	the  procedure Call Statement syntax is:
+*	The procedure call statement syntax is:
 ***********************************
 *	ID ( <parameters> );
 ***********************************
 * 	
-*	the parameters are optional and when using more than one parameter
-*	you should seperet them with ','
+*	The parameters are optional and when using more than one parameter
+*	you should seperate them with ','
 *	and when calling the procedure we don't specify the type of the parameters.
 *
 */
@@ -506,7 +503,7 @@ actualParameters returns [Node * node]
 exitStatement
 @init{
 /** 
-*	the  exit Statement syntax is:
+*	The  exit statement syntax is:
 ***********************************
 *	exit when <expression> ;
 ***********************************
@@ -525,7 +522,7 @@ exitStatement
 returnStatement
 @init{
 /** 
-*	the  return Statement syntax is:
+*	The return statement syntax is:
 ***********************************
 *	return <expression> ;
 ***********************************
@@ -840,11 +837,11 @@ type
 guiDecStatement returns [Node* node]
 @init {
 /** 
-*	the  GUI Declaration Statement syntax is:
+*	The GUI declaration statement syntax is:
 ******************************************
 *	<guiType> : ID ;
 ******************************************
-*	the GUI Declaration Statement ends with ;
+*	The GUI declaration statement ends with ;
 *	the <guiType> can be either: Circle, Box, Triangle or Label.
 *
 */
@@ -884,8 +881,8 @@ guiDecStatement returns [Node* node]
 guiTerm returns [Node* node]
 @init {
 /** 
-*	the  GUI Term is either a gui which we expressed it with its ID
-*	or it's a guiPositionExpression which represents a position relation between gui terms. 
+*	The GUI Term is either a GUI which we expressed it with its ID
+*	or it's a guiPositionExpression which represents a position relation between GUI terms. 
 *
 */
 }
@@ -916,11 +913,11 @@ guiTerm returns [Node* node]
 guiPositionExpression returns [Node* node]
 @init { Node* temp;
 /** 
-*	the  GUI Position Expression syntax is:
+*	The GUI position expression syntax is:
 ******************************************
 *	<guiTerm> <positionKeyword> <guiTerm>
 ******************************************
-*	the <positionKeyword>s are: LeftOf, RightOf, Above, Below, Contains and Intersect.
+*	The <positionKeyword>s are: LeftOf, RightOf, Above, Below, Contains and Intersect.
 *
 */
 }
@@ -1103,8 +1100,8 @@ guiComparisonExpression returns [Node* node]
 guiStatement returns [Node* node]
 @init {
 /** 
-*	the  GUI Statements are either GUI Declaration Statemet, GUI Position Expression
-*	or GUI Comparison Expression.
+*	The GUI statements are either GUI declaration statement, GUI position expression
+*	or GUI comparison expression.
 *	and the GUI staements are like the regular statements should end with ';'
 *
 */
@@ -1120,14 +1117,14 @@ guiStatement returns [Node* node]
 evntHandleStatement returns [Node* node]
 @init {
 /** 
-*	the  event Handle Statement syntax is:
+*	The event handle statement syntax is:
 ******************************************
 *	ID.<eventType>
 *	(
 *	<statements>
 *	) ;
 ******************************************
-*	the <eventType>s are: OnClick and KeyPress.
+*	The <eventType>s are: OnClick and KeyPress.
 *
 */
  }
@@ -1182,7 +1179,7 @@ guiComparsionTerm
 fragment LETTER : ('a'..'z' | 'A'..'Z');
 fragment DIGIT : '0'..'9' ;
 
-STRING_LITERAL    // we can write any thing here including (\") which will be understood it as  (")
+STRING_LITERAL    // We can write any thing here including (\") which will be understood it as (")
 	: '"'
 		 ( '\\' '\"'  |   ~('"' |  '\n'| '\r')	 )*
 	  '"'
