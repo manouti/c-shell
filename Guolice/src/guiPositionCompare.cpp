@@ -147,8 +147,10 @@ int guiIsRightOf(Node* g1, Node* g2)
 // if both nodes are VAR
 	if ((g1IsOP == false) && (g2IsOP == false))
 	{
-
-		if ((g1LeftX > g2LeftX) && (g1RightX > g2RightX))
+		bool  condition1 = g1LeftX > g2LeftX;
+		bool  condition2 = g1RightX > g2RightX;
+		 
+		if (condition1 && condition2)
 		{return 0;}
 		else
 		{return 1;}
