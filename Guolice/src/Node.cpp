@@ -117,7 +117,7 @@ string Node::toString() const
 	string nodeString ("Node \t ");
 	nodeString += value + "\n\t\t parent \t-> ";
 	nodeString += ((parent == NULL)?"NULL":parent->getValue());
-	nodeString += "\n\t\t children \t-> ";
+	nodeString += "\n\t\t top-level children \t-> ";
 	nodeString += printChildren() + "";
 	
 	return nodeString;

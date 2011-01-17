@@ -41,15 +41,14 @@ options {
 	map<string, AbstractGui*> guiObject;
 
 	char* metadata_file = "../test_examples/gui_metadata";
-	string comparision_output = "";
+	string comparison_output = "";
 
-/** \function
-*	\param Node* pointer from the Type Node
-*	
-*	\brief Print the nodes in the tree
-*
-*/
-
+	/** \function
+	*	\param Node* pointer from the Type Node
+	*	
+	*	\brief Print the nodes in the tree
+	*
+	*/
 	void printTree(Node* node) {
 		cout << "\nNode: " << node->toString() << endl;
 		for(int i = 0; i < node->getChildren().size(); i++) 
@@ -58,31 +57,22 @@ options {
 		}
 	}
 
-/** \function
-*	\brief Print the list of the Function or the procedure members
-*
-*/ 
-
+	/** \function
+	*	\brief Print the list of the Function or the procedure members
+	*
+	*/ 
 	void printFunctionList() {
-        cout << "[ ";
-        for (int i=0; i < functionList.size(); i++)
-        {
-            if(functionList[i] != NULL) {
-                cout << functionList[i]->toString() << "The function " << functionList[i]->getValue() << " members : ";
-               
-                for (int j=0; j < functionList[i]->getChildren().size(); j++)
-                {
-                    printTree(functionList[i]->getChildren().at(j));
-                }
-                cout << endl;
-            }
-        }
-        cout << "]\n";
-    }
-	
-
-
-
+		cout << "[ ";
+		
+		for (int i = 0; i < functionList.size(); i++) 
+		{
+			if(functionList[i] != NULL) {
+				cout << functionList[i]->toString();
+				cout << endl;
+			}
+		}
+		cout << "]\n";
+	}
 }
 
 
@@ -109,13 +99,13 @@ program
 		printFunctionList();
 
 
-        tree = new ParseTree(root);
-        tree->varIDs = variableIDs;
-        Graph::pTree = tree;
+	        tree = new ParseTree(root);
+	        tree->varIDs = variableIDs;
+	        Graph::pTree = tree;
 
 
-        cout << "\nNUMBER OF NODES: " << tree->getNodeCount() << endl;
-        /*FunctionNode* first = functionList.at(0);
+	        cout << "\nNUMBER OF NODES: " << tree->getNodeCount() << endl;
+	        /*FunctionNode* first = functionList.at(0);
 		cout << "The first procedure is: " << first->toString() << endl;
 		FunctionNode* second = functionList.at(1);
 		cout << "The second procedure is: " << second->toString() << endl;*/
@@ -128,8 +118,8 @@ program
 
 			cout << endl << endl;
 			cout << "****************************************************************************************************" << endl;
-			cout << endl << endl << "GUI Comparision Output:" << endl << endl;
-			cout << comparision_output << endl;
+			cout << endl << endl << "GUI Comparison Output:" << endl << endl;
+			cout << comparison_output << endl;
 		}
 		/****************************************************************************************************/
 	   }
@@ -160,7 +150,8 @@ program
  	;
 
 procedureDec
-@init { FunctionNode* procedureNode;
+@init { Node* procedureRootNode;
+	FunctionNode* procedureTree;
 /** to declare the procedure use the syntax
 *******************************************
 *	procedure : ID ( <parameters> )
@@ -177,13 +168,14 @@ procedureDec
 */
 }
 
-	: 'procedure' ':' ID  { procedureNode = new FunctionNode((string)(char*)($ID.text->chars)); }
-	'(' (parameters { procedureNode->setParameters(functionParameters); } )? ')'
+	: 'procedure' ':' ID  { procedureRootNode = new Node((string)(char*)($ID.text->chars));
+				procedureTree = new FunctionNode(procedureRootNode); }
+	'(' (parameters { procedureTree->setParameters(functionParameters); } )? ')'
 		( statement 
 		{
 			if($statement.node ->getValue() != "emptyMark") 
 			{
-				 procedureNode->addChild($statement.node);
+				 procedureRootNode->addChild($statement.node);
 			}
 /*			for(int i = 0; i < variableDeclNodes.size(); i++) 
 			{
@@ -199,15 +191,16 @@ procedureDec
 	   	} 
 		| exitStatement)*
 		{
-			procedureNode->setReturnType("void");
-			functionList.push_back(procedureNode); 
+			procedureTree->setReturnType("void");
+			functionList.push_back(procedureTree);
 		}
 	  'end' 'procedure'
 	;
 
 
 functionDec
-@init { FunctionNode* functionNode;
+@init { Node* functionRootNode;
+	FunctionNode* functionTree;
 /** to declare the function use the syntax
 *******************************************
 *	function <type> : ID ( <parameters> )
@@ -226,28 +219,29 @@ functionDec
 */
 }
 //@after { /*System.out.println("The procedure list is: " + functionList + "\n"); */}
-	: 'function' type ':' ID  { functionNode = new FunctionNode((string)(char*)($ID.text->chars)); }
-	'(' (parameters { functionNode->setParameters(functionParameters); } )? ')'  // here (type) is the return value type of the function
+	: 'function' type ':' ID  { functionRootNode = new Node((string)(char*)($ID.text->chars));
+				    functionTree = new FunctionNode(functionRootNode); }
+	'(' (parameters { functionTree->setParameters(functionParameters); } )? ')'  // here (type) is the return value type of the function
 		( statement 
 		{
 			if($statement.node ->getValue() != "emptyMark") 
 			{
-				functionNode->addChild($statement.node);
+				functionRootNode->addChild($statement.node);
 			}
 			for(int i = 0; i < variableDeclNodes.size(); i++) 
 			{
-				functionNode->addChild(variableDeclNodes[i]);
+				functionRootNode->addChild(variableDeclNodes[i]);
 			}
 			for(int i = 0; i < guiDeclNodes.size(); i++) 
 			{
-				functionNode->addChild(guiDeclNodes[i]);
+				functionRootNode->addChild(guiDeclNodes[i]);
 			}
 			
 			guiDeclNodes.clear();
 			variableDeclNodes.clear();
 	   	} )* returnStatement
-	  'end' 'function' { functionNode->setReturnType((string)(char*)($type.text->chars));
-                       functionList.push_back(functionNode); }
+	  'end' 'function' { functionTree->setReturnType((string)(char*)($type.text->chars));
+                       functionList.push_back(functionTree); }
 	;
 
 parameters
@@ -945,135 +939,135 @@ guiPositionExpression returns [Node* node]
 
 			if ($g1.node->getMode() == "ERROR")
 			{
-				comparision_output += "*** error: '" + $g1.node->getValue() + "' was not declared.\n";
+				comparison_output += "*** error: '" + $g1.node->getValue() + "' was not declared.\n";
 			}
 			if ($g2.node->getMode() == "ERROR")
 			{
-				comparision_output += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
+				comparison_output += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
 			}
 
 			if (($g1.node->getType() == Node::VAR) && ($g1.node->getGui() == NULL))
 			{
-				comparision_output += "*** error: '" + $g1.node->getValue() + "' has no metadata provided.\n";
+				comparison_output += "*** error: '" + $g1.node->getValue() + "' has no metadata provided.\n";
 			}
 			if (($g2.node->getType() == Node::VAR) && ($g2.node->getGui() == NULL))
 			{
-				comparision_output += "*** error: '" + $g2.node->getValue() + "' has no metadata provided.\n";
+				comparison_output += "*** error: '" + $g2.node->getValue() + "' has no metadata provided.\n";
 			}
 
 			if ((string)(char*)($positionKeyword.text->chars) == "LeftOf")
 			{
-				comparision_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
+				comparison_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
 							(string)(char*)($g2.text->chars) + "':   ";
 				if (guiIsLeftOf($g1.node, $g2.node) == 0)
 				{
-					comparision_output += "True\n";
+					comparison_output += "True\n";
 				}
 				else if (guiIsLeftOf($g1.node, $g2.node) == 1)
 				{
-					comparision_output += "False\n";
+					comparison_output += "False\n";
 				}
 				else if (guiIsLeftOf($g1.node, $g2.node) == 2)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 				else if (guiIsLeftOf($g1.node, $g2.node) == 3)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 				
 			}
 			else if ((string)(char*)($positionKeyword.text->chars) == "RightOf")
 			{
-				comparision_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
+				comparison_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
 							(string)(char*)($g2.text->chars) + "':   ";
 				if (guiIsRightOf($g1.node, $g2.node) == 0)
 				{
-					comparision_output += "True\n";
+					comparison_output += "True\n";
 				}
 				else if (guiIsRightOf($g1.node, $g2.node) == 1)
 				{
-					comparision_output += "False\n";
+					comparison_output += "False\n";
 				}
 				else if (guiIsRightOf($g1.node, $g2.node) == 2)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 				else if (guiIsRightOf($g1.node, $g2.node) == 3)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 			}
 			else if ((string)(char*)($positionKeyword.text->chars) == "Above")
 			{
-				comparision_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
+				comparison_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
 							(string)(char*)($g2.text->chars) + "':   ";
 				if (guiIsAbove($g1.node, $g2.node) == 0)
 				{
-					comparision_output += "True\n";
+					comparison_output += "True\n";
 				}
 				else if (guiIsAbove($g1.node, $g2.node) == 1)
 				{
-					comparision_output += "False\n";
+					comparison_output += "False\n";
 				}
 				else if (guiIsAbove($g1.node, $g2.node) == 2)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 				else if (guiIsAbove($g1.node, $g2.node) == 3)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 			}
 			else if ((string)(char*)($positionKeyword.text->chars) == "Below")
 			{
-				comparision_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
+				comparison_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
 							(string)(char*)($g2.text->chars) + "':   ";
 				if (guiIsBelow($g1.node, $g2.node) == 0)
 				{
-					comparision_output += "True\n";
+					comparison_output += "True\n";
 				}
 				else if (guiIsBelow($g1.node, $g2.node) == 1)
 				{
-					comparision_output += "False\n";
+					comparison_output += "False\n";
 				}
 				else if (guiIsBelow($g1.node, $g2.node) == 2)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 				else if (guiIsBelow($g1.node, $g2.node) == 3)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 			}
 			else if ((string)(char*)($positionKeyword.text->chars) == "Contains")
 			{
-				comparision_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
+				comparison_output += "Analyzing '" + (string)(char*)($g1.text->chars) + " " + (string)(char*)($positionKeyword.text->chars) + " " +
 							(string)(char*)($g2.text->chars) + "':   ";
 				if (guiIsContains($g1.node, $g2.node) == 0)
 				{
-					comparision_output += "True\n";
+					comparison_output += "True\n";
 				}
 				else if (guiIsContains($g1.node, $g2.node) == 1)
 				{
-					comparision_output += "False\n";
+					comparison_output += "False\n";
 				}
 				else if (guiIsContains($g1.node, $g2.node) == 2)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g1.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 				else if (guiIsContains($g1.node, $g2.node) == 3)
 				{
-					comparision_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
+					comparison_output += "Faild - '" + (string)(char*)($g2.text->chars) + "' or at least one of its children is not declared " +
 											"or does not have metadata.\n";
 				}
 			}

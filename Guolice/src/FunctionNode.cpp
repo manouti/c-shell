@@ -1,17 +1,7 @@
 #include "FunctionNode.h"
 
-FunctionNode::FunctionNode()
-		: Node()
-{
-}
-		
-FunctionNode::FunctionNode(string v)
-		: Node(v)
-{
-}
-
 FunctionNode::FunctionNode(Node* node)
-		: Node(node)
+		: ParseTree(node)
 {
 }
 
@@ -49,18 +39,32 @@ string FunctionNode::printParameters()
 	return params;
 }
 
+string FunctionNode::printFunctionName()
+{
+	return root->getValue();
+}
+
+string FunctionNode::printBody()
+{
+	return root->toString();
+}
+
+Node* FunctionNode::getFunctionRoot() const
+{ 
+	return root;
+}
+
 string FunctionNode::toString()
 {
-	string nodeString ("Node\t ");
-	nodeString += getValue();
+	string nodeString ("FunctionNode\t ");
+	nodeString += printFunctionName();
 	nodeString += "(";
 	nodeString += printParameters();
 	nodeString += ") \n\t\treturns: ";
 	nodeString += returnType;
-	nodeString += "\n\t\tparent -> ";
-	nodeString += ((getParent() == NULL)?"NULL":getParent()->getValue());
-	nodeString += "\n\t\tchildren -> ";
-	nodeString += printChildren();
+	nodeString += "\n\t\tFunction body: \n\t\t";
+	nodeString += printBody();
+	nodeString += "\n--------------------------------------------------";
 	nodeString += "\n\n";
 
 	return nodeString;
