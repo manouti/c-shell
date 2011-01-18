@@ -16,9 +16,5 @@ public:
 
     Node* getProgNodeMap(progGraph::ProgNode* progNode);
 
-
-
-
-
 };
 #endif // GuoliceNodeFactory_H
