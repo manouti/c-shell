@@ -1,7 +1,5 @@
 #include "Visitors.h"
 
-
-
 bool Visitor::operator() (progGraph::ProgNode * node) {
         cout << "node " << node->data <<endl;
         return true;

@@ -1,16 +1,13 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
-
 #include "AbstractGui.h"
-
 
 class Circle: public AbstractGui{
 private:
     int radius;
 
 public:
-
     Circle(Point center, int r) : AbstractGui(1) 
 	{
         radius = r;
@@ -47,8 +44,5 @@ public:
 		return point[0].getY() - radius;
 	}
 };
-
-
-
 
 #endif // CIRCLE_H

@@ -1,7 +1,6 @@
 #ifndef BOX_H
 #define BOX_H
 
-
 #include <AbstractGui.h>
 
 class Box: public AbstractGui {
@@ -9,7 +8,6 @@ private:
 	int width, height;
 
 public:
-
 	Box(Point bottomLeft, int w, int h) : AbstractGui(4)
 	{
 		point[0] = bottomLeft;
@@ -46,8 +44,5 @@ public:
 	}
 
 };
-
-
-
 
 #endif // BOX_H

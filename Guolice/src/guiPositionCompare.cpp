@@ -1,5 +1,5 @@
 /** \file guiPositionCompare.cpp
-*   \brief the file containing the functions responsible of comparing the positions of the gui Shapes.
+*   \brief The file containing the functions responsible of comparing the positions of the GUI shapes.
 *     
 */
 
@@ -28,7 +28,7 @@ int guiIsLeftOf(Node* g1, Node* g2)
 		g1IsOP = true;
 	}
 
-// Gui_2 
+	// Gui_2 
 	if (g2->getType() == Node::VAR)
 	{
 		g2IsOP = false;
@@ -44,8 +44,8 @@ int guiIsLeftOf(Node* g1, Node* g2)
 		g2IsOP = true;
 	}
 
-// comparing guiIsLeftOf(gui1 , gui2)
-// if both nodes are VAR
+	// comparing guiIsLeftOf(gui1 , gui2)
+	// if both nodes are VAR
 	if ((g1IsOP == false) && (g2IsOP == false))
 	{
 		bool  condition1 = g1LeftX < g2LeftX;
@@ -56,7 +56,7 @@ int guiIsLeftOf(Node* g1, Node* g2)
 		else
 		{return 1;}
 	}
-// if the first node is VAR and the second one is operation
+	// if the first node is VAR and the second one is operation
 	else if ((g1IsOP == false) && (g2IsOP == true))
 	{
 		vector<Node*> children = g2->getChildren();
@@ -70,7 +70,7 @@ int guiIsLeftOf(Node* g1, Node* g2)
 		}
 		return 0;
 	}
-// if the first node is operation and the second one is VAR.
+	// if the first node is operation and the second one is VAR.
 	else if ((g1IsOP == true) && (g2IsOP == false))
 	{
 		vector<Node*> children = g1->getChildren();
@@ -84,7 +84,7 @@ int guiIsLeftOf(Node* g1, Node* g2)
 		}
 		return 0;
 	}
-// if both nodes are operation.
+	// if both nodes are operation.
 	else
 	{
 		vector<Node*> children1 = g1->getChildren();
@@ -111,7 +111,7 @@ int guiIsRightOf(Node* g1, Node* g2)
 	int g1LeftX, g2LeftX;
 	int g1RightX, g2RightX;
 	bool g1IsOP, g2IsOP;
-// Gui_1
+	// Gui_1
 	if (g1->getType() == Node::VAR)
 	{
 		g1IsOP = false;
@@ -127,7 +127,7 @@ int guiIsRightOf(Node* g1, Node* g2)
 		g1IsOP = true;
 	}
 
-// Gui_2
+	// Gui_2
 	if (g2->getType() == Node::VAR)
 	{
 		g2IsOP = false;
@@ -143,8 +143,8 @@ int guiIsRightOf(Node* g1, Node* g2)
 		g2IsOP = true;
 	}
 
-// comparing guiIsRightOf(gui1 , gui2)
-// if both nodes are VAR
+	// comparing guiIsRightOf(gui1 , gui2)
+	// if both nodes are VAR
 	if ((g1IsOP == false) && (g2IsOP == false))
 	{
 		bool  condition1 = g1LeftX > g2LeftX;
@@ -569,4 +569,3 @@ int guiIsContains(Node* g1, Node* g2)
 
 return 0;
 }
-

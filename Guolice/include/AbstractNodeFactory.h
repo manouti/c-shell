@@ -24,9 +24,4 @@ public:
 
 };
 
-
-
-
-
-
 #endif // ABSTRACTNODEFACTORY_H
