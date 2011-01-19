@@ -1,7 +1,6 @@
 #ifndef TRANSLATOR_H
 #define TRANSLATOR_H
 
-
 #include "Node.h"
 #include "ParseTree.h"
 #include "graph.h"
@@ -14,23 +13,21 @@ ParseTree* Graph::pTree = new ParseTree();
 ProgGraph<string, string>* Graph::translatedGraph = new ProgGraph<string, string>();
 
 
-
 //middle man class
 class Translator
 {
-private:
-    StandardNodeFactory standardNodeFactory;
-    GuoliceNodeFactory  guoliceNodeFactory;
-public:
-    Translator(){}
+	private:
+		StandardNodeFactory standardNodeFactory;
+		GuoliceNodeFactory  guoliceNodeFactory;
+		
+	public:
+		Translator(){}
 
-    void guoliceTranslate(Node* node );
+		void guoliceTranslate(Node* node);
 
-    void translate();
+		void translate();
 
-    void translate( progGraph  graph);
-
-
+		void translate(progGraph  graph);
 };
 
 //test main

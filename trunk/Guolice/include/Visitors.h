@@ -3,7 +3,6 @@
 
 #include "GuoliceNodeFactory.h"
 
-
 class Visitor {
 public:
     bool operator() (progGraph::ProgNode * node) ;

@@ -7,29 +7,27 @@
 using namespace std;
 
 class Point{
-private:
-	double x;
-	double y;
+	private:
+		double x, y;
 
-public:
-	Point(){}	
-	
-	Point(double x, double y)
-	{
-		this->x = x;
-		this->y = y;
-	}
-	
-	int getX() const
-	{
-		return x;
-	}
-	
-	int getY() const
-	{
-		return y;
-	}
-	
+	public:
+		Point(){}	
+		
+		Point(double x, double y)
+		{
+			this->x = x;
+			this->y = y;
+		}
+		
+		int getX() const
+		{
+			return x;
+		}
+		
+		int getY() const
+		{
+			return y;
+		}	
 };
 
 /*
@@ -119,6 +117,5 @@ Point maxX(Point* pointArray, int length)
 }
 
 */
-
 
 #endif // POINT_H

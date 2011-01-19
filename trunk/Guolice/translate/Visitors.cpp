@@ -22,9 +22,9 @@ bool StandardGraphVistor::operator() (progGraph::ProgNode * node) {
     //create the node
     if(nodeFactory->getProgNodeMap(node)==NULL){ //assuming were visiting with color 1
        nodeFactory->createNode(node);
-       cout<<"Created Guolice node: "<< nodeFactory->getProgNodeMap(node)->getValue()<<endl;
+       cout << "Created Guolice node: " << nodeFactory->getProgNodeMap(node)->getValue() << endl;
        if(!setRootNode){
-            setRootNode=true;
+            setRootNode = true;
             rootNode = nodeFactory->getProgNodeMap(node);
        }
     }
@@ -34,6 +34,7 @@ bool StandardGraphVistor::operator() (progGraph::ProgNode * node) {
  bool StandardGraphVistor::operator() (progGraph::ProgEdge * edge) {
     Node* parentNode;
     Node* childNode;
+	
     if(edge->from.isVisited(1) )
        parentNode = nodeFactory->getProgNodeMap(&edge->from);
     if(edge->to.isVisited(1))
@@ -44,7 +45,7 @@ bool StandardGraphVistor::operator() (progGraph::ProgNode * node) {
         childNode = nodeFactory->getProgNodeMap(&edge->to);
     }
     parentNode->addChild(childNode);
-    cout<<"Adding edge between: "<<parentNode->getValue()<<" and "<<childNode->getValue()<<endl;
+    cout << "Adding edge between: " << parentNode->getValue() << " and " << childNode->getValue() << endl;
     return true;
 }
 

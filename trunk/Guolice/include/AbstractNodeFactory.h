@@ -1,7 +1,6 @@
 #ifndef ABSTRACTNODEFACTORY_H
 #define ABSTRACTNODEFACTORY_H
 
-
 //used in inherited classes
 #include <map>
 #include "ParseTree.h"
@@ -12,16 +11,15 @@ using namespace std;
 enum FactoryType {guolice, standard};
 
 class AbstractNodeFactory{
+	private:
+		FactoryType factoryType;
+		
+	public:
+		AbstractNodeFactory();
 
-private:
-        FactoryType factoryType;
-public:
-        AbstractNodeFactory();
+		void print();
 
-        void print();
-
-        void setFactoryType(FactoryType type);
-
+		void setFactoryType(FactoryType type);
 };
 
 #endif // ABSTRACTNODEFACTORY_H

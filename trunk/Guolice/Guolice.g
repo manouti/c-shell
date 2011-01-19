@@ -27,7 +27,7 @@ options {
 }
 
 @parser::members{
-    ParseTree* tree;
+    	ParseTree* tree;
 	Node* root;
 	vector<Node*> variableDeclNodes;
 	vector<Node*> guiDeclNodes;
@@ -36,10 +36,10 @@ options {
 	vector<Node*> statements;
 	
 	map<Node*, string> variableIDs;
-
-	map<string, string> guiNodeModes;
+	
+	map<string, string> guiNodeShapes;
 	map<string, AbstractGui*> guiObject;
-
+	
 	char* metadata_file = "../test_examples/gui_metadata";
 	string comparison_output = "";
 
@@ -151,14 +151,14 @@ program
 procedureDec
 @init { Node* procedureRootNode;
 	FunctionNode* procedureTree;
-/** to declare the procedure use the syntax
+/** To declare a procedure, use the syntax
 *******************************************
 *	procedure : ID ( <parameters> )
 *	<statemets> or <exit statement>
 *	end procedure
 *******************************************
-*	the parameters are optional and when using more than one parameter
-*	you should seperet them with ','
+*	The parameters are optional and when using more than one parameter
+*	you should separate them with ','
 *	when using parameters you should specify the type of the parameter
 *
 *	Ex: procedure : pro1 (int : param1 , int : param2)
@@ -200,15 +200,15 @@ procedureDec
 functionDec
 @init { Node* functionRootNode;
 	FunctionNode* functionTree;
-/** to declare the function use the syntax
+/** To declare a function, use the syntax
 *******************************************
 *	function <type> : ID ( <parameters> )
 *	<statemets>
 *	<return statement>
 *	end function
 *******************************************
-*	the parameters are optional and when using more than one parameter
-*	you should seperet them with ','
+*	T parameters are optional and when using more than one parameter
+*	you should separate them with ','
 *	when using parameters you should specify the type of the parameter
 *
 *	Ex: function int : FUNC1 (int : param1 , int : param2)
@@ -254,9 +254,9 @@ parameters
 statement returns [Node* node]
 @init {
 /** 
-*	the statemets could be assignment Statement, constant Decleration Statement,
-*	variable Decleration Statement, if Statement, while Statement, procedure Call Statement,
-*	gui Statement or event Handle Statement.
+*	The statement could be an assignment statement, a constant declaration statement,
+*	a variable declaration statement, an if statement, a while statement, a procedure call statement,
+*	a GUI statement, or an event handle statement.
 *
 */
 }
@@ -285,13 +285,13 @@ statement returns [Node* node]
 assignmentStatement returns [Node* node]
 @init{
 /** 
-*	The  assignment statement syntax is:
+*	The assignment statement syntax is:
 ******************************************
 *	ID := <expression> ;
 ******************************************
-*	The assignment Statement ends with ;
+*	The assignment statement ends with ;
 *	and the expression could be an integer or string
-*	or a mathmatical expression like 4+(5*2)
+*	or a mathematical expression like 4+(5*2)
 *
 */
 }
@@ -315,7 +315,7 @@ assignmentStatement returns [Node* node]
 constantDecStatement returns [Node* node]
 @init{
 /** 
-*	The  constant declaration statement syntax is:
+*	The constant declaration statement syntax is:
 ******************************************
 *	constant <type> : ID  := <expression> ; 
 ******************************************
@@ -350,7 +350,7 @@ constantDecStatement returns [Node* node]
 variableDecStatement returns [Node* node]
 @init{
 /** 
-*	the  variable declaration statement syntax is:
+*	the variable declaration statement syntax is:
 ******************************************
 *	var <type> : ID  := <expression> ; 
 ******************************************
@@ -860,17 +860,17 @@ guiDecStatement returns [Node* node]
 			
 			variableIDs[$node] = (string)(char*)($ID.text->chars);
 			
-			guiNodeModes[variableIDs[$node]] = (string)(char*)($guiType.text->chars);
+			guiNodeShapes[variableIDs[$node]] = (string)(char*)($guiType.text->chars);
 
-			if (guiNodeModes[variableIDs[$node]] == "Circle")
+			if (guiNodeShapes[variableIDs[$node]] == "Circle")
 			{
 				guiObject[variableIDs[$node]] = guiConstract::guiCircleConstract(metadata_file, variableIDs[$node]);
 			}
-			else if (guiNodeModes[variableIDs[$node]] == "Box")
+			else if (guiNodeShapes[variableIDs[$node]] == "Box")
 			{
 				guiObject[variableIDs[$node]] = guiConstract::guiBoxConstract(metadata_file, variableIDs[$node]);
 			}
-			else if (guiNodeModes[variableIDs[$node]] == "Triangle")
+			else if (guiNodeShapes[variableIDs[$node]] == "Triangle")
 			{
 				guiObject[variableIDs[$node]] = guiConstract::guiTriangleConstract(metadata_file, variableIDs[$node]);
 			}
@@ -889,13 +889,13 @@ guiTerm returns [Node* node]
 	: ID {
 			$node = new Node((string)(char*)($ID.text->chars));
 			$node->setType(Node::VAR);
-			if (guiNodeModes[(string)(char*)($ID.text->chars)] == "")
+			if (guiNodeShapes[(string)(char*)($ID.text->chars)] == "")
 			{
 				$node->setMode("ERROR");
 			}
 			else
 			{
-				$node->setMode(guiNodeModes[(string)(char*)($ID.text->chars)]);
+				$node->setMode(guiNodeShapes[(string)(char*)($ID.text->chars)]);
 			}
 
 			if (guiObject[(string)(char*)($ID.text->chars)] == NULL)

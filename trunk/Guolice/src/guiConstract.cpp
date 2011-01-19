@@ -1,6 +1,4 @@
-
 #include <guiConstract.h>
-
 
 #ifndef capturedData
 #define capturedData atoi(str_metadata.substr(position1,position2).data())
@@ -110,7 +108,6 @@ AbstractGui* guiConstract::guiTriangleConstract(char* metadata_file, string Node
 	Triangle* triangle = new Triangle(*point_1, *point_2, *point_3);
 	return triangle;
 }
-
 
 
 
