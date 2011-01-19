@@ -17,26 +17,25 @@ typedef ProgGraph<string, string> progGraph;
 using namespace std;
 
 class ParseTree {
-
 	public:
         ParseTree(){}
 		ParseTree(Node *root);
-		  // Constructor using a start node.
+		// Constructor using a start node.
 		  
 		~ParseTree();
-		  // Destructor
+		// Destructor
 		
 		bool isEmpty() const;
-		  // Determines whether the tree is empty.
-		  // Postcondition: Returns true if the tree is empty, false otherwise.
+		// Determines whether the tree is empty.
+		// Postcondition: Returns true if the tree is empty, false otherwise.
 		  
 		void traverse(Node* node);
 	    // Traversal function for the tree structure. It has calls to visitNode and visitEdge.
 		// Postcondition: The specified node and all its children are visited in a recursive way.
 
 		int getNodeCount() const;
-		  // Gets the number of nodes in the tree.
-		  // Postcondition: Returns the number of nodes in the parse tree.
+		// Gets the number of nodes in the tree.
+		// Postcondition: Returns the number of nodes in the parse tree.
 
 		int dotNodeCount;  // Used to name the nodes in the dot file (each new node increments dotNodeCount).
 		vector<string> nodeDeclarations;
@@ -53,16 +52,15 @@ class ParseTree {
 		void setFunctionList(vector<FunctionNode*> funcList);
 		void printTree(Node * node);
 		
-        private:
-			Node *root;   // Root node
-			vector<FunctionNode*> functionList;
+	private:
+		Node *root;   // Root node
+		vector<FunctionNode*> functionList;
 };
 
 class Graph{
     public:
         static ParseTree* pTree;
         static progGraph* translatedGraph;
-
 };
 
 #endif

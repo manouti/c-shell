@@ -147,13 +147,13 @@ int guiIsRightOf(Node* g1, Node* g2)
 	// if both nodes are VAR
 	if ((g1IsOP == false) && (g2IsOP == false))
 	{
-		bool  condition1 = g1LeftX > g2LeftX;
-		bool  condition2 = g1RightX > g2RightX;
+		bool condition1 = g1LeftX > g2LeftX;
+		bool condition2 = g1RightX > g2RightX;
 		 
 		if (condition1 && condition2)
-		{return 0;}
+			{return 0;}
 		else
-		{return 1;}
+			{return 1;}
 	}
 	else if ((g1IsOP == false) && (g2IsOP == true))
 	{
@@ -242,8 +242,8 @@ int guiIsAbove(Node* g1, Node* g2)
 
 	if ((g1IsOP == false) && (g2IsOP == false))
 	{
-		bool  condition1 = g1TopY > g2TopY;
-		bool  condition2 = g1BottomY > g2BottomY;
+		bool condition1 = g1TopY > g2TopY;
+		bool condition2 = g1BottomY > g2BottomY;
 		 
 		if (condition1 && condition2)
 		{return 0;}
@@ -312,8 +312,7 @@ int guiIsBelow(Node* g1, Node* g2)
 		if (gui == NULL) {return 2;}
 
 		g1TopY = gui->getUpperY();
-		g1BottomY = gui->getBottomY();
-		
+		g1BottomY = gui->getBottomY();		
 	}
 	else
 	{
@@ -338,8 +337,8 @@ int guiIsBelow(Node* g1, Node* g2)
 
 	if ((g1IsOP == false) && (g2IsOP == false))
 	{
-		bool  condition1 = g1TopY < g2TopY;
-		bool  condition2 = g1BottomY < g2BottomY;
+		bool condition1 = g1TopY < g2TopY;
+		bool condition2 = g1BottomY < g2BottomY;
 		 
 		if (condition1 && condition2)
 		{return 0;}
@@ -410,20 +409,20 @@ int guiIsContains(Node* g1, Node* g2)
 
 		AbstractGui* gui = g1->getGui();
 		if (gui == NULL) {return 2;}
-
-		if (g1->getMode() == "Circle")
+		
+		if (g1->getGuiShape() == "Circle")
 		{
 			g1Radius = ((Circle*)(gui))->getRadius();
 			g1Center = ((Circle*)(gui))->getCenter();
 		}
-		else if (g1->getMode() == "Box")
+		else if (g1->getGuiShape() == "Box")
 		{
 			g1TopY = gui->getUpperY();
 			g1BottomY = gui->getBottomY();
 			g1LeftX = gui->getLeftX();
 			g1RightX = gui->getRightX();
 		}
-		else if (g1->getMode() == "Triangle")
+		else if (g1->getGuiShape() == "Triangle")
 		{
 		}
 	}
@@ -444,16 +443,16 @@ int guiIsContains(Node* g1, Node* g2)
 		g2LeftX = gui->getLeftX();
 		g2RightX = gui->getRightX();
 
-		if (g2->getMode() == "Circle")
+		if (g2->getGuiShape() == "Circle")
 		{
 			g2Radius = ((Circle*)(gui))->getRadius();
 			g2Center = ((Circle*)(gui))->getCenter();
 		}
-		else if (g2->getMode() == "Box")
+		else if (g2->getGuiShape() == "Box")
 		{
 			point = ((Box*)(gui))->getBLCorner();
 		}
-		else if (g2->getMode() == "Triangle")
+		else if (g2->getGuiShape() == "Triangle")
 		{
 			point = ((Triangle*)(gui))->getPoint_A();
 		}
@@ -466,9 +465,9 @@ int guiIsContains(Node* g1, Node* g2)
 
 	if ((g1IsOP == false) && (g2IsOP == false))
 	{
-		if (g1->getMode() == "Circle") 
+		if (g1->getGuiShape() == "Circle") 
 		{	
-			if (g2->getMode() == "Circle")
+			if (g2->getGuiShape() == "Circle")
 			{	
 				bool  condition1 = g1Radius > g2Radius;
 				float distance   = GuoliceUtil::getDistance (g1Center, g2Center);
@@ -479,7 +478,7 @@ int guiIsContains(Node* g1, Node* g2)
 				else
 				{return 1;}
 			}
-			else if (g2->getMode() == "Box")
+			else if (g2->getGuiShape() == "Box")
 			{
 				bool condition1 = GuoliceUtil::getDistance (g1Center, point[0]) <= g1Radius;
 				bool condition2 = GuoliceUtil::getDistance (g1Center, point[1]) <= g1Radius;
@@ -490,7 +489,7 @@ int guiIsContains(Node* g1, Node* g2)
 				else
 				{return 1;}
 			}
-			else if (g2->getMode() == "Triangle")
+			else if (g2->getGuiShape() == "Triangle")
 			{
 				bool condition1 = GuoliceUtil::getDistance (g1Center, point[0]) <= g1Radius;
 				bool condition2 = GuoliceUtil::getDistance (g1Center, point[1]) <= g1Radius;
@@ -501,7 +500,7 @@ int guiIsContains(Node* g1, Node* g2)
 				{return 1;}
 			}
 		}
-		else if (g1->getMode() == "Box") 
+		else if (g1->getGuiShape() == "Box") 
 		{
 			bool condition1 = g1TopY >= g2TopY;
 			bool condition2 = g1BottomY <= g2BottomY;

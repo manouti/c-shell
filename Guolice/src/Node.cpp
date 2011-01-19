@@ -131,7 +131,7 @@ string Node::getMode() const
 
 void Node::setMode(string m)
 {
-        mode = m;
+	mode = m;
 }
 
 AbstractGui* Node::getGui() const

@@ -57,7 +57,7 @@ class Node {
 
         bool isVisited();
 
-        string getMode() const;
+        string getGuiShape() const;
         void setMode(string m);
         AbstractGui* getGui() const;
         void setGui(AbstractGui* m);
@@ -71,9 +71,9 @@ class Node {
 		NodeType type;					// Type of the node (VAR, CONST, OP).
         DataType dataType;              // Data type of node(INT, STRING, BOOL, BOX, CIRCLE, TRIANGLE, LABEL).
         bool visited;
-        string mode;					//!< Mode of the node (Box, Circle, Triangle, Label).
+        string guiShape;				//!< Shape of GUI represented by the node (Box, Circle, Triangle, Label).
         
-		AbstractGui* gui;		//!< Properties of the node mode, i.e. properties of the circle, box, triangle, etc...
+		AbstractGui* gui;		//!< Properties of the node GUI shape, i.e. properties of the circle, box, triangle, etc...
 
 };
 

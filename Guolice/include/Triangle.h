@@ -4,77 +4,74 @@
 #include "AbstractGui.h"
 
 class Triangle : public AbstractGui{
-public:
+	public:
+		Triangle(Point A, Point B, Point C) : AbstractGui(3)
+		{
+			points[0] = A;
+			points[1] = B;
+			points[2] = C;
+		}
 
-    Triangle(Point A, Point B, Point C) : AbstractGui(3)
-	{
-        point[0] = A;
-        point[1] = B;
-        point[2] = C;
-    }
+		Point* getVertices() const
+		{ 
+			return points;
+		}
 
-	Point* getPoint_A() const
-	{ 
-		return &point[0];
-	}
-
-	virtual int getLeftX() const
-	{
-		int leftX = point[0].getX();
-		if (point[1].getX() < leftX)
+		virtual int getLeftX() const
 		{
-			leftX = point[1].getX();
+			int leftX = points[0].getX();
+			if (points[1].getX() < leftX)
+			{
+				leftX = points[1].getX();
+			}
+			if (points[2].getX() < leftX)
+			{
+				leftX = points[2].getX();
+			}
+			return leftX;
 		}
-		if (point[2].getX() < leftX)
+		
+		virtual int getUpperY() const
 		{
-			leftX = point[2].getX();
+			int upperY = points[0].getY();
+			if (points[1].getY() > upperY)
+			{
+				upperY = points[1].getY();
+			}
+			if (points[2].getY() > upperY)
+			{
+				upperY = points[2].getY();
+			}
+			return upperY; 
 		}
-		return leftX;
-	}
-	
-	virtual int getUpperY() const
-	{
-		int upperY = point[0].getY();
-		if (point[1].getY() > upperY)
+		
+		virtual int getRightX() const
 		{
-			upperY = point[1].getY();
+			int rightX = points[0].getX();
+			if (points[1].getX() > rightX)
+			{
+				rightX = points[1].getX();
+			}
+			if (points[2].getX() > rightX)
+			{
+				rightX = points[2].getX();
+			}
+			return rightX; 
 		}
-		if (point[2].getY() > upperY)
+		
+		virtual int getBottomY() const
 		{
-			upperY = point[2].getY();
+			int bottomY = points[0].getY();
+			if (points[1].getY() < bottomY)
+			{
+				bottomY = points[1].getY();
+			}
+			if (points[2].getY() < bottomY)
+			{
+				bottomY = points[2].getY();
+			}
+			return bottomY; 
 		}
-		return upperY; 
-	}
-	
-	virtual int getRightX() const
-	{
-		int rightX = point[0].getX();
-		if (point[1].getX() > rightX)
-		{
-			rightX = point[1].getX();
-		}
-		if (point[2].getX() > rightX)
-		{
-			rightX = point[2].getX();
-		}
-		return rightX; 
-	}
-	
-	virtual int getBottomY() const
-	{
-		int bottomY = point[0].getY();
-		if (point[1].getY() < bottomY)
-		{
-			bottomY = point[1].getY();
-		}
-		if (point[2].getY() < bottomY)
-		{
-			bottomY = point[2].getY();
-		}
-		return bottomY; 
-	}
 };
-
-
 
 #endif // TRIANGLE_H
