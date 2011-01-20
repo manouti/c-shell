@@ -50,15 +50,15 @@ main	(int argc, char *argv[])
 
     if (tstream == NULL)
     {
-	fprintf(stderr, "Out of memory trying to allocate token stream\n");
-	exit(1);
+		fprintf(stderr, "Out of memory trying to allocate token stream\n");
+		exit(1);
     }
     psr	    = GuoliceParserNew(tstream);  
 
     if (psr == NULL)
     {
-	fprintf(stderr, "Out of memory trying to allocate parser\n");
-	exit(ANTLR3_ERR_NOMEM);
+		fprintf(stderr, "Out of memory trying to allocate parser\n");
+		exit(ANTLR3_ERR_NOMEM);
     }
 
     psr->program(psr);

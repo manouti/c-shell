@@ -27,7 +27,7 @@ options {
 }
 
 @parser::members{
-    	ParseTree* tree;
+    ParseTree* tree;
 	Node* root;
 	vector<Node*> variableDeclNodes;
 	vector<Node*> guiDeclNodes;
@@ -891,11 +891,11 @@ guiTerm returns [Node* node]
 			$node->setType(Node::VAR);
 			if (guiNodeShapes[(string)(char*)($ID.text->chars)] == "")
 			{
-				$node->setMode("ERROR");
+				$node->setGuiShape("ERROR");
 			}
 			else
 			{
-				$node->setMode(guiNodeShapes[(string)(char*)($ID.text->chars)]);
+				$node->setGuiShape(guiNodeShapes[(string)(char*)($ID.text->chars)]);
 			}
 
 			if (guiObject[(string)(char*)($ID.text->chars)] == NULL)
@@ -934,11 +934,11 @@ guiPositionExpression returns [Node* node]
 
 			$node = temp;
 
-			if ($g1.node->getMode() == "ERROR")
+			if ($g1.node->getGuiShape() == "ERROR")
 			{
 				comparison_output += "*** error: '" + $g1.node->getValue() + "' was not declared.\n";
 			}
-			if ($g2.node->getMode() == "ERROR")
+			if ($g2.node->getGuiShape() == "ERROR")
 			{
 				comparison_output += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
 			}

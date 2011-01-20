@@ -41,17 +41,17 @@ string FunctionNode::printParameters()
 
 string FunctionNode::printFunctionName()
 {
-	return root->getValue();
+	return getRootNode()->getValue();
 }
 
 string FunctionNode::printBody()
 {
-	return root->toString();
+	return getRootNode()->toString();
 }
 
 Node* FunctionNode::getFunctionRoot() const
 { 
-	return root;
+	return getRootNode();
 }
 
 string FunctionNode::toString()

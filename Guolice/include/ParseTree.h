@@ -3,7 +3,6 @@
 
 #include "Node.h"
 #include "graph.h"
-#include "FunctionNode.h"
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -29,6 +28,14 @@ class ParseTree {
 		// Determines whether the tree is empty.
 		// Postcondition: Returns true if the tree is empty, false otherwise.
 		  
+		Node* getRootNode() const;
+		// Gets a pointer to the root node.
+		// Postcondition: Returns a pointer to the root of the parse tree.
+		
+		void setRootNode(Node* root);
+		// Sets the root node.
+		// Postcondition: Sets the root of the parse tree with the specified node.
+		
 		void traverse(Node* node);
 	    // Traversal function for the tree structure. It has calls to visitNode and visitEdge.
 		// Postcondition: The specified node and all its children are visited in a recursive way.
@@ -47,14 +54,13 @@ class ParseTree {
 		void visitNode(Node* node);
 		void visitEdge(Node* parent, int childNumber);
 		void destroy(Node* &node); // Used by the destructor to free memory.
-		Node* getRootNode();
-		void setRootNode(Node* root);
+		
 		void setFunctionList(vector<FunctionNode*> funcList);
 		void printTree(Node * node);
 		
 	private:
 		Node *root;   // Root node
-		vector<FunctionNode*> functionList;
+		//vector<FunctionNode*> functionList;	// This will cause a compiler error
 };
 
 class Graph{

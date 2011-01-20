@@ -123,15 +123,14 @@ string Node::toString() const
 	return nodeString;
 }
 
-
-string Node::getMode() const
+string Node::getGuiShape() const
 {
-    return mode;
+    return guiShape;
 }
 
-void Node::setMode(string m)
+void Node::setGuiShape(string shape)
 {
-	mode = m;
+	guiShape = shape;
 }
 
 AbstractGui* Node::getGui() const
