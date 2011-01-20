@@ -27,7 +27,7 @@ options {
 }
 
 @parser::members{
-    ParseTree* tree;
+    	ParseTree* tree;
 	Node* root;
 	vector<Node*> variableDeclNodes;
 	vector<Node*> guiDeclNodes;
@@ -40,7 +40,7 @@ options {
 	map<string, string> guiNodeShapes;
 	map<string, AbstractGui*> guiObject;
 	
-	char* metadata_file = "../test_examples/gui_metadata";
+	char* metadata_file = "../tests/gui_metadata";
 	string comparison_output = "";
 
 	/** \function
