@@ -39,6 +39,10 @@ class FunctionNode: public ParseTree {
 		
 		void visitFunctionChild(int childNumber);
 		
+		/**
+		* This may be somehow redundant since we already have a getter for root from the base class,
+		* but we added it for readability purposes.
+		*/
 		Node* getFunctionRoot() const;
 };
 

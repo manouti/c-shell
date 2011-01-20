@@ -58,7 +58,8 @@ class Node {
         bool isVisited();
 
         string getGuiShape() const;
-        void setMode(string m);
+        void setGuiShape(string shape);
+		
         AbstractGui* getGui() const;
         void setGui(AbstractGui* m);
 

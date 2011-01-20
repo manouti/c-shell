@@ -8,10 +8,10 @@ class Box: public AbstractGui {
 		/** Order of points is as follows:
 		*
 		*		3 *-------------------* 2
-		*	  	  |		   			  |
-		*	  	  | 			      |  (height)
-		*	  	  |					  |
-		*	  	  |					  |
+		*	  	  |                   |
+		*	  	  |                   | (height)
+		*	  	  |                   |
+		*	  	  |                   |
 		*	    0 *-------------------* 1
 		*       	    (width)
 		*

@@ -450,11 +450,11 @@ int guiIsContains(Node* g1, Node* g2)
 		}
 		else if (g2->getGuiShape() == "Box")
 		{
-			point = ((Box*)(gui))->getBLCorner();
+			point = &((Box*)(gui))->getLLCorner();
 		}
 		else if (g2->getGuiShape() == "Triangle")
 		{
-			point = ((Triangle*)(gui))->getPoint_A();
+			point = &((Triangle*)(gui))->getVertices()[0];
 		}
 	}
 	else
