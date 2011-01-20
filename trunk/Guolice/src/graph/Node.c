@@ -123,6 +123,7 @@ string Node::toString() const
 	return nodeString;
 }
 
+
 string Node::getGuiShape() const
 {
     return guiShape;

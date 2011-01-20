@@ -5,6 +5,11 @@ ParseTree::ParseTree(Node *root)
 	this->root = root;
 	dotNodeCount = 0;
 }
+
+void ParseTree::setRootNode(Node* root){
+	this->root = root;
+	dotNodeCount = 0;
+}
 		  
 ParseTree::~ParseTree()
 {
@@ -15,17 +20,6 @@ bool ParseTree::isEmpty() const
 {
 	return (root == NULL);
 }
-
-Node* ParseTree::getRootNode() const
-{
-    return root;
-}
-
-void ParseTree::setRootNode(Node* root)
-{
-	this->root = root;
-	dotNodeCount = 0;
-}
 		  
 void ParseTree::traverse(Node* node)
 {
@@ -33,14 +27,14 @@ void ParseTree::traverse(Node* node)
 		visitNode(node);
 
 		for(int i = 0; i < node->getChildren().size(); i++) {
-				traverse(node->getChildren().at(i));
-				visitEdge(node, i);
+			traverse(node->getChildren().at(i));
+			visitEdge(node, i);
 		}
 	}
 }
 
-void doCount(Node *node, int &count)
-{
+
+void doCount(Node *node, int &count) {
 	if(node != NULL) {
 		count++;
 		for(int i = 0; i < node->getChildren().size(); i++) {
@@ -81,13 +75,16 @@ void ParseTree::destroy(Node* &node)
 	}
 }
 
-void ParseTree::setFunctionList(vector<FunctionNode*> funcList)
+Node* ParseTree::getRootNode() const
 {
-    functionList = funcList;
+    return root;
 }
 
-void ParseTree::printTree(Node * node)
-{
+/*void ParseTree::setFunctionList(vector<FunctionNode*> funcList){
+    functionList = funcList;
+}*/
+
+void ParseTree::printTree(Node * node){
     node->setVisited();
     cout << node->toString() << endl;
 	for(int i = 0; i < node->getChildren().size(); i++)
