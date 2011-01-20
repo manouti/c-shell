@@ -55,15 +55,15 @@ class ParseTree {
 		void visitEdge(Node* parent, int childNumber);
 		void destroy(Node* &node); // Used by the destructor to free memory.
 		
-		void setFunctionList(vector<FunctionNode*> funcList);
+		//void setFunctionList(vector<FunctionNode*> funcList);
 		void printTree(Node * node);
 		
 	private:
-		Node *root;   // Root node
+		Node* root;   // Root node
 		//vector<FunctionNode*> functionList;	// This will cause a compiler error
 };
 
-class Graph{
+class Graph {
     public:
         static ParseTree* pTree;
         static progGraph* translatedGraph;
