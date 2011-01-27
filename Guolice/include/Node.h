@@ -4,6 +4,10 @@
 #include <string>
 #include <vector>
 #include <AbstractGui.h>
+#include <map>
+#include <guiCompare.h>
+#include <Solution.h>
+
 using namespace std;
 
 
@@ -24,27 +28,21 @@ class Node {
 		//~Node(void);
 		
 		string getValue() const;
-		
 		void setValue(string v);
 
-		NodeType getType() const;
-            
 		void setType(NodeType type);
-
+		NodeType getType() const;
+        
         void setDataType(DataType dType);
-
         string getDataType();
 		
 		vector<Node*> getChildren() const;
-
 		void setChildren(vector<Node*> c);
 
 		Node* getParent() const;
-
 		void setParent(Node* p);
 		
 		void addChild(Node* child);
-
         void addChild(Node* child, string weight);
 
         string getChildrenWeight(int i);
@@ -57,12 +55,13 @@ class Node {
 
         bool isVisited();
 
-        string getGuiShape() const;
-        void setGuiShape(string shape);
+        string getMode() const;
+        void setMode(string m);
 		
-        AbstractGui* getGui() const;
-        void setGui(AbstractGui* m);
-
+		vector<vector<Solution> > getNodeSolution() const;
+        void SetNodeSolution(vector<vector<Solution> > m);
+		
+		vector<vector<Solution> > evaluate(map<string, vector<AbstractGui*> > guiObject);
 	
     private:
 		string value;					// The text value of the node.
@@ -72,9 +71,8 @@ class Node {
 		NodeType type;					// Type of the node (VAR, CONST, OP).
         DataType dataType;              // Data type of node(INT, STRING, BOOL, BOX, CIRCLE, TRIANGLE, LABEL).
         bool visited;
-        string guiShape;				//!< Shape of GUI represented by the node (Box, Circle, Triangle, Label).
-        
-		AbstractGui* gui;		//!< Properties of the node GUI shape, i.e. properties of the circle, box, triangle, etc...
+		string mode;					//!< Mode of the node (Box, Circle, Triangle, Label).
+        vector<vector<Solution> > nodeSolution;			//!< contain the solution of the node 
 
 };
 

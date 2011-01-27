@@ -1,57 +1,63 @@
 #ifndef ABSTRACTGUI_H
 #define ABSTRACTGUI_H
 
+
 #include "Point.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <GuoliceUtil.h>
+#include <cmath>
 
 class AbstractGui{
-	protected:
-		Point* points;
-		int numOfVertices; //should be added as a decorator
+protected:
+    Point* point;
+    int vertices; //should be added as a decorator
+	string mode;
+	string name;
 
-	public:
-		AbstractGui(int numberOfVertices)
-		{
-			points = new Point[numberOfVertices];
-			numOfVertices = numberOfVertices;
-		}
-		
-		virtual int getLeftX() const = 0;
+public:
 
-		virtual int getUpperY() const = 0;
+    AbstractGui(int numberOfVertcies)
+	{
+        point = new Point[numberOfVertcies];
+        vertices = numberOfVertcies;
+    }
+	
+	virtual int getLeftX() const = 0;
 
-		virtual int getRightX() const = 0;
+	virtual int getUpperY() const = 0;
 
-		virtual int getBottomY() const = 0;
+	virtual int getRightX() const = 0;
 
-		/*
-		Point * getPoints()
-		{
-			return point;
-		}
+	virtual int getBottomY() const = 0;
+	
+	virtual	string toString() const = 0;
+	
+	virtual double getArea() const = 0;
 
-		void print();
+	string getMode() const
+	{	
+		return mode;
+	}
 
-		bool below(AbstractGui A){
+	string getName() const
+	{
+		return name;
+	}
 
-
-		}
-		bool above(AbstractGui A){
-
-
-		}
-
-
-		bool leftOf(AbstractGui A){
-
-
-		}
-
-		bool rightOf(AbstractGui A){
+    Point* getPoints() const
+	{
+        return point;
+    }
 
 
-		}
 
-	*/
+
 };
+
+
+
+
 
 #endif // ABSTRACTGUI_H

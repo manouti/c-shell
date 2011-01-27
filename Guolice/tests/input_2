@@ -3,10 +3,31 @@ Circle 		: C2 ;
 Box    		: B1 ;
 Box	   		: B2 ;
 Triangle 	: T1 ;
-B1 Contains T1;
-B1 Contains C1;
-B1 Contains B2;
-(C1 Below C2) LeftOf (B1 Above (B2 RightOf T1));
-B2 Below ((C1 LeftOf C2) Above (B2 Below T1));
+Triangle 	: T2 ;
+Triangle 	: T3 ;
+Circle 		: C3 ;
+
+//B1 Contains T1;
+//B1 Contains C1;
+//B1 Contains B2;
+
+//C1 Contains (C2 AND C3);
+
+(C2 OR  (B1 Above B2)) Contains C1 ;
+
+//C1 Contains (C2 OR (B1 Above B2))  ;
+
+//C2 OR (C1 OR C3) ;
+
+//(C1 Above C2) AND ((B1 Above B2) OR (T2 Above T3));
+
+//C1 LeftOf (B1 Above (B2 RightOf T1));
+
+//B1 BiggerThan C2;
+//B1 SmallerThan C2;
+//B1 EqualTo C2;
+
+
+//B2 Below ((C1 LeftOf C2) Above (B2 Below T1));
 
 

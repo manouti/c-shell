@@ -124,22 +124,98 @@ string Node::toString() const
 }
 
 
-string Node::getGuiShape() const
+string Node::getMode() const
 {
-    return guiShape;
+    return mode;
 }
 
-void Node::setGuiShape(string shape)
+void Node::setMode(string m)
 {
-	guiShape = shape;
+        mode = m;
 }
 
-AbstractGui* Node::getGui() const
+vector<vector<Solution> > Node::getNodeSolution() const
 {
-    return gui;
+    return nodeSolution;
 }
 
-void Node::setGui(AbstractGui* m)
+void Node::SetNodeSolution (vector<vector<Solution> > m)
 {
-    gui = m;
+    nodeSolution = m;
 }
+
+vector<vector<Solution> > Node::evaluate(map<string, vector<AbstractGui*> > guiObject)
+{
+	vector<vector<Solution> > solution;
+	vector<Node*> children = Node::getChildren();
+
+	if (children.size() == 0 )
+	{	
+		vector<Solution> temp;
+		for(int i=0 ; i< guiObject[Node::getMode()].size(); i++ )
+		{
+			temp.clear();
+			Solution sol;
+			sol.shape = guiObject[Node::getMode()].at(i);
+			sol.varName = Node::getValue();
+			temp.push_back(sol);
+			solution.push_back(temp);
+		}
+		return solution;
+	}
+	
+	vector<vector<Solution> > v1 = children.at(0)->evaluate(guiObject);
+	if (v1.size() == 0)
+	{
+		return solution;
+	}
+
+	vector<vector<Solution> > v2 = children.at(1)->evaluate(guiObject);
+	if (v2.size() == 0)
+	{
+		return solution;
+	}
+
+	if (Node::getValue() == "LeftOf")
+	{	
+		solution = guiIsLeftOf(v1, v2);
+	}
+	else if (Node::getValue() == "RightOf")
+	{	
+		solution = guiIsRightOf(v1, v2);
+	}
+	else if (Node::getValue() == "Below")
+	{	
+		solution = guiIsBelow(v1, v2);
+	}
+	else if (Node::getValue() == "Above")
+	{
+		solution = guiIsAbove(v1, v2);
+	}
+	else if (Node::getValue() == "Contains")
+	{	
+		solution = guiIsContains(v1, v2);
+	}
+	else if (Node::getValue() == "SmallerThan")
+	{
+		solution = guiSmallerThan(v1, v2);
+	}
+	else if (Node::getValue() == "BiggerThan")
+	{
+		solution = guiBiggerThan(v1, v2);
+	}
+	else if (Node::getValue() == "EqualTo")
+	{
+		solution = guiEqualTo(v1, v2);
+	}
+	else if (Node::getValue() == "AND")
+	{
+		solution = guiAND(v1, v2);
+	}
+	else if (Node::getValue() == "OR")
+	{
+		solution = guiOR(v1, v2);
+	}
+	return solution;
+}
+

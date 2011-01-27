@@ -4,30 +4,55 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <GuoliceUtil.h>
+#include <cmath>
+
 using namespace std;
 
 class Point{
-	private:
-		double x, y;
+private:
+	double x;
+	double y;
 
-	public:
-		Point(){}	
-		
-		Point(double x, double y)
-		{
-			this->x = x;
-			this->y = y;
-		}
-		
-		int getX() const
-		{
-			return x;
-		}
-		
-		int getY() const
-		{
-			return y;
-		}	
+public:
+	Point(){}	
+	
+	Point(double x, double y)
+	{
+		this->x = x;
+		this->y = y;
+	}
+	
+	double getX() const
+	{
+		return x;
+	}
+	
+	double getY() const
+	{
+		return y;
+	}
+	
+	string toString()
+	{
+		string ret_str;
+		char str[25];
+		GuoliceUtil::dbl2str(str, x);
+		ret_str = "(" + string(str) +", ";
+		GuoliceUtil::dbl2str(str, y);
+		ret_str += string(str) + ")";
+		return ret_str;
+	}
+
+	double getDistanceTo(Point p2)
+	{
+		double dx = this->x - p2.getX();
+		double dy = this->y - p2.getY();
+		double dx2 = pow(dx,2);
+		double dy2 = pow(dy,2);
+		return sqrt( dx2 + dy2);
+	}
+	
 };
 
 /*
@@ -117,5 +142,6 @@ Point maxX(Point* pointArray, int length)
 }
 
 */
+
 
 #endif // POINT_H
