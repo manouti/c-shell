@@ -46,8 +46,8 @@ JAVAFLAGS      = -cp ./third/antlr/antlr-3.2.jar
 CPP            = g++
 CPPFLAGS       = -pipe #-Wall -W
 DBGFLAG        = -g
-INCPATH        = -I. -I./include/antlr3c -I./include
-LIBS           = -L./lib -lantlr3c
+INCPATH        = -I. -I./third/antlr/libantlr3c-3.2/include -I./include -I./third/antlr/libantlr3c-3.2/ -I./src/grmr
+LIBS           = -L./third/antlr/libantlr3c-3.2/.libs -lantlr3c
 COPY           = cp -f
 LINK           = g++
 COPY_FILE      = $(COPY)
@@ -63,7 +63,7 @@ DOC            = doxygen
 GRMR_DIR      = ./src/grmr
 GRAPH_DIR     = ./src/graph
 MAIN_DIR      = ./src/guolice
-VISUAL_DIR    = ./src/visual
+VISUAL_DIR    = ./src/hr
 TRANSLATE_DIR = ./src/translate
 CHECK_DIR     = ./src/check
 
@@ -74,66 +74,40 @@ DOC_DIR       = ./doc
 
 ####### Files #######
 GRAMMARFILE   = $(GRMR_DIR)/Guolice.g
-SOURCES       = GuoliceLexer.c GuoliceParser.c ${wildcard $(GRAPH_DIR)/*.c} ${wildcard $(MAIN_DIR)/*.c} ${wildcard $(VISUAL_DIR)/*.c} ${wildcard $(TRANSLATE_DIR)/*.c} ${wildcard $(CHECK_DIR)/*.c}
-ANTLROUTPUT_H = GuoliceLexer.h GuoliceParser.h
+SOURCES       = $(GRMR_DIR)/GuoliceLexer.c $(GRMR_DIR)/GuoliceParser.c ${wildcard $(GRAPH_DIR)/*.cpp} ${wildcard $(MAIN_DIR)/*.c} ${wildcard $(CHECK_DIR)/*.cpp}
+ANTLROUTPUT_H = $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.h
 ANTLROUTPUT_C = GuoliceLexer.c GuoliceParser.c Guolice.tokens
 OBJECTS       = $(SOURCES:.c=.o)
-DEPENDS       = $(OBJECTS:.o=.d)
 TARGET        = Guolice
 DOXYFILE      = DoxyFile
 
 DIRECTORIES = ${wildcard ./src/*} .
 
-all : $(TARGET)
+all :  $(TARGET) 
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	#$(DOC) $(DOXYFILE)
+	cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./Guolice
 	
-	@for i in $(DIRECTORIES); do \
-		cd $$i; $(DEL_FILE) *.d; cd ../..; \
-	done
+	
 
-ifeq ($(findstring $(MAKECMDGOALS),clean),)
--include $(DEPENDS)
-endif
 
-$(PCONFIG):
-	$(AG) --gen_config -o $@
 
 $(TARGET) : $(OBJECTS)
 	$(MKDIR) $(OBJECTS_DIR)
 	$(MKDIR) $(ARTIFACT_DIR)
-	$(LINK) -o $@ $(BUILDFLAG) $(LIBS) $(OBJECTS)
-	$(MOVE) $(ANTLROUTPUT_C) $(GRMR_DIR)
-	$(MOVE) $(ANTLROUTPUT_H) ./include
+	$(LINK) -o $@ $(BUILDFLAG) $(INCPATH) $(LIBS) $(OBJECTS)
 	$(MOVE) $(OBJECTS) $(OBJECTS_DIR)
 	$(MOVE) $@ $(ARTIFACT_DIR)
 
-%.d : %.c
-	$(CPP) $(INCPATH) -M $< > $@
+
 	
 %.o : %.c
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
-# ParseTree.o : ./src/ParseTree.cpp ./include/ParseTree.h
-	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
-# Node.o : ./src/Node.cpp ./include/Node.h
-	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
-	
-# FunctionNode.o : ./src/FunctionNode.cpp ./include/FunctionNode.h
-	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
-	
-# main.o : ./src/main.c ./include/Guolice.h
-	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
-# guiCompare.o : ./src/guiCompare.cpp ./include/guiCompare.h
-	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
-
-# guiConstruct.o : ./src/guiConstruct.cpp ./include/guiConstruct.h
-	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
-
-GuoliceLexer.c GuoliceLexer.h GuoliceParser.c GuoliceParser.h Guolice.tokens : $(GRAMMARFILE)
+$(GRMR_DIR)/GuoliceLexer.c $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.c $(GRMR_DIR)/GuoliceParser.h $(GRMR_DIR)/Guolice.tokens : $(GRAMMARFILE)
 	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
 
 debug : all
@@ -178,12 +152,16 @@ doc :
 
 aspect: $(GRAMMARFILE)
 	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
-	$(MOVE) $(ANTLROUTPUT_C) ./src
-	$(MOVE) $(ANTLROUTPUT_H) ./include
 	$(MKDIR) $(ARTIFACT_DIR)
 	cp $(SOURCES) $(VISUAL_DIR)/viz_aspect
-	cp -r ./include  ./GuoliceAspect
+	cp -r ./include  $(VISUAL_DIR)/viz_aspect
+	cp $(ANTLROUTPUT_H) $(VISUAL_DIR)/viz_aspect/include
 	cd $(VISUAL_DIR)/viz_aspect; make	
+####################### Translate Target #######################
+
+translate:
+	
+
 	
 ####################### Clean Target #######################
 . PHONY : clean
@@ -214,3 +192,4 @@ help :
 	@echo "- clean will delete all generated object files and program generated from source."
 	@echo
 	@echo "- help will display this message."
+
