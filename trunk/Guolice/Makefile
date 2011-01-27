@@ -127,10 +127,10 @@ $(TARGET) : $(OBJECTS)
 # main.o : ./src/main.c ./include/Guolice.h
 	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
-# guiPositionCompare.o : ./src/guiPositionCompare.cpp ./include/guiPositionCompare.h
+# guiCompare.o : ./src/guiCompare.cpp ./include/guiCompare.h
 	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
-# guiConstract.o : ./src/guiConstract.cpp ./include/guiConstract.h
+# guiConstruct.o : ./src/guiConstruct.cpp ./include/guiConstruct.h
 	# $(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
 GuoliceLexer.c GuoliceLexer.h GuoliceParser.c GuoliceParser.h Guolice.tokens : $(GRAMMARFILE)
