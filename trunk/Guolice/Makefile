@@ -74,7 +74,7 @@ DOC_DIR       = ./doc
 
 ####### Files #######
 GRAMMARFILE   = $(GRMR_DIR)/Guolice.g
-SOURCES       = $(GRMR_DIR)/GuoliceLexer.c $(GRMR_DIR)/GuoliceParser.c ${wildcard $(GRAPH_DIR)/*.cpp} ${wildcard $(MAIN_DIR)/*.c} ${wildcard $(CHECK_DIR)/*.cpp}
+SOURCES       = $(GRMR_DIR)/GuoliceLexer.c $(GRMR_DIR)/GuoliceParser.c ${wildcard $(GRAPH_DIR)/*.c} ${wildcard $(MAIN_DIR)/*.c} ${wildcard $(CHECK_DIR)/*.cpp}
 ANTLROUTPUT_H = $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.h
 ANTLROUTPUT_C = GuoliceLexer.c GuoliceParser.c Guolice.tokens
 OBJECTS       = $(SOURCES:.c=.o)
