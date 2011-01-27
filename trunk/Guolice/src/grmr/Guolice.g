@@ -40,13 +40,13 @@ options {
 	vector<Node*> statements;
 	
 	map<Node*, string> variableIDs;
-	map<string, string> guiNodeModes;
-	
-	char* metadata_file = "../test_examples/gui_metadata";
 
+	map<string, string> guiNodeModes;
 	map<string, vector<AbstractGui*> > guiObject ;
 
-	string comparision_output = "";
+	char* metadata_file = "../tests/gui_metadata";
+
+	string comparison_output = "";
 
 /** \function
 *	\param Node* pointer from the Type Node
@@ -70,15 +70,11 @@ options {
 
 	void printFunctionList() {
         cout << "[ ";
-        for (int i=0; i < functionList.size(); i++)
+        for (int i = 0; i < functionList.size(); i++)
         {
-            if(functionList[i] != NULL) {
-                cout << functionList[i]->toString() << "The function " << functionList[i]->getValue() << " members : ";
-               
-                for (int j=0; j < functionList[i]->getChildren().size(); j++)
-                {
-                    printTree(functionList[i]->getChildren().at(j));
-                }
+            if(functionList[i] != NULL) 
+			{
+                cout << functionList[i]->toString();
                 cout << endl;
             }
         }
@@ -128,7 +124,7 @@ program
 				cout << endl << endl;
 				cout << "****************************************************************************************************" << endl;
 				cout << endl << endl << "GUI Comparision Output:" << endl << endl;
-				cout << comparision_output << endl;
+				cout << comparison_output << endl;
 			}
 			/****************************************************************************************************/
 	   }
@@ -163,15 +159,17 @@ program
 
 
 procedureDec
-@init { FunctionNode* procedureNode;
-/** to declare the procedure use the syntax
+@init 	{ 
+			Node* procedureRootNode;
+			FunctionNode* procedureTree;
+/** to declare a procedure, use the syntax
 *******************************************
 *	procedure : ID ( <parameters> )
 *	<statemets> or <exit statement>
 *	end procedure
 *******************************************
-*	the parameters are optional and when using more than one parameter
-*	you should seperet them with ','
+*	The parameters are optional and when using more than one parameter
+*	you should separate them with ','
 *	when using parameters you should specify the type of the parameter
 *
 *	Ex: procedure : pro1 (int : param1 , int : param2)
@@ -180,19 +178,20 @@ procedureDec
 */
 }
 
-	: 'procedure' ':' ID  { procedureNode = new FunctionNode((string)(char*)($ID.text->chars)); }
-	'(' (parameters { procedureNode->setParameters(functionParameters); } )? ')'
+	: 'procedure' ':' ID  { procedureRootNode = new Node((string)(char*)($ID.text->chars)); 
+							procedureTree = new FunctionNode(procedureRootNode); }
+	'(' (parameters { procedureTree->setParameters(functionParameters); } )? ')'
 	( statement 
 		{
 			if($statement.node ->getValue() != "emptyMark") 
 			{
-				 procedureNode->addChild($statement.node);
+				 procedureRootNode->addChild($statement.node);
 			}
 	   	} 
 	| exitStatement)*
 		{
-			procedureNode->setReturnType("void");
-			functionList.push_back(procedureNode); 
+			procedureTree->setReturnType("void");
+			functionList.push_back(procedureTree); 
 		}
 	'end' 'procedure'
 	;
@@ -200,16 +199,18 @@ procedureDec
 
 
 functionDec
-@init { FunctionNode* functionNode;
-/** to declare the function use the syntax
+@init { Node* functionRootNode;
+		FunctionNode* functionTree;
+
+/** To declare the function, use the syntax
 *******************************************
 *	function <type> : ID ( <parameters> )
 *	<statemets>
 *	<return statement>
 *	end function
 *******************************************
-*	the parameters are optional and when using more than one parameter
-*	you should seperet them with ','
+*	The parameters are optional and when using more than one parameter
+*	you should separate them with ','
 *	when using parameters you should specify the type of the parameter
 *
 *	Ex: function int : FUNC1 (int : param1 , int : param2)
@@ -218,21 +219,21 @@ functionDec
 *		end function		
 */
 }
-	: 'function' type ':' ID  { functionNode = new FunctionNode((string)(char*)($ID.text->chars)); }
-	'(' (parameters { functionNode->setParameters(functionParameters); } )? ')'  // here (type) is the return value type of the function
+	: 'function' type ':' ID  { functionRootNode = new Node((string)(char*)($ID.text->chars)); }
+	'(' (parameters { functionTree->setParameters(functionParameters); } )? ')'  // here (type) is the return value type of the function
 	( statement 
 		{
 			if($statement.node ->getValue() != "emptyMark") 
 			{
-				functionNode->addChild($statement.node);
+				functionRootNode->addChild($statement.node);
 			}
 			for(int i = 0; i < variableDeclNodes.size(); i++) 
 			{
-				functionNode->addChild(variableDeclNodes[i]);
+				functionRootNode->addChild(variableDeclNodes[i]);
 			}
 			for(int i = 0; i < guiDeclNodes.size(); i++) 
 			{
-				functionNode->addChild(guiDeclNodes[i]);
+				functionRootNode->addChild(guiDeclNodes[i]);
 			}
 			
 			guiDeclNodes.clear();
@@ -242,8 +243,8 @@ functionDec
 	returnStatement
 	'end' 'function' 
 		{ 
-			functionNode->setReturnType((string)(char*)($type.text->chars));
-			functionList.push_back(functionNode); 
+			functionTree->setReturnType((string)(char*)($type.text->chars));
+			functionList.push_back(functionTree); 
 		}
 	;
 
@@ -262,9 +263,9 @@ parameters
 statement returns [Node* node]
 @init {
 /** 
-*	the statemets could be assignment Statement, constant Decleration Statement,
-*	variable Decleration Statement, if Statement, while Statement, procedure Call Statement,
-*	gui Statement or event Handle Statement.
+*	The statement could be an assignment Statement, a constant declaration Statement,
+*	a variable declaration statement, an if statement, a while statement, a procedure call statement,
+*	a GUI statement or an event handle statement.
 *
 */
 }
@@ -289,18 +290,18 @@ statement returns [Node* node]
 
 
 
-//begin regular programing grammar
+//begin regular programming grammar
 
 assignmentStatement returns [Node* node]
 @init{
 /** 
-*	the  assignment Statement syntax is:
+*	The  assignment statement syntax is:
 ******************************************
 *	ID := <expression> ;
 ******************************************
-*	the assignment Statement ends with ;
+*	The assignment statement ends with ;
 *	and the expression could be an integer or string
-*	or a mathmatical expression like 4+(5*2)
+*	or a mathematical expression like 4+(5*2)
 *
 */
 }
@@ -323,13 +324,13 @@ assignmentStatement returns [Node* node]
 constantDecStatement returns [Node* node]
 @init{
 /** 
-*	the  constant Decleration Statement syntax is:
+*	the  constant declaration Statement syntax is:
 ******************************************
 *	constant <type> : ID  := <expression> ; 
 ******************************************
-*	the constant Decleration Statement ends with ;
+*	The constant declaration statement ends with ';'
 *	and the expression could be an int or string
-*	or a mathmatical expression like 4+(5*2)
+*	or a mathematical expression like 4+(5*2)
 *	the <type> could be int, bool or string.
 */
 }
@@ -365,7 +366,7 @@ variableDecStatement returns [Node* node]
 *	the variable Decleration Statement ends with ;
 *	the expression is optional.
 *	the expression could be an int or string
-*	or a mathmatical expression like 4+(5*2)
+*	or a mathematical expression like 4+(5*2)
 *	the <type> could be int, bool or string.
 */
 }
@@ -398,7 +399,7 @@ variableDecStatement returns [Node* node]
 ifStatement returns [Node* node]
 @init { Node* thenNode; Node* elseNode;
 /** 
-*	the  if Statement syntax is:
+*	The  if statement syntax is:
 ***********************************
 *	if <expression> then
 *	<statements>
@@ -449,15 +450,15 @@ ifStatement returns [Node* node]
 whileStatement returns [Node * node]
 @init{
 /** 
-*	the  while Statement syntax is:
+*	The  while statement syntax is:
 ***********************************
 *	while <expression> loop
 *	<statements>
 *	end loop
 ***********************************
 * 
-*	the expression is  a regular expression (i.e. int)
-*	or a mathmatical expression like ( iterator < 5 ) which can be valued as a boolean
+*	The expression is  a regular expression (i.e. int)
+*	or a mathematical expression like ( iterator < 5 ) which can be valued as a boolean
 */
 }
 	: 'while' 
@@ -480,13 +481,13 @@ whileStatement returns [Node * node]
 procedureCallStatement returns [Node * node]
 @init{
 /** 
-*	the  procedure Call Statement syntax is:
+*	The  procedure call Statement syntax is:
 ***********************************
 *	ID ( <parameters> );
 ***********************************
 * 	
-*	the parameters are optional and when using more than one parameter
-*	you should seperet them with ','
+*	The parameters are optional and when using more than one parameter
+*	you should separate them with ','
 *	and when calling the procedure we don't specify the type of the parameters.
 *
 */
@@ -536,7 +537,7 @@ actualParameters returns [Node * node]
 exitStatement
 @init{
 /** 
-*	the  exit Statement syntax is:
+*	The  exit statement syntax is:
 ***********************************
 *	exit when <expression> ;
 ***********************************
@@ -782,12 +783,12 @@ type
 guiDecStatement returns [Node* node]
 @init {
 /** 
-*	the  GUI Declaration Statement syntax is:
+*	The  GUI Declaration statement syntax is:
 ******************************************
 *	<guiType> : ID ;
 ******************************************
-*	the GUI Declaration Statement ends with ;
-*	the <guiType> can be either: Circle, Box, Triangle or Label.
+*	The GUI declaration Statement ends with ';'
+*	The <guiType> can be either: Circle, Box, Triangle or Label.
 *
 */
 }
@@ -814,8 +815,8 @@ guiDecStatement returns [Node* node]
 guiTerm returns [Node* node]
 @init {
 /** 
-*	the  GUI Term is either a gui which we expressed it with its ID
-*	or it's a guiCompareExpression which represents a position relation between gui terms. 
+*	The GUI Term is either a GUI which we expressed it with its ID
+*	or it's a guiPositionExpression which represents a position relation between GUI terms. 
 *
 */
 }
@@ -844,11 +845,11 @@ guiTerm returns [Node* node]
 guiCompareExpression returns [Node* node]
 @init { Node* temp;
 /** 
-*	the  GUI Compare Expression syntax is:
+*	The  GUI compare expression syntax is:
 ******************************************
 *	<guiTerm> <guiCompareKeyword> <guiTerm>
 ******************************************
-*	the <guiCompareKeyword>s are: LeftOf, RightOf, Above, Below, Contains, AND, Or, SmallerThan, BiggerThan and EqualTo.
+*	The <guiCompareKeyword>s are: LeftOf, RightOf, Above, Below, Contains, AND, Or, SmallerThan, BiggerThan and EqualTo.
 *
 */
 }
@@ -865,11 +866,11 @@ guiCompareExpression returns [Node* node]
 
 			if ($g1.node->getMode() == "ERROR")
 			{
-				comparision_output += "*** error: '" + $g1.node->getValue() + "' was not declared.\n";
+				comparison_output += "*** error: '" + $g1.node->getValue() + "' was not declared.\n";
 			}
 			if ($g2.node->getMode() == "ERROR")
 			{
-				comparision_output += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
+				comparison_output += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
 			}
 		} )+
 	;
@@ -879,7 +880,7 @@ guiCompareExpression returns [Node* node]
 guiStatement returns [Node* node]
 @init {
 /** 
-*	the  GUI Statements are either GUI Declaration Statemet or GUI Compare Expression.
+*	The  GUI statements are either GUI declaration statemet or GUI compare expression.
 *	and the GUI staements are like the regular statements should end with ';'
 *
 */
@@ -890,21 +891,21 @@ guiStatement returns [Node* node]
 	| guiCompareExpression 
 		{ 	
 			$node = $guiCompareExpression.node;
-			comparision_output += "\nEvaluating '" + (string)(char*)($guiCompareExpression.text->chars) + "'\n";
+			comparison_output += "\nEvaluating '" + (string)(char*)($guiCompareExpression.text->chars) + "'\n";
 			vector<vector<Solution> > solutions;
 			solutions = node->evaluate(guiObject);
 			char cstr[25];
 			GuoliceUtil::int2str(cstr, solutions.size());
-			comparision_output += "Number Of solutions: " + string(cstr) + "\n";
-			comparision_output += "=======================\n";
+			comparison_output += "Number Of solutions: " + string(cstr) + "\n";
+			comparison_output += "=======================\n";
 			for (int solutionIt = 0 ; solutionIt < solutions.size() ; solutionIt++)
 			{
 				GuoliceUtil::int2str(cstr, solutionIt + 1);
-				comparision_output += "\n    Solution: " + string(cstr) + "\n";
-				comparision_output += "    ------------\n";
+				comparison_output += "\n    Solution: " + string(cstr) + "\n";
+				comparison_output += "    ------------\n";
 				for (int solutionIt_sub = 0; solutionIt_sub < solutions.at(solutionIt).size() ; solutionIt_sub++)
 				{
-					comparision_output += "    " + solutions.at(solutionIt).at(solutionIt_sub).varName + ": " + 
+					comparison_output += "    " + solutions.at(solutionIt).at(solutionIt_sub).varName + ": " + 
 										solutions.at(solutionIt).at(solutionIt_sub).shape->toString() + "\n";
 				}
 			}
@@ -917,14 +918,14 @@ guiStatement returns [Node* node]
 evntHandleStatement returns [Node* node]
 @init {
 /** 
-*	the  event Handle Statement syntax is:
+*	The event handle statement syntax is:
 ******************************************
 *	ID.<eventType>
 *	(
 *	<statements>
 *	) ;
 ******************************************
-*	the <eventType>s are: OnClick and KeyPress.
+*	The <eventType>s are: OnClick and KeyPress.
 *
 */
  }
