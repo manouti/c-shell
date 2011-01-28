@@ -68,7 +68,7 @@ MOVE           = mv -f
 CHK_DIR_EXISTS = test -d
 MKDIR          = mkdir -p
 DOC            = doxygen
-
+MV           = mv 
 ####### Source directories #######
 GRMR_DIR      = ./src/grmr
 GRAPH_DIR     = ./src/graph
@@ -83,13 +83,16 @@ ARTIFACT_DIR  = ./bin
 DOC_DIR       = ./doc
 
 ####### Files #######
-GRAMMARFILE   = $(GRMR_DIR)/Guolice.g
-SOURCES       = ${wildcard $(GRAPH_DIR)/*.cpp} ${wildcard $(MAIN_DIR)/*.cpp} ${wildcard $(CHECK_DIR)/*.cpp}
-ANTLROUTPUT_H = GuoliceLexer.h GuoliceParser.h
-ANTLROUTPUT_C = GuoliceLexer.c GuoliceParser.c Guolice.tokens
-OBJECTS       = GuoliceLexer.o GuoliceParser.o $(SOURCES:.cpp=.o)
-TARGET        = Guolice
-DOXYFILE      = DoxyFile
+SOURCES       		= ${wildcard $(CHECK_DIR)/*.cpp} ${wildcard $(GRAPH_DIR)/*.cpp} 
+MAINSOURCES		= $(SOURCES) ${wildcard $(MAIN_DIR)/*.cpp} 
+TRANSLATESOURCES 	= $(SOURCES) ${wildcard $(TRANSLATE_DIR)/*.cpp} $(MAIN_DIR)/Driver.cpp
+ASPECTSOURCES 		= $(MAINSOURCES) ${wildcard $(GRMR_DIR)/*.c} 
+ANTLROUTPUT_H 		= $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.h
+OBJECTS       		= GuoliceLexer.o GuoliceParser.o $(MAINSOURCES:.cpp=.o)
+TRANSLATEOBJECTS 	= GuoliceLexer.o GuoliceParser.o $(TRANSLATESOURCES:.cpp=.o);
+GRAMMARFILE   		= $(GRMR_DIR)/Guolice.g
+TARGET        		= Guolice
+DOXYFILE      		= DoxyFile
 
 DIRECTORIES = ${wildcard ./src/*} .
 
@@ -97,7 +100,15 @@ all :  $(TARGET)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	#$(DOC) $(DOXYFILE)
-	#cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./Guolice
+	cd $(GRMR_DIR) ; make;
+	cd $(GRAPH_DIR) ; make;
+	cd $(MAIN_DIR) ; make;
+	cd $(TRANSLATE_DIR) ; make;
+	cd $(CHECK_DIR) ; make;
+	
+
+
+	cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./Guolice
 	
 
 $(TARGET) : $(OBJECTS)
@@ -112,14 +123,16 @@ $(TARGET) : $(OBJECTS)
 %.o : %.cpp
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
+%.o : %.c
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
+
 GuoliceLexer.o : $(GRMR_DIR)/GuoliceLexer.c
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
 GuoliceParser.o : $(GRMR_DIR)/GuoliceParser.c
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
-$(GRMR_DIR)/GuoliceLexer.c $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.c $(GRMR_DIR)/GuoliceParser.h $(GRMR_DIR)/Guolice.tokens : $(GRAMMARFILE)
-	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
+
 
 
 debug : all
@@ -135,9 +148,7 @@ release : all
 
 antlr-generate : $(GRAMMARFILE)
 	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
-	$(MOVE) $(ANTLROUTPUT_C) $(GRMR_DIR)
-	$(MOVE) $(ANTLROUTPUT_H) ./include
-	
+
 ###################### Compile Target ######################
 . PHONY : compile
 
@@ -165,14 +176,21 @@ doc :
 aspect: $(GRAMMARFILE)
 	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
 	$(MKDIR) $(ARTIFACT_DIR)
-	cp $(SOURCES) $(VISUAL_DIR)/viz_aspect
+	cp $(ASPECTSOURCES) $(VISUAL_DIR)/viz_aspect
 	cp -r ./include  $(VISUAL_DIR)/viz_aspect
 	cp $(ANTLROUTPUT_H) $(VISUAL_DIR)/viz_aspect/include
-	cd $(VISUAL_DIR)/viz_aspect; make	
+	cd $(VISUAL_DIR)/viz_aspect; make
+	cd ./bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./GuoliceGraph ; dot -Tsvg Graph.dot -o G.svg
+		
 ####################### Translate Target #######################
 
-translate:
-	
+translate: $(TRANSLATEOBJECTS)
+	$(MKDIR) $(OBJECTS_DIR)
+	$(MKDIR) $(ARTIFACT_DIR)
+	$(LINK) -o $@ $(BUILDFLAG) $(INCPATH) $(LIBS) $(TRANSLATEOBJECTS)
+	mv $< $(OBJECTS_DIR)
+	$(MOVE) $@ $(ARTIFACT_DIR)
+	cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./translate
 
 	
 ####################### Clean Target #######################
