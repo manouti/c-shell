@@ -1,16 +1,16 @@
-ACFLAGS ?= -v1 -k
-AC      ?= ../lib/ac++
-AG      ?= ../lib/ag++
-PCONFIG ?= ../lib/puma.config
-INCPATH ?= -I. -I../antlr/libantlr3c-3.2/include/ -I../antlr/libantlr3c-3.2/ -I./include
-files	?= GuoliceLexer.cc GuoliceParser.cc ParseTree.cc Node.cc FunctionNode.cc main.cc 
-dollar	?= $
+ACFLAGS 	?= -v1 -k
+AC      	?= ../../../third/aspect/ac++
+AG      	?= ../../../third/aspect/ag++
+PCONFIG 	?= ../../../third/aspect/puma.config
+INCPATH 	?= -I. -I../../../third/antlr/libantlr3c-3.2/include/ -I../../../third/antlr/libantlr3c-3.2/ -I./include
+Cfiles		?= ${wildcard ./*.cpp}
+Cleanfiles	?= ${wildcard ./*.cc} 
+CCfiles		?= $(Cfiles:.cpp=.cc)
+dollar		?= $
 
-all:
-	rename 's/.cpp'$(dollar)'/.cc/' *.cpp; 
+all:	$(CCfiles)
 	mv GuoliceLexer.c GuoliceLexer.cc
 	mv GuoliceParser.c GuoliceParser.cc
-	mv main.c main.cc
 	$(AC) $(ACFLAGS) --config $(PCONFIG) $(INCPATH) -p . -d ../GuoliceAspect-out
 	cp MakeToCopy ../GuoliceAspect-out/Makefile
 	cd ../GuoliceAspect-out; make
@@ -19,6 +19,12 @@ $(PCONFIG):
 	$(AG) --gen_config -o $@
 
 clean:
-	rm -f $(files)
+	rm -f $(Cleanfiles)
+	rm  -r ./include
 	rm -r ../GuoliceAspect-out
 	mkdir -p ../GuoliceAspect-out
+
+
+
+%.cc : %.cpp
+	mv $< $@
