@@ -19,24 +19,34 @@
 #     help                     print help message
 #  
 
+
 # Debug configuration
 ARTIFACT_DIR_Debug = bin/Debug
-ARTIFACT_NAME_Debug = Guolice
 ARTIFACT_PATH_Debug = bin/Debug/Guolice
 
 # Release configuration
 ARTIFACT_DIR_Release = ./bin/Release/
-ARTIFACT_NAME_Release = Guolice
 ARTIFACT_PATH_Release = ./bin/Release/Guolice
 
+ARTIFACT_DIR_64 = ./bin/build64
+ARTIFACT_PATH_64 = ./bin/build64/Guolice
 
 BUILDFLAG = 
 ifeq ($(findstring debug,$(MAKECMDGOALS)),debug)
-    BUILDFLAG = $(DBGFLAG)
+    BUILDFLAG += $(DBGFLAG)
 endif
  
 ifeq ($(findstring release,$(MAKECMDGOALS)),release)
-    BUILDFLAG = -O3
+    BUILDFLAG += -O3
+endif
+
+BUILDFLAG = 
+ifeq ($(findstring 32b,$(MAKECMDGOALS)),32b)
+    BUILDFLAG += -m32
+endif
+ 
+ifeq ($(findstring 64b,$(MAKECMDGOALS)),64b)
+    BUILDFLAG += -m64
 endif
 
 ####### Compiler, tools and options #######
@@ -74,10 +84,10 @@ DOC_DIR       = ./doc
 
 ####### Files #######
 GRAMMARFILE   = $(GRMR_DIR)/Guolice.g
-SOURCES       = $(GRMR_DIR)/GuoliceLexer.c $(GRMR_DIR)/GuoliceParser.c ${wildcard $(GRAPH_DIR)/*.c} ${wildcard $(MAIN_DIR)/*.c} ${wildcard $(CHECK_DIR)/*.c}
-ANTLROUTPUT_H = $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.h
+SOURCES       = ${wildcard $(GRAPH_DIR)/*.cpp} ${wildcard $(MAIN_DIR)/*.cpp} ${wildcard $(CHECK_DIR)/*.cpp}
+ANTLROUTPUT_H = GuoliceLexer.h GuoliceParser.h
 ANTLROUTPUT_C = GuoliceLexer.c GuoliceParser.c Guolice.tokens
-OBJECTS       = $(SOURCES:.c=.o)
+OBJECTS       = GuoliceLexer.o GuoliceParser.o $(SOURCES:.cpp=.o)
 TARGET        = Guolice
 DOXYFILE      = DoxyFile
 
@@ -87,11 +97,8 @@ all :  $(TARGET)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	#$(DOC) $(DOXYFILE)
-	cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./Guolice
+	#cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./Guolice
 	
-	
-
-
 
 $(TARGET) : $(OBJECTS)
 	$(MKDIR) $(OBJECTS_DIR)
@@ -102,13 +109,18 @@ $(TARGET) : $(OBJECTS)
 
 
 	
-%.o : %.c
+%.o : %.cpp
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
+GuoliceLexer.o : $(GRMR_DIR)/GuoliceLexer.c
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
+GuoliceParser.o : $(GRMR_DIR)/GuoliceParser.c
+	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
 $(GRMR_DIR)/GuoliceLexer.c $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.c $(GRMR_DIR)/GuoliceParser.h $(GRMR_DIR)/Guolice.tokens : $(GRAMMARFILE)
 	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
+
 
 debug : all
 	$(MKDIR) $(ARTIFACT_DIR_Debug)
@@ -123,7 +135,7 @@ release : all
 
 antlr-generate : $(GRAMMARFILE)
 	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
-	$(MOVE) $(ANTLROUTPUT_C) ./src
+	$(MOVE) $(ANTLROUTPUT_C) $(GRMR_DIR)
 	$(MOVE) $(ANTLROUTPUT_H) ./include
 	
 ###################### Compile Target ######################
