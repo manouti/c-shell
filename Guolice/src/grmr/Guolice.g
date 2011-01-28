@@ -872,7 +872,7 @@ guiCompareExpression returns [Node* node]
 			{
 				comparison_output += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
 			}
-		} )+
+		} )
 	;
 
 
