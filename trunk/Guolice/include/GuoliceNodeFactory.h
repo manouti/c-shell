@@ -8,13 +8,20 @@ class GuoliceNodeFactory : public AbstractNodeFactory
 {
 private:
     map<progGraph::ProgNode*, Node*> progNode_Node_Map;
+    static GuoliceNodeFactory*  staticInstance;
+    GuoliceNodeFactory();
 
 public:
-    GuoliceNodeFactory();
+
+    static GuoliceNodeFactory* getInstance();
 
     void createNode(progGraph::ProgNode* node);
 
     Node* getProgNodeMap(progGraph::ProgNode* progNode);
 
 };
+
+
 #endif // GuoliceNodeFactory_H
+
+
