@@ -7,19 +7,18 @@ Node::Node(string v)
 	value = v;
     visited = false;
 }
-Node::Node(string v, DataType dType){
+Node::Node(string v, string dType){
     value = v;
     visited = false;
 
 }
-void Node::setDataType(DataType dType){
+void Node::setDataType(string dType){
     dataType = dType;
     visited = false;
 }
 
 string Node::getDataType(){
-    string dataStringArray [] = { "INTEGER", "STRING_LITERAL", "BOOL", "BOX", "CIRCLE", "TRIANGLE", "LABEL"};
-    return dataStringArray[dataType];
+    return dataType;
 }
 
 void Node::addChild(Node* child, string weight){
