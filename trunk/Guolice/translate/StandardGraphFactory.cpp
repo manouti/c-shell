@@ -4,6 +4,19 @@ StandardNodeFactory::StandardNodeFactory(){
      setFactoryType(standard);
 }
 
+StandardNodeFactory* StandardNodeFactory::getInstance(){
+    if(staticInstance==0)
+        staticInstance = new StandardNodeFactory();
+
+    return staticInstance;
+
+
+
+}
+
+
+
+
 void StandardNodeFactory::createNode(Node* node){
     switch(node->getType()){
         case 0:
