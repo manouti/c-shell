@@ -1,12 +1,11 @@
-INCPATH = -I. -I../antlr/libantlr3c-3.2/include -I./include -I../antlr/libantlr3c-3.2/
-LIBS    = -L../antlr/libantlr3c-3.2/.libs -lantlr3c
-CC	=g++
-SOURCES	= main.cc GuoliceParser.cc GuoliceLexer.cc ParseTree.cc FunctionNode.cc Node.cc 
+INCPATH = -I. -I../../../third/antlr/libantlr3c-3.2/include -I./include -I../../../third/antlr/libantlr3c-3.2/
+LIBS    = -L../../../third/antlr/libantlr3c-3.2/.libs -lantlr3c
+SOURCES	= ${wildcard ./*.cc} 
 LD_PATH = $LD_LIBAR..$
 
 GuoliceGraph: $(SOURCES)
-	g++ -o ../dist/GuoliceGraph $(SOURCES) $(INCPATH) $(LIBS)
-	cd ../dist; export LD_LIBRARY_PATH=../antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./GuoliceGraph ; dot -Tsvg Graph.dot -o G.svg
+	g++ -o ../../../bin/GuoliceGraph $(SOURCES) $(INCPATH) $(LIBS)
+        cd ../../../bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./GuoliceGraph ; dot -Tsvg Graph.dot -o G.svg
 	
 
 
