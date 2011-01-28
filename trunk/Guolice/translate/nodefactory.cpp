@@ -20,6 +20,17 @@ void AbstractNodeFactory::setFactoryType(FactoryType type){
 
 }
 
+GuoliceNodeFactory* GuoliceNodeFactory::getInstance(){
+    if(staticInstance == 0)
+        staticInstance  = new GuoliceNodeFactory();
+
+    return staticInstance;
+
+
+
+}
+
+
 
  GuoliceNodeFactory::GuoliceNodeFactory(){
            setFactoryType(guolice);
