@@ -1,0 +1,77 @@
+---------------------------------------------------------------------------------------
+     _______     _       _       ______     _ _         _ _      ______     ______
+	/       \    |       |     /       \     |           |      /      \   |
+ 	|            |       |    |         |    |           |     |           |
+	|       .    |       |    |         |    |           |     |           |-----
+	|      /|\   |       |    |         |    |           |     |           |
+	 \______/     \_____/      \_______/     |_______   _|_     \______/   |______
+	        
+---------------------------------------------------------------------------------------
+
+Short Description for Guolice:
+--------------------------------------------
+
+Contents:
+----------
+
+0. Brief Overview
+1. Project Phase 1 (Task 1)
+2. Project Phase 2 (Tasks 2 and 3)
+3. Project Phase 3 (Tasks 4, 5 and 6)
+
+--------------------------------------
+Revision 1.0: First project milestone
+January 28, 2011
+--------------------------------------
+
+
+------------------
+0. Brief Overview
+------------------
+
+Guolice is a language that allows specification of GUI behaviors. The language allows simple
+entities such as strings, simple geometric shapes (boxes, triangles, circles), events (click, key press).
+It allows positional operators such as left of, right of, above, and below. It allows shape operations
+such as equal, smaller than, bigger than, and contains.
+Later on, the language can introduce a conditional structure where a behavior depends on the
+current shapes and events. It also can introduce a recursive structure where shapes are defined in
+terms of smaller shapes or behaviors are defined in terms of earlier or later behaviors.
+Guolice specifies the behavior of a GUI application and facilitates testing it later on. Testing
+GUI currently is a painful behavior and involves manual record and replay testing where even a
+small change in the resolution of a screen can render a test suite obsolete. With Guolice and a
+proper checker that checks whether a trace of a GUI execution violates a Guolice specification, GUI
+testing should become much easier.
+
+
+----------------------------
+1. Project Phase 1 (Task 1)
+----------------------------
+
+The first phase consisted of writing the grammar of Guolice using the well-known language recognizer generation tool Antlr (wwwa.antlr.org).
+As in the case of any language, the grammar is composed of two sets of rules: lexer and parser rules. Lexer rules define the small tokens
+of the language such as integer, a string, or an identifier, and thus is merely a few number of rules that the lexer detects. After tokenizing
+the input character stream, the output of the lexer is fed to the parser which figures out how a sequence of tokens forms a grammatically valid
+parser rule such as statement, which can be an assignment or a variable declaration. At the end of this phase, we were able to test a number of cases
+that apply the rule of Guolice's syntax and thus come up with a simple language that is mostly based on conventional high-level languages like C++, while
+adding some syntactic sugar to it. Also emphasizes in this phase was the need to hold the representation of the parse tree of a sample program in a special
+data structure. This work was not yet finished.
+
+-----------------------------------
+2. Project Phase 2 (Tasks 2 and 3)
+-----------------------------------
+
+After building the grammar, we applied some aspect-oriented programming to it by implementing an aspect that, whenever called would
+create nodes that represent various parse elements in the program and displays them at the end using a nice graphical format. This way,
+we separated the main logic of the program from the graphical aspect. Then we added some inline documentation using the Doxygen (www.doxygen.org; it may
+redirect to http://www.stack.nl/~dimitri/doxygen/), and this makes it easy to keep documentation attached to the code. Later, we had an important step
+in testing the so far obtained language with various cases, and several bugs appeared which required attention.
+
+--------------------------------------
+3. Project Phase 3 (Tasks 4, 5 and 6)
+--------------------------------------
+Task 4 consisted of restructuring the project directories to reflect a conventional release model. In this way, you will find all source code in the /src
+folder, while all other third-party libraries and other resources found in the /third folder. Another example is the /lib folder which we used to learn
+how to generated a static and a shared library file in order to present binaries as a plugin for others. Several makefiles were added, one in the top-level
+directory that can be used against different phony targets, or to build everything from scratch. Other makefiles do specific jobs like generating doc in the
+/doc folder and generating static libraries in /lib.
+Task 5 is about translating 
