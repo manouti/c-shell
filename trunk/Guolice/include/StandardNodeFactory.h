@@ -9,9 +9,10 @@ class StandardNodeFactory: public AbstractNodeFactory
 {
 private:
     map<Node*, progGraph::ProgNode*> node_ProgNode_Map;
-
-public:
+    static StandardNodeFactory* staticInstance;
     StandardNodeFactory();
+public:
+    static StandardNodeFactory* getInstance();
 
     void createNode(Node* node);
 
