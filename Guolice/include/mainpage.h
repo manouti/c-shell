@@ -43,18 +43,33 @@
 * @section requirements requirements
 * Required resources to build the project:
 *
-*- The antlr jar in the folder /antlr.
+*- antlr jars should be placed  /third/antlr
+*
+*- aspect jars should be placed  /third/aspect.
 *
 *- All include files from the Antlr3 C runtime (e.g. antlr.h)
 *
-*- The library of the Antlr3 C runtime according to your platform.
+*- The library of the Antlr3 C runtime according to your platform..
 *
 
 * <hr>
 * @section notes Makefile
 * The makefile includes some phony targets in case the user would like to build step-by-step
 * without knowing the object file(s) to compile or link (e.g. compile target).
-* 
+*
+*make:
+*	Will print the graph on the console
+*	Will archive libraries
+*
+*
+*make aspect:
+*	will bill the graph using dot format
+*
+*
+*make translate:
+*	Will translate the graph backwards and foward
+*	A graph in form of graph.h should be placed in ./src/translate/translateMain.cpp in order to be translated
+*
 * Type make help to see the help on the phony targets.
 *
 

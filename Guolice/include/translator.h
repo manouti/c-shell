@@ -1,3 +1,8 @@
+/** \file Translator.h
+* Translator Class
+*
+*/
+
 #ifndef TRANSLATOR_H
 #define TRANSLATOR_H
 
@@ -12,21 +17,38 @@
 
 
 
+/**
+* \class Tranlsator
+* \brief A middle man class used by TranslatorMain.cpp in order to translate graphs
+*   Contains two singlton node factories
+*/
 
-//middle man class
 class Translator
 {
 	private:
-                StandardNodeFactory* standardNodeFactory;
-                GuoliceNodeFactory*  guoliceNodeFactory;
+                StandardNodeFactory* standardNodeFactory;       //! static instance of Standard Node Factory
+                GuoliceNodeFactory*  guoliceNodeFactory;        //! static instance of Guolice Node Factory
 		
 	public:
                 Translator();
 
-		void guoliceTranslate(Node* node);
 
+                /**
+                * \brief Will translate the to the Standard Graph, recursive function, rootNode is passed
+                *
+                */
+                void guoliceTranslate(Node* node);
+
+
+                /**
+                * \brief Will translate the to the Standard Graph, placed in the static Graph::ParseTree which is filled by the grammar and Driver
+                */
 		void translate();
 
+
+                /**
+                * \brief Will translate a graph in graph.h to Guolice, passed as parameter
+                */
 		void translate(progGraph  graph);
 };
 
