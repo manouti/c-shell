@@ -24,13 +24,15 @@ public:
 
     /**
     * \brief Will print the characteristic infromation of node
-    *
+    *\param progGraph::ProgNode * node
+    *\return boolean
     */
     bool operator() (progGraph::ProgNode * node) ;
 
     /**
     * \brief Will print the characteristic infromation of edge
-    *
+     *\param progGraph::progGraph::ProgEdge * edge
+    *\return boolean
     */
     bool operator() (progGraph::ProgEdge * edge) ;
 };
@@ -48,18 +50,20 @@ public:
 
 class StandardGraphVistor {
 private:
-    bool setRootNode;                       //! used to declare rootNode of Guolice graph -- the first node traversed
-    GuoliceNodeFactory* nodeFactory;        //! instance of node factory calling the traversal
-    Node * rootNode;                        //! rootNode of Graph::ParseTree
+    bool setRootNode;                       //!< used to declare rootNode of Guolice graph -- the first node traversed
+    GuoliceNodeFactory* nodeFactory;        //!< instance of node factory calling the traversal
+    Node * rootNode;                        //!< rootNode of Graph::ParseTree
 
 public:
     /**
-    * \brief Intiated by GuoliceNodeFactory, passes an instance of self
+    * \brief constructor Intiated by GuoliceNodeFactory, passes an instance of self
+    * \param GuoliceNodeFactory* guoliceNodeFactory
     */
     StandardGraphVistor(GuoliceNodeFactory* guoliceNodeFactory);
 
     /**
     * \brief When Visitor meets a node, will create a Guolice Node by Factory
+    * \param progGraph::ProgNode * node
     */
     bool operator() (progGraph::ProgNode * node);
 
@@ -67,6 +71,7 @@ public:
     * \brief When Visitor meets a edge, will check if node at end of edge is created,
     * if created -> will create an edge between nodes
     * if not -> will create node, and then create edge
+    *\param progGraph::ProgEdge * edge
     */
     bool operator() (progGraph::ProgEdge * edge);
 
