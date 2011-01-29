@@ -9,7 +9,7 @@
 #include <vector>
 #include <AbstractGui.h>
 #include <map>
-#include <guiCompare.h>
+#include <GuiCompare.h>
 #include <Solution.h>
 
 using namespace std;
