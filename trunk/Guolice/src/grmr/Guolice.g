@@ -1,80 +1,80 @@
 grammar Guolice;
 
 options {
-	backtrack = true;
-	k = 3 ;
-	language = C;
+        backtrack = true;
+        k = 3 ;
+        language = C;
 }
 
 @parser::includes
 {
-	#include	<iostream>
-	#include	<cstdlib>
-	#include	<fstream>
-	#include	<string>
-	#include	<vector>
-	#include	<map>
-	#include	<ParseTree.h>
-	#include	<Node.h>	
-	#include	<FunctionNode.h>
-	#include	<guiCompare.h>
-	#include	<guiConstruct.h>
-	#include	<AbstractGui.h>	
-	#include 	<Circle.h>
-	#include 	<Box.h>
-	#include 	<Triangle.h>
-	#include	<stdio.h>
-	#include	<GuoliceUtil.h>
-	#include 	<Solution.h>
+        #include	<iostream>
+        #include	<cstdlib>
+        #include	<fstream>
+        #include	<string>
+        #include	<vector>
+        #include	<map>
+        #include	<ParseTree.h>
+        #include	<Node.h>
+        #include	<FunctionNode.h>
+        #include	<guiCompare.h>
+        #include	<guiConstruct.h>
+        #include	<AbstractGui.h>
+        #include 	<Circle.h>
+        #include 	<Box.h>
+        #include 	<Triangle.h>
+        #include	<stdio.h>
+        #include	<GuoliceUtil.h>
+        #include 	<Solution.h>
+        #include        <GuiChecker.h>
 
-	using namespace std;
+        using namespace std;
 }
 
 @parser::members{
     ParseTree* tree;
-	Node* root;
-	vector<Node*> variableDeclNodes;
-	vector<Node*> guiDeclNodes;
-	vector<FunctionNode*> functionList;
-	map<string, string> functionParameters;
-	vector<Node*> statements;
-	
-	map<Node*, string> variableIDs;
+        Node* root;
+        vector<Node*> variableDeclNodes;
+        vector<Node*> guiDeclNodes;
+        vector<FunctionNode*> functionList;
+        map<string, string> functionParameters;
+        vector<Node*> statements;
 
-	map<string, string> guiNodeModes;
-	map<string, vector<AbstractGui*> > guiObject ;
+        map<Node*, string> variableIDs;
 
-	char* metadata_file = "../tests/gui_metadata";
-	char* comparison_output_file = "../tests/test_output";
-	string comparison_output_on_screen = "";	
-	string comparison_output = "";
+        map<string, string> guiNodeModes;
+        StringAbstractGuiMap guiObject ;
+
+        char* metadata_file = "../tests/gui_metadata";
+
+        string comparison_output = "";
 
 /** \function
 *	\param Node* pointer from the Type Node
-*	
+*
 *	\brief Print the nodes in the tree
 *
 */
 
-	void printTree(Node* node) {
-		cout << "\nNode: " << node->toString() << endl;
-		for(int i = 0; i < node->getChildren().size(); i++) 
-		{
-			printTree(node->getChildren().at(i));
-		}
-	}
+        void printTree(Node* node) {
+                cout << "\nNode: " << node->toString() << endl;
+                for(int i = 0; i < node->getChildren().size(); i++)
+                {
+                        printTree(node->getChildren().at(i));
+                }
+        }
 
 /** \function
 *	\brief Print the list of the Function or the procedure members
 *
-*/ 
+*/
 
-	void printFunctionList() {
+        void printFunctionList() {
         cout << "[ ";
         for (int i = 0; i < functionList.size(); i++)
         {
-            if(functionList[i] != NULL) 
-			{
+            if(functionList[i] != NULL)
+                        {
                 cout << functionList[i]->toString();
                 cout << endl;
             }
@@ -91,85 +91,74 @@ options {
 */
 
 program
-@init 	{ 
+@init 	{
                         root = new Node("PROGRAM", "programNode");
-			guiObject["Circle"] = guiConstruct::guiCircleConstruct(metadata_file, "Circle");
-			guiObject["Box"] = guiConstruct::guiBoxConstruct(metadata_file, "Box");
-			guiObject["Triangle"] = guiConstruct::guiTriangleConstruct(metadata_file, "Triangle");
-	 	}
+                        guiObject["Circle"] = guiConstruct::guiCircleConstruct(metadata_file, "Circle");
+                        guiObject["Box"] = guiConstruct::guiBoxConstruct(metadata_file, "Box");
+                        guiObject["Triangle"] = guiConstruct::guiTriangleConstruct(metadata_file, "Triangle");
+                }
 @after {
 
-			vector<Node*>::iterator i;
-			for (i = statements.begin(); i != statements.end(); ++i)
-			{
+                        vector<Node*>::iterator i;
+                        for (i = statements.begin(); i != statements.end(); ++i)
+                        {
                                 root->addChild(*i, "iterator");
-			}
+                        }
 
-			printTree(root);
+                        printTree(root);
 
-			cout <<  "The list of functions is: \n" << endl;
-			printFunctionList();
+                        cout <<  "The list of functions is: \n" << endl;
+                        printFunctionList();
 
-		    tree = new ParseTree(root);
-		    tree->varIDs = variableIDs;
-		    Graph::pTree = tree;
+                    tree = new ParseTree(root);
+                    tree->varIDs = variableIDs;
+                    Graph::pTree = tree;
 
-		    cout << "\nNUMBER OF NODES: " << tree->getNodeCount() << endl;
+                    cout << "\nNUMBER OF NODES: " << tree->getNodeCount() << endl;
 
-			/************************************* Print Compasition Output *************************************/
-			ifstream check_metadata (metadata_file);
-			if (check_metadata != NULL)
-			{
-				check_metadata.close();
+                        /************************************* Print Compasition Output *************************************/
+                        ifstream check_metadata (metadata_file);
+                        if (check_metadata != NULL)
+                        {
+                                check_metadata.close();
+                                Graph::guiChecker->setIfMetaData(true);
+                        }
+                        /****************************************************************************************************/
+           }
 
-				cout << endl << endl;
-				cout << "****************************************************************************************************" << endl;
-				cout << endl << endl << "GUI Comparision Output:" << endl << endl;
-				cout << comparison_output_on_screen << endl;
+        : ( procedureDec | functionDec | statement
+                {
+                        /**
+                        *	in the main program you can declare functions, procedures, or statements
+                        */
 
-				ofstream result(comparison_output_file);
-				if (result != NULL)
-				{
-					result << comparison_output;
-					result.close();
-				}
-			}
-			/****************************************************************************************************/
-	   }
-	
-	: ( procedureDec | functionDec | statement 
-		{
-			/**
-			*	in the main program you can declare functions, procedures, or statements
-			*/
+                        if($statement.node ->getValue() != "emptyMark")
+                        {
+                                statements.push_back($statement.node);
+                        }
 
-			if($statement.node ->getValue() != "emptyMark") 
-			{
-				statements.push_back($statement.node);
-			}
+                        for(int i = 0; i < variableDeclNodes.size(); i++)
+                        {
+                                statements.push_back(variableDeclNodes[i]);
+                        }
 
-			for(int i = 0; i < variableDeclNodes.size(); i++) 
-			{
-		       		statements.push_back(variableDeclNodes[i]);
-			}
+                        for(int i = 0; i < guiDeclNodes.size(); i++)
+                        {
+                                statements.push_back(guiDeclNodes[i]);
+                        }
 
-			for(int i = 0; i < guiDeclNodes.size(); i++) 
-			{
-				statements.push_back(guiDeclNodes[i]);
-			}
-
-			guiDeclNodes.clear();
-			variableDeclNodes.clear();
-     	}
-	)*
- 	;
+                        guiDeclNodes.clear();
+                        variableDeclNodes.clear();
+        }
+        )*
+        ;
 
 
 
 procedureDec
-@init 	{ 
-			Node* procedureRootNode;
-			FunctionNode* procedureTree;
+@init 	{
+                        Node* procedureRootNode;
+                        FunctionNode* procedureTree;
 /** to declare a procedure, use the syntax
 *******************************************
 *	procedure : ID ( <parameters> )
@@ -182,33 +171,33 @@ procedureDec
 *
 *	Ex: procedure : pro1 (int : param1 , int : param2)
 *		<statements>
-*		end procedure		
+*		end procedure
 */
 }
 
         : 'procedure' ':' ID  { procedureRootNode = new Node((string)(char*)($ID.text->chars), "procedureNode");
-							procedureTree = new FunctionNode(procedureRootNode); }
-	'(' (parameters { procedureTree->setParameters(functionParameters); } )? ')'
-	( statement 
-		{
-			if($statement.node ->getValue() != "emptyMark") 
-			{
+                                                        procedureTree = new FunctionNode(procedureRootNode); }
+        '(' (parameters { procedureTree->setParameters(functionParameters); } )? ')'
+        ( statement
+                {
+                        if($statement.node ->getValue() != "emptyMark")
+                        {
                                  procedureRootNode->addChild($statement.node, "procedureStatment");
-			}
-	   	} 
-	| exitStatement)*
-		{
-			procedureTree->setReturnType("void");
-			functionList.push_back(procedureTree); 
-		}
-	'end' 'procedure'
-	;
+                        }
+                }
+        | exitStatement)*
+                {
+                        procedureTree->setReturnType("void");
+                        functionList.push_back(procedureTree);
+                }
+        'end' 'procedure'
+        ;
 
 
 
 functionDec
 @init { Node* functionRootNode;
-		FunctionNode* functionTree;
+                FunctionNode* functionTree;
 
 /** To declare the function, use the syntax
 *******************************************
@@ -224,77 +213,77 @@ functionDec
 *	Ex: function int : FUNC1 (int : param1 , int : param2)
 *		<statements>
 *		return val1;
-*		end function		
+*		end function
 */
 }
         : 'function' type ':' ID  { functionRootNode = new Node((string)(char*)($ID.text->chars), "functionNode"); }
-	'(' (parameters { functionTree->setParameters(functionParameters); } )? ')'  // here (type) is the return value type of the function
-	( statement 
-		{
-			if($statement.node ->getValue() != "emptyMark") 
-			{
+        '(' (parameters { functionTree->setParameters(functionParameters); } )? ')'  // here (type) is the return value type of the function
+        ( statement
+                {
+                        if($statement.node ->getValue() != "emptyMark")
+                        {
                                 functionRootNode->addChild($statement.node, "functionStatment");
-			}
-			for(int i = 0; i < variableDeclNodes.size(); i++) 
-			{
+                        }
+                        for(int i = 0; i < variableDeclNodes.size(); i++)
+                        {
                                 functionRootNode->addChild(variableDeclNodes[i], "variableDecl");
-			}
-			for(int i = 0; i < guiDeclNodes.size(); i++) 
-			{
+                        }
+                        for(int i = 0; i < guiDeclNodes.size(); i++)
+                        {
                                 functionRootNode->addChild(guiDeclNodes[i], "guiDeclNodes");
-			}
-			
-			guiDeclNodes.clear();
-			variableDeclNodes.clear();
-	   	} 
-	)* 
-	returnStatement
-	'end' 'function' 
-		{ 
-			functionTree->setReturnType((string)(char*)($type.text->chars));
-			functionList.push_back(functionTree); 
-		}
-	;
+                        }
+
+                        guiDeclNodes.clear();
+                        variableDeclNodes.clear();
+                }
+        )*
+        returnStatement
+        'end' 'function'
+                {
+                        functionTree->setReturnType((string)(char*)($type.text->chars));
+                        functionList.push_back(functionTree);
+                }
+        ;
 
 
 
 parameters
-	: t1=type  ':' i1=ID 
-		{ functionParameters[(string)(char*)($i1.text->chars)]=(string)(char*)($t1.text->chars);}
-	( ',' t2=type  ':' i2=ID 
-		{ functionParameters[(string)(char*)($i2.text->chars)]=(string)(char*)($t2.text->chars);}
-	)*
-	;
+        : t1=type  ':' i1=ID
+                { functionParameters[(string)(char*)($i1.text->chars)]=(string)(char*)($t1.text->chars);}
+        ( ',' t2=type  ':' i2=ID
+                { functionParameters[(string)(char*)($i2.text->chars)]=(string)(char*)($t2.text->chars);}
+        )*
+        ;
 
 
 
 statement returns [Node* node]
 @init {
-/** 
+/**
 *	The statement could be an assignment Statement, a constant declaration Statement,
 *	a variable declaration statement, an if statement, a while statement, a procedure call statement,
 *	a GUI statement or an event handle statement.
 *
 */
 }
-	: ';'
-	| assignmentStatement 
-		{ $node = $assignmentStatement.node;}
-	| constantDecStatement 
-		{ $node = $constantDecStatement.node;}
-	| variableDecStatement 
-		{ $node = $variableDecStatement.node;}
-	| ifStatement  
-		{ $node =$ifStatement.node; }
-	| whileStatement 
-		{ $node = $whileStatement.node; }
-	| procedureCallStatement 
-		{ $node = $procedureCallStatement.node; }
-	| guiStatement 
-		{ $node = $guiStatement.node; }
-	| evntHandleStatement 
-		{ $node = $evntHandleStatement.node; }
-	;
+        : ';'
+        | assignmentStatement
+                { $node = $assignmentStatement.node;}
+        | constantDecStatement
+                { $node = $constantDecStatement.node;}
+        | variableDecStatement
+                { $node = $variableDecStatement.node;}
+        | ifStatement
+                { $node =$ifStatement.node; }
+        | whileStatement
+                { $node = $whileStatement.node; }
+        | procedureCallStatement
+                { $node = $procedureCallStatement.node; }
+        | guiStatement
+                { $node = $guiStatement.node; }
+        | evntHandleStatement
+                { $node = $evntHandleStatement.node; }
+        ;
 
 
 
@@ -302,7 +291,7 @@ statement returns [Node* node]
 
 assignmentStatement returns [Node* node]
 @init{
-/** 
+/**
 *	The  assignment statement syntax is:
 ******************************************
 *	ID := <expression> ;
@@ -313,28 +302,28 @@ assignmentStatement returns [Node* node]
 *
 */
 }
-	: ID ':=' expression ';' 
-		{
+        : ID ':=' expression ';'
+                {
                         Node* idNode = new Node((string)(char*)($ID.text->chars), "idNode");   // Create a node for the identifier
-			idNode->setType(Node::VAR); // Set this node as a variable node
-			
-			Node* equalsNode = new Node(":=");   // Create a node for the assignment symbol
-			// Now add the identifier node and the node returned by the expression rule to the assignment symbol node
+                        idNode->setType(Node::VAR); // Set this node as a variable node
+
+                        Node* equalsNode = new Node(":=");   // Create a node for the assignment symbol
+                        // Now add the identifier node and the node returned by the expression rule to the assignment symbol node
                         equalsNode->addChild(idNode, "id");
                         equalsNode->addChild($expression.node, "expression");
-			equalsNode->setType(Node::OP);  // Set this node as an operation node (assignment)
-			$node = equalsNode;   // Return the assignment symbol node
-		}
-	;
+                        equalsNode->setType(Node::OP);  // Set this node as an operation node (assignment)
+                        $node = equalsNode;   // Return the assignment symbol node
+                }
+        ;
 
 
 
 constantDecStatement returns [Node* node]
 @init{
-/** 
+/**
 *	the  constant declaration Statement syntax is:
 ******************************************
-*	constant <type> : ID  := <expression> ; 
+*	constant <type> : ID  := <expression> ;
 ******************************************
 *	The constant declaration statement ends with ';'
 *	and the expression could be an int or string
@@ -342,34 +331,34 @@ constantDecStatement returns [Node* node]
 *	the <type> could be int, bool or string.
 */
 }
-	: 'constant' type ':' ID  ':=' expression ';' 
-		{
-			$node = new Node(":=");
+        : 'constant' type ':' ID  ':=' expression ';'
+                {
+                        $node = new Node(":=");
 
-			string constantText ("");
-			constantText += (string)(char*)($ID.text->chars);
-			constantText += " ( ";
-			constantText += (string)(char*)($type.text->chars);
-			constantText += " constant ) ";
-			
+                        string constantText ("");
+                        constantText += (string)(char*)($ID.text->chars);
+                        constantText += " ( ";
+                        constantText += (string)(char*)($type.text->chars);
+                        constantText += " constant ) ";
+
                         Node * idNode = new Node(constantText, "idNode");
-			idNode->setType(Node::VAR);
-			variableIDs[idNode] = (string)(char*)($ID.text->chars);
-			
+                        idNode->setType(Node::VAR);
+                        variableIDs[idNode] = (string)(char*)($ID.text->chars);
+
                         $node->addChild(idNode, "id");
                         $node->addChild($expression.node, "expression");
-			$node->setType(Node::OP);
-		}
-	;
+                        $node->setType(Node::OP);
+                }
+        ;
 
 
 
 variableDecStatement returns [Node* node]
 @init{
-/** 
+/**
 *	the  variable Decleration Statement syntax is:
 ******************************************
-*	var <type> : ID  := <expression> ; 
+*	var <type> : ID  := <expression> ;
 ******************************************
 *	the variable Decleration Statement ends with ;
 *	the expression is optional.
@@ -378,35 +367,35 @@ variableDecStatement returns [Node* node]
 *	the <type> could be int, bool or string.
 */
 }
-	: 'var' type ':' i1=ID 
-		{
-			string varText ("") ;
-			varText += (string)(char*)($i1.text->chars);
-			varText += " ( ";
-			varText += (string)(char*)($type.text->chars);
-			varText += " variable ) ";
-			
+        : 'var' type ':' i1=ID
+                {
+                        string varText ("") ;
+                        varText += (string)(char*)($i1.text->chars);
+                        varText += " ( ";
+                        varText += (string)(char*)($type.text->chars);
+                        varText += " variable ) ";
+
                         $node = new Node (varText, "varNode");
-			$node->setType(Node::VAR);
-			variableIDs[$node] = (string)(char*)($ID.text->chars);
-	    }
-	(':=' e1=expression 
-		{
-			Node * equalsNode = new Node(":=");
-			equalsNode->setType(Node::OP);
+                        $node->setType(Node::VAR);
+                        variableIDs[$node] = (string)(char*)($ID.text->chars);
+            }
+        (':=' e1=expression
+                {
+                        Node * equalsNode = new Node(":=");
+                        equalsNode->setType(Node::OP);
                         equalsNode->addChild($node, "equals");
                         equalsNode->addChild($e1.node, "statment");
-			$node = equalsNode;
-	    }
-	)? 
-	';'
-	;
+                        $node = equalsNode;
+            }
+        )?
+        ';'
+        ;
 
 
 
 ifStatement returns [Node* node]
 @init { Node* thenNode; Node* elseNode;
-/** 
+/**
 *	The  if statement syntax is:
 ***********************************
 *	if <expression> then
@@ -415,136 +404,136 @@ ifStatement returns [Node* node]
 *	<statements>
 *	end if
 ***********************************
-* 
+*
 *	the expression is either a regular expression or gui Compare Expression.
 */
 }
-	: 'if' 	
-		{
+        : 'if'
+                {
                         $node = new Node("if", "ifNode");
-			$node->setType(Node::OP);
-		}
-	( expression
+                        $node->setType(Node::OP);
+                }
+        ( expression
                 {$node->addChild($expression.node, "expression");}
-	| guiCompareExpression
+        | guiCompareExpression
                 {$node->addChild($guiCompareExpression.node, "guiCompareExpression");}
-	)  
-	'then'
-		{
+        )
+        'then'
+                {
                         thenNode = new Node("then", "thenNode");
-			thenNode->setType(Node::OP);
+                        thenNode->setType(Node::OP);
                         $node->addChild(thenNode, "then");
-		}
-	
-	( s1=statement 
-                { thenNode->addChild($s1.node, "statment"); }
-	)*
+                }
 
-	( 'else'   
-		{ 
+        ( s1=statement
+                { thenNode->addChild($s1.node, "statment"); }
+        )*
+
+        ( 'else'
+                {
                         elseNode = new Node("else", "elseNode");
-			elseNode->setType(Node::OP);
+                        elseNode->setType(Node::OP);
                 $node->addChild(elseNode, "else");
-	   	}
-	( s2=statement 
+                }
+        ( s2=statement
                 { elseNode->addChild($s2.node, "statment"); }
-	)* 
-	)?
-	'end' 'if'
-	;
+        )*
+        )?
+        'end' 'if'
+        ;
 
 
 
 whileStatement returns [Node * node]
 @init{
-/** 
+/**
 *	The  while statement syntax is:
 ***********************************
 *	while <expression> loop
 *	<statements>
 *	end loop
 ***********************************
-* 
+*
 *	The expression is  a regular expression (i.e. int)
 *	or a mathematical expression like ( iterator < 5 ) which can be valued as a boolean
 */
 }
-	: 'while' 
-		{ 
+        : 'while'
+                {
                         $node = new Node("while", "whileNode");
-			$node->setType(Node::OP); 
-		} 
-	expression 
+                        $node->setType(Node::OP);
+                }
+        expression
                 { $node->addChild($expression.node, "expression"); }
-	'loop'
-	( statement 
+        'loop'
+        ( statement
                 { $node->addChild($statement.node, "statment"); }
-	| exitStatement
-	)*
-	'end' 'loop'
-	;
+        | exitStatement
+        )*
+        'end' 'loop'
+        ;
 
 
 
 procedureCallStatement returns [Node * node]
 @init{
-/** 
+/**
 *	The  procedure call Statement syntax is:
 ***********************************
 *	ID ( <parameters> );
 ***********************************
-* 	
+*
 *	The parameters are optional and when using more than one parameter
 *	you should separate them with ','
 *	and when calling the procedure we don't specify the type of the parameters.
 *
 */
 }
-	: ID  
-	('(' actualParameters ')' 
-		{
-			string procedureCallText ((string)(char*)($ID.text->chars));
-			procedureCallText += " (";
-			procedureCallText += (string)(char*)($actualParameters.text->chars); 
-			procedureCallText += ")";
+        : ID
+        ('(' actualParameters ')'
+                {
+                        string procedureCallText ((string)(char*)($ID.text->chars));
+                        procedureCallText += " (";
+                        procedureCallText += (string)(char*)($actualParameters.text->chars);
+                        procedureCallText += ")";
 
                         $node = new Node(procedureCallText, "procedureNode");
-			$node->setType(Node::OP);
-			for(int i = 0; i < $actualParameters.node->getChildren().size(); i++) 
-			{
+                        $node->setType(Node::OP);
+                        for(int i = 0; i < $actualParameters.node->getChildren().size(); i++)
+                        {
                                 $node->addChild($actualParameters.node->getChildren().at(i), "paramters");
-			}
-		}
+                        }
+                }
 
-	| '(' ')' 
-		{
-			string procedureCallText ((string)(char*)($ID.text->chars));
-			procedureCallText += " ( )";
-			$node = new Node(procedureCallText);
-			$node->setType(Node::OP);
-		}
-	) 
-	';'
-	;
+        | '(' ')'
+                {
+                        string procedureCallText ((string)(char*)($ID.text->chars));
+                        procedureCallText += " ( )";
+                        $node = new Node(procedureCallText);
+                        $node->setType(Node::OP);
+                }
+        )
+        ';'
+        ;
 
 
 
 actualParameters returns [Node * node]
-	: e1=expression 
-		{ 
-			$node = new Node();
+        : e1=expression
+                {
+                        $node = new Node();
                         $node->addChild($e1.node, "expresssion");
-		}
-	(',' e2=expression 
+                }
+        (',' e2=expression
                 {$node->addChild($e2.node, "expression");}
-	)*
-	;
+        )*
+        ;
 
 
 
 exitStatement
 @init{
-/** 
+/**
 *	The  exit statement syntax is:
 ***********************************
 *	exit when <expression> ;
@@ -557,15 +546,15 @@ exitStatement
 *
 */
 }
-	: 'exit''when' expression ';'
-	| 'exit''now'';'
-	;
+        : 'exit''when' expression ';'
+        | 'exit''now'';'
+        ;
 
 
 
 returnStatement
 @init{
-/** 
+/**
 *	the  return Statement syntax is:
 ***********************************
 *	return <expression> ;
@@ -574,223 +563,223 @@ returnStatement
 *
 */
 }
-	: 'return' expression ';'
-	;
+        : 'return' expression ';'
+        ;
 
 
 
 term returns [Node * node]
 @init 	{ string tempText (""); }
-	: INTEGER 
-		{ 
+        : INTEGER
+                {
                         $node = new Node((string)(char*)($INTEGER.text->chars), "INTEGER");
-			$node->setType(Node::CONST); 
-		}
+                        $node->setType(Node::CONST);
+                }
 
-	| '(' expression ')' 
-		{ $node = $expression.node; }
+        | '(' expression ')'
+                { $node = $expression.node; }
 
-	| ID 
-		{	
+        | ID
+                {
                         $node = new Node((string)(char*)($ID.text->chars), "ID");
-			$node->setType(Node::VAR); 
-		}
+                        $node->setType(Node::VAR);
+                }
 
-	| ID '(' actualParameters ')'
-		{ 	
-			tempText = (string)(char*)($actualParameters.text->chars);    
-			string nodeText ((string)(char*)($ID.text->chars));
-			nodeText += "(";
-			nodeText += tempText;
-			nodeText += ")";
+        | ID '(' actualParameters ')'
+                {
+                        tempText = (string)(char*)($actualParameters.text->chars);
+                        string nodeText ((string)(char*)($ID.text->chars));
+                        nodeText += "(";
+                        nodeText += tempText;
+                        nodeText += ")";
                         $node = new Node(nodeText, "IDTEXT");
-			$node->setType(Node::OP);
-			
-			for(int i = 0; i < $actualParameters.node->getChildren().size(); i++) 
-			{
+                        $node->setType(Node::OP);
+
+                        for(int i = 0; i < $actualParameters.node->getChildren().size(); i++)
+                        {
                                 $node->addChild($actualParameters.node->getChildren().at(i), "parameters");
-			}
-		} 
+                        }
+                }
 
-	| ID '(' ')' 
-		{ 	
-			string nodeText ((string)(char*)($ID.text->chars));
-			nodeText += "( )";
+        | ID '(' ')'
+                {
+                        string nodeText ((string)(char*)($ID.text->chars));
+                        nodeText += "( )";
                         $node = new Node(nodeText, "IDTEXT");
-			$node->setType(Node::OP);
-		}
+                        $node->setType(Node::OP);
+                }
 
-	| STRING_LITERAL
-		{
-			string nodeText ((string)(char*)($STRING_LITERAL.text->chars));
-			nodeText = nodeText.substr(1, nodeText.length() - 2);
+        | STRING_LITERAL
+                {
+                        string nodeText ((string)(char*)($STRING_LITERAL.text->chars));
+                        nodeText = nodeText.substr(1, nodeText.length() - 2);
                         $node = new Node(nodeText, "STRINGLITERAL"); $node->setType(Node::CONST);
-		}
-	;
+                }
+        ;
 
 
 
 negation returns [Node * node]
 @init 	{ int numberOfNots = 0; }
-	: ( 'NOT' { numberOfNots++; } )* term
-		{
-			Node * returnNode = $term.node;
-			for(int i = 0; i < numberOfNots; i++) 
-			{
+        : ( 'NOT' { numberOfNots++; } )* term
+                {
+                        Node * returnNode = $term.node;
+                        for(int i = 0; i < numberOfNots; i++)
+                        {
                                 Node * notNode = new Node("NOT", "NOTNODE");
-				notNode->setType(Node::OP);
+                                notNode->setType(Node::OP);
                                 notNode->addChild(returnNode, "returning");
-				returnNode = notNode;
-			}
-			$node = returnNode;
-		}
-	;
+                                returnNode = notNode;
+                        }
+                        $node = returnNode;
+                }
+        ;
 
 
 
 unary returns [Node * node]
 @init 	{ int minuses = 0; }
-	: ( '+' | '-' { minuses++; })* negation 
-		{
-			string sign = (minuses \% 2 == 0)? "" : "-";  // if number of minuses is even, the sign is "", otherwise the sign is -
-			if (minuses \% 2 == 0)
-			{	
-				$node = $negation.node;
-			}
-			else
-			{			
-				$node = new Node("-");
-				$node->setType(Node::OP);
+        : ( '+' | '-' { minuses++; })* negation
+                {
+                        string sign = (minuses \% 2 == 0)? "" : "-";  // if number of minuses is even, the sign is "", otherwise the sign is -
+                        if (minuses \% 2 == 0)
+                        {
+                                $node = $negation.node;
+                        }
+                        else
+                        {
+                                $node = new Node("-");
+                                $node->setType(Node::OP);
                                 $node->addChild($negation.node, "negation");
-			}	
-		}
-	;
+                        }
+                }
+        ;
 
 
 
 multdiv returns [Node* node]
 @init 	{
-			Node* temp;
-			string nodeName;
-		}
-	: u1=unary 	{temp = $u1.node;}
-	( 
-	( '*' 		{nodeName = "*";}
+                        Node* temp;
+                        string nodeName;
+                }
+        : u1=unary 	{temp = $u1.node;}
+        (
+        ( '*' 		{nodeName = "*";}
 
-	|  '/' 		{nodeName = "/";} 
+        |  '/' 		{nodeName = "/";}
 
-	| 'MOD'		{nodeName = "mod";} 
-	  
-	) u2=unary	
-		{	
+        | 'MOD'		{nodeName = "mod";}
+
+        ) u2=unary
+                {
                         Node* multdivNode = new Node(nodeName, "multdivNode");
-			multdivNode->setType(Node::OP);
+                        multdivNode->setType(Node::OP);
                         multdivNode->addChild(temp, "multDiv");
                         multdivNode->addChild($u2.node, "multDiv");
-			temp = multdivNode;
-		}
-	)*
-		{$node = temp;}
-	;
+                        temp = multdivNode;
+                }
+        )*
+                {$node = temp;}
+        ;
 
 
 
 addsub returns [Node* node]
 @init 	{
-			Node* temp;
-			string nodeName;
-		}
-	: m1=multdiv	{temp = $m1.node;}
-	( 
+                        Node* temp;
+                        string nodeName;
+                }
+        : m1=multdiv	{temp = $m1.node;}
+        (
 
-	( '+'  			{nodeName = "+";}
-		  
-	| '-'  			{nodeName = "-";} 
+        ( '+'  			{nodeName = "+";}
 
-	) m2=multdiv
-		{
+        | '-'  			{nodeName = "-";}
+
+        ) m2=multdiv
+                {
                         Node* addsubNode = new Node(nodeName, "addSubNode");
-			addsubNode->setType(Node::OP);
+                        addsubNode->setType(Node::OP);
                         addsubNode->addChild(temp, "addSub");
                         addsubNode->addChild($m2.node, "addSub");
-			temp = addsubNode;
-		}
-	)*
-		{$node = temp;}
-	;
+                        temp = addsubNode;
+                }
+        )*
+                {$node = temp;}
+        ;
 
 
 
 compare returns [Node* node]
 @init 	{
-			Node* temp;
-			string nodeName;
-		}
-	: a1=addsub {temp = $a1.node;}
-	( 
+                        Node* temp;
+                        string nodeName;
+                }
+        : a1=addsub {temp = $a1.node;}
+        (
 
-	( '='  		{nodeName = "=";}
+        ( '='  		{nodeName = "=";}
 
-	| '!=' 		{nodeName = "!=";}
-	
-	| '<'  		{nodeName = "<";}
-	
-	| '<' '=' 	{nodeName = "<=";} 
+        | '!=' 		{nodeName = "!=";}
 
-	| '>'  		{nodeName = ">";}
-		
-	| '>' '=' 	{nodeName = ">=";}
-		
-	) a2=addsub
-		{
+        | '<'  		{nodeName = "<";}
+
+        | '<' '=' 	{nodeName = "<=";}
+
+        | '>'  		{nodeName = ">";}
+
+        | '>' '=' 	{nodeName = ">=";}
+
+        ) a2=addsub
+                {
                         Node* comparatorNode = new Node(nodeName, "compareNode");
-			comparatorNode->setType(Node::OP);
+                        comparatorNode->setType(Node::OP);
                         comparatorNode->addChild(temp, "comparator");
                         comparatorNode->addChild($a2.node, "comparator");
-			temp = comparatorNode;
-		}
-	)?
-		{$node = temp;}
-	;
+                        temp = comparatorNode;
+                }
+        )?
+                {$node = temp;}
+        ;
 
 
 
 expression returns [Node* node]
 @init 	{
-			Node* temp;
-			string nodeName;
-		}
-	: c1=compare 	{temp = $c1.node;}
-	( 
-	( 'AND' 		{nodeName = "AND";}
-		
-	| 'OR' 			{nodeName = "OR";}
+                        Node* temp;
+                        string nodeName;
+                }
+        : c1=compare 	{temp = $c1.node;}
+        (
+        ( 'AND' 		{nodeName = "AND";}
 
-	) c2=compare 
-		{
+        | 'OR' 			{nodeName = "OR";}
+
+        ) c2=compare
+                {
                         Node* comparatorNode = new Node(nodeName, "comparatorNode");
-			comparatorNode->setType(Node::OP);
+                        comparatorNode->setType(Node::OP);
                         comparatorNode->addChild(temp, "comparator");
                         comparatorNode->addChild($c2.node, "comparator");
-			temp = comparatorNode;
-		}
-	)*
-		{$node = temp;}
-	;
+                        temp = comparatorNode;
+                }
+        )*
+                {$node = temp;}
+        ;
 
 
 
 type
-	: 'int'
-	| 'bool'
-	| 'string'
-	;
+        : 'int'
+        | 'bool'
+        | 'string'
+        ;
 
 
 
 guiDecStatement returns [Node* node]
 @init {
-/** 
+/**
 *	The  GUI Declaration statement syntax is:
 ******************************************
 *	<guiType> : ID ;
@@ -800,59 +789,59 @@ guiDecStatement returns [Node* node]
 *
 */
 }
-	: guiType ':' i1=ID  
-		{
-			string guiTypeText = (string)(char*)($i1.text->chars);
-			guiTypeText += " ( ";
-			guiTypeText += (string)(char*)($guiType.text->chars);
-			guiTypeText += " ) ";
+        : guiType ':' i1=ID
+                {
+                        string guiTypeText = (string)(char*)($i1.text->chars);
+                        guiTypeText += " ( ";
+                        guiTypeText += (string)(char*)($guiType.text->chars);
+                        guiTypeText += " ) ";
 
                         $node = new Node(guiTypeText, "guiTypeText");
-			$node->setType(Node::VAR);
-			
-			variableIDs[$node] = (string)(char*)($ID.text->chars);
-			
-			guiNodeModes[variableIDs[$node]] = (string)(char*)($guiType.text->chars);
+                        $node->setType(Node::VAR);
 
-		}
-	';'
-	;
+                        variableIDs[$node] = (string)(char*)($ID.text->chars);
+
+                        guiNodeModes[variableIDs[$node]] = (string)(char*)($guiType.text->chars);
+
+                }
+        ';'
+        ;
 
 
 
 guiTerm returns [Node* node]
 @init {
-/** 
+/**
 *	The GUI Term is either a GUI which we expressed it with its ID
-*	or it's a guiPositionExpression which represents a position relation between GUI terms. 
+*	or it's a guiPositionExpression which represents a position relation between GUI terms.
 *
 */
 }
-	: ID 
-		{
+        : ID
+                {
                         $node = new Node((string)(char*)($ID.text->chars), "IDNODE");
-			$node->setType(Node::VAR);
+                        $node->setType(Node::VAR);
 
-			if (guiNodeModes[(string)(char*)($ID.text->chars)] == "")
-			{
-				$node->setMode("ERROR");
-			}
-			else
-			{
-				$node->setMode(guiNodeModes[(string)(char*)($ID.text->chars)]);
-			}
+                        if (guiNodeModes[(string)(char*)($ID.text->chars)] == "")
+                        {
+                                $node->setMode("ERROR");
+                        }
+                        else
+                        {
+                                $node->setMode(guiNodeModes[(string)(char*)($ID.text->chars)]);
+                        }
 
-		}
+                }
 
-	| '(' guiCompareExpression ')' 
-		{ $node = $guiCompareExpression.node; $node->setType(Node::OP); }
-	;
+        | '(' guiCompareExpression ')'
+                { $node = $guiCompareExpression.node; $node->setType(Node::OP); }
+        ;
 
 
 
 guiCompareExpression returns [Node* node]
 @init { Node* temp;
-/** 
+/**
 *	The  GUI compare expression syntax is:
 ******************************************
 *	<guiTerm> <guiCompareKeyword> <guiTerm>
@@ -861,88 +850,51 @@ guiCompareExpression returns [Node* node]
 *
 */
 }
-	: g1=guiTerm { temp = $g1.node; }
-	 (guiCompareKeyword g2=guiTerm 
-		{
+        : g1=guiTerm { temp = $g1.node; }
+         (guiCompareKeyword g2=guiTerm
+                {
                         Node* compareNode = new Node((string)(char*)($guiCompareKeyword.text->chars), "compareNode");
-			compareNode->setType(Node::OP);
-			
+                        compareNode->setType(Node::OP);
+
                         compareNode->addChild(temp, "compare");
                         compareNode->addChild($g2.node, "compare");
 
-			$node= compareNode;
+                        $node= compareNode;
 
-			if ($g1.node->getMode() == "ERROR")
-			{
-				comparison_output_on_screen += "*** error: '" + $g1.node->getValue() + "' was not declared.\n";
-			}
-			if ($g2.node->getMode() == "ERROR")
-			{
-				comparison_output_on_screen += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
-			}
-		} )
-	;
+                        Graph::guiChecker->checkError($g1.node);
+                        Graph::guiChecker->checkError($g2.node);
+
+
+                } )
+        ;
 
 
 
 guiStatement returns [Node* node]
 @init {
-/** 
+/**
 *	The  GUI statements are either GUI declaration statemet or GUI compare expression.
 *	and the GUI staements are like the regular statements should end with ';'
 *
 */
  }
-	: guiDecStatement
-		{ $node = $guiDecStatement.node ;}
+        : guiDecStatement
+                { $node = $guiDecStatement.node ;}
 
-	| guiCompareExpression 
-		{ 	
-			$node = $guiCompareExpression.node;
-			comparison_output += "\nEvaluating '" + (string)(char*)($guiCompareExpression.text->chars) + "'\n";
-			comparison_output_on_screen += "\nEvaluating '" + (string)(char*)($guiCompareExpression.text->chars) + "'\n";
-			vector<vector<Solution> > solutions;
-			solutions = node->evaluate(guiObject);
-			char cstr[25];
-			GuoliceUtil::int2str(cstr, solutions.size());
-			comparison_output += "Number Of solutions: " + string(cstr) + "\n";
-			comparison_output += "=======================\n";
-			comparison_output_on_screen += "Number Of solutions: " + string(cstr) + "\n";
-			comparison_output_on_screen += "=======================\n";
-			for (int solutionIt = 0 ; solutionIt < solutions.size() ; solutionIt++)
-			{
-				GuoliceUtil::int2str(cstr, solutionIt + 1);
-				if (solutionIt == 2)
-				{
-					comparison_output_on_screen += "\n    More solutions can be found on the output file ../tests/test_output.\n";
-				}
-				comparison_output += "\n    Solution: " + string(cstr) + "\n";
-				comparison_output += "    ------------\n";
-				if (solutionIt < 2)
-				{
-					comparison_output_on_screen += "\n    Solution: " + string(cstr) + "\n";
-					comparison_output_on_screen += "    ------------\n";
-				}
-				for (int solutionIt_sub = 0; solutionIt_sub < solutions.at(solutionIt).size() ; solutionIt_sub++)
-				{
-					comparison_output += "    " + solutions.at(solutionIt).at(solutionIt_sub).varName + ": " + 
-										solutions.at(solutionIt).at(solutionIt_sub).shape->toString() + "\n";
-					if (solutionIt < 2)
-					{
-						comparison_output_on_screen += "    " + solutions.at(solutionIt).at(solutionIt_sub).varName + ": " + 
-										solutions.at(solutionIt).at(solutionIt_sub).shape->toString() + "\n";
-					}
-				}
-			}
-		}  
-	';'
-	;
+        | guiCompareExpression
+                {
+                        $node = $guiCompareExpression.node;
+                        Graph::guiChecker->compareExpression(node, guiObject, (string)(char*)($guiCompareExpression.text->chars) );
+
+                }
+        ';'
+        ;
 
 
 
 evntHandleStatement returns [Node* node]
 @init {
-/** 
+/**
 *	The event handle statement syntax is:
 ******************************************
 *	ID.<eventType>
@@ -954,48 +906,48 @@ evntHandleStatement returns [Node* node]
 *
 */
  }
-	: ID '.' eventType 
-			{
+        : ID '.' eventType
+                        {
                                 $node = new Node((string)(char*)($eventType.text->chars), "EventNode");
                                 Node* idNode = new Node((string)(char*)($ID.text->chars), "IdNode");
-				idNode->setType(Node::VAR);
+                                idNode->setType(Node::VAR);
                                 $node->addChild(idNode, "id");
-				$node->setType(Node::OP);
-				
-			}'('
-	( statement 
-			{
+                                $node->setType(Node::OP);
+
+                        }'('
+        ( statement
+                        {
                                 $node->addChild($statement.node, "statment");
-			})*
-	')' ';'
-	;
+                        })*
+        ')' ';'
+        ;
 
 
 
 guiType
-	: 'Box'
-	| 'Circle'
-	| 'Triangle'
-	| 'Label'
-	;
+        : 'Box'
+        | 'Circle'
+        | 'Triangle'
+        | 'Label'
+        ;
 
 eventType
-	: 'OnClick'
-	| 'KeyPress'
-	;
+        : 'OnClick'
+        | 'KeyPress'
+        ;
 
 guiCompareKeyword
-	: 'LeftOf'
-	| 'RightOf'
-	| 'Above'
-	| 'Below'
-	| 'Contains'
-	| 'SmallerThan'
-	| 'BiggerThan'
-	| 'EqualTo'
-	| 'AND'
-	| 'OR'
-	;
+        : 'LeftOf'
+        | 'RightOf'
+        | 'Above'
+        | 'Below'
+        | 'Contains'
+        | 'SmallerThan'
+        | 'BiggerThan'
+        | 'EqualTo'
+        | 'AND'
+        | 'OR'
+        ;
 
 
 
@@ -1007,11 +959,11 @@ fragment LETTER : ('a'..'z' | 'A'..'Z');
 fragment DIGIT : '0'..'9' ;
 
 STRING_LITERAL    // we can write any thing here including (\") which will be understood it as  (")
-	: '"'
-		 ( '\\' '\"'  |   ~('"' |  '\n'| '\r')	 )*
-	  '"'
-	;
-	
+        : '"'
+                 ( '\\' '\"'  |   ~('"' |  '\n'| '\r')	 )*
+          '"'
+        ;
+
 ID	: LETTER ( LETTER | DIGIT | '_')*;
 
 INTEGER : DIGIT+ ;
