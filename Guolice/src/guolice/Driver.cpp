@@ -1,7 +1,7 @@
 #include "Driver.h"
 
 
-int Driver::drive(int argc, char *argv[]){
+void Driver::drive(int argc, char *argv[]){
 
     pANTLR3_UINT8	    fName;
     pANTLR3_INPUT_STREAM    input;
@@ -59,6 +59,5 @@ int Driver::drive(int argc, char *argv[]){
     //traversing the graph
     Graph::pTree->traverse( Graph::pTree->getRootNode() ); // Get the dot output.
 
-    return 0;
 
 }
