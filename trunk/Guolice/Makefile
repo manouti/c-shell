@@ -89,7 +89,7 @@ TRANSLATESOURCES 	= $(SOURCES) ${wildcard $(TRANSLATE_DIR)/*.cpp} $(MAIN_DIR)/Dr
 ASPECTSOURCES 		= $(MAINSOURCES) ${wildcard $(GRMR_DIR)/*.c} 
 ANTLROUTPUT_H 		= $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.h
 OBJECTS       		= GuoliceLexer.o GuoliceParser.o $(MAINSOURCES:.cpp=.o)
-TRANSLATEOBJECTS 	= GuoliceLexer.o GuoliceParser.o $(TRANSLATESOURCES:.cpp=.o);
+TRANSLATEOBJECTS 	= GuoliceLexer.o GuoliceParser.o $(TRANSLATESOURCES:.cpp=.o)
 GRAMMARFILE   		= $(GRMR_DIR)/Guolice.g
 TARGET        		= Guolice
 DOXYFILE      		= DoxyFile
@@ -191,7 +191,7 @@ translate: $(TRANSLATEOBJECTS)
 	$(MKDIR) $(OBJECTS_DIR)
 	$(MKDIR) $(ARTIFACT_DIR)
 	$(LINK) -o $@ $(BUILDFLAG) $(INCPATH) $(LIBS) $(TRANSLATEOBJECTS)
-	mv $< $(OBJECTS_DIR)
+	$(MOVE) $(TRANSLATEOBJECTS) $(OBJECTS_DIR)
 	$(MOVE) $@ $(ARTIFACT_DIR)
 	cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./translate
 
