@@ -83,22 +83,22 @@ public:
 			bool cont12 = s1->containsPoint(s2->getP2());
 			bool cont21 = s2->containsPoint(s1->getP1());
 			bool cont22 = s2->containsPoint(s1->getP2());
-
+			
 			if(same11 && !cont12 && !cont22)
 			{
-				return (s1->getP1());
+				return s1->getP1();
 			}
 			if(same12 && !cont11 && !cont22)
 			{
-				return (s1->getP1());
+				return s1->getP1();
 			}
 			if(same21 && !cont12 && !cont21)
 			{
-				return (s1->getP2());
+				return s1->getP2();
 			}
 			if(same22 && !cont11 && !cont21)
 			{
-				return (s1->getP2());
+				return s1->getP2();
 			}
 
 			return NULL;
