@@ -212,7 +212,8 @@ help :
 	@echo $(OBJECTS)
 	@echo $(DEPENDS)
 	@echo "Makefile for Guolice; must be invoked from the root directory that contains src, .objs, ..."
-	@echo "Available targets: all, antlr-generate, compile, link, clean, and help."
+	@echo
+	@echo "Available targets: all, antlr-generate, compile, link, doc, aspect, translate, test, clean, and help."
 	@echo
 	@echo "- all will build all the necessary files needed to run the program against the input file written in Guolice."
 	@echo

@@ -3,7 +3,6 @@ Circle : -2, -1, 1
 Circle : 2, 2, 1
 Circle : 4, 4, 1
 Circle : -5, -5, 1
-
 Box : 5, 0, 4, 3
 Box : 10, -3, 2, 1
 Box : -25 , -25 , 50 , 50

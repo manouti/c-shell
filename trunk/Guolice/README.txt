@@ -16,32 +16,29 @@ Note: The project has been built and tested with the library provided for Window
 
 
 
-**************************************************** Commands: ****************************************************
+*************************************************** Helpful Commands: ****************************************************
 
 make:
-	Will print the graph on the console
-	
-	Will archive libraries
-
-
-
+	Will print the graph on the console.
+	Will archive libraries.
 
 make aspect:
-	will bill the graph using dot format
-
-
-
+	will bill the graph using dot format.
 
 make translate:
-	Will translate the graph backwards and foward
-	A graph in form of graph.h should be placed in ./src/translate/translateMain.cpp in order to be                 translated
+	Will translate the graph backwards and forward.
+	A graph in form of graph.h should be placed in ./src/translate/translateMain.cpp in order to be translated.
+
+make test:
+	Will run the program. 
+
+make help:
+	Will print the help on the makefile and list of the commands available.
+
+*************************************************************************************************************************
 
 
-
-*****************************************************************************************************************************
-
-
-TestCase:
+Test Case:
 The test case should be written like this example:
 *******************************
 Circle : -2, 0, 1
@@ -50,12 +47,12 @@ Triangle : 0,0 , 1 ,1 , 0 , 2
 
 *******************************
 
-where you put the name of the GUI_variable and the ':'
+where you put the shape of the GUI and ':'
 followed by the parameters separated by comma.
 
-for the Circle:   	'ID' : 'center_point_X' , 'center_point_Y' , 'radius'
-for the Box:		'ID' : 'left_Bottom_corner_X' , 'left_Bottom_corner_Y' , 'length_(on_the_X_axis)' , 'width_(on_the_Y_axis)'
-for the triangle:	'ID' : 'point_1_X' , 'point_1_Y' , 'point_2_X' , 'point_2_Y' , 'point_3_X' , 'point_3_Y' 
+for the Circle:   	Circle : <center_point_X> , <center_point_Y> , <radius>
+for the Box:		Box : <left_Bottom_corner_X> , <left_Bottom_corner_Y> , <width_on_the_X_axis> , <height_on_the_Y_axis>
+for the Triangle:	Triangle : <point_1_X> , <point_1_Y> , <point_2_X> , <point_2_Y> , <point_3_X> , <point_3_Y>
 
 and then you put it the "../Guolice/tests/gui_metadata" file
 
