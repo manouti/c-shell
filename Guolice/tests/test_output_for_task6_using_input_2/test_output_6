@@ -1,0 +1,1187 @@
+
+Evaluating 'C1 LeftOf (B1 Above (B2 RightOf T1))'
+Number Of solutions: 169
+=======================
+
+    Solution: 1
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 2
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 3
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 4
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 5
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 6
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 7
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 8
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 9
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 10
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 11
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 12
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 13
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 14
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 15
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 16
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 17
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 18
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 19
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 20
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 21
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 22
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 23
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 24
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 25
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 26
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 27
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 28
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 29
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 30
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 31
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 32
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 33
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 34
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 35
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 36
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 37
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 38
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 39
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 40
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 41
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 42
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 43
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 44
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 45
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 46
+    ------------
+    C1: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 47
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 48
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 49
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 50
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 51
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 52
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 53
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 54
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 55
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 56
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 57
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 58
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 59
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 60
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 61
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 62
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 63
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 64
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 65
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 66
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 67
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 68
+    ------------
+    C1: Circle : [Center(2.00, 2.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 69
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 70
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 71
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 72
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 73
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 74
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 75
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 76
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 77
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 78
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 79
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 80
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 81
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 82
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 83
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 84
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 85
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 86
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 87
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 88
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 89
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 90
+    ------------
+    C1: Circle : [Center(4.00, 4.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 91
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 92
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 93
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 94
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 95
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 96
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 97
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 98
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 99
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 100
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 101
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 102
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 103
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 104
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 105
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 106
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 107
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 108
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 109
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 110
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 111
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 112
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 113
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 114
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 115
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 116
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 117
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 118
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 119
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 120
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 121
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 122
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 123
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+
+    Solution: 124
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 125
+    ------------
+    C1: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 126
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 127
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 128
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 129
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 130
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 131
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 132
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 133
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 134
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 135
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 136
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 137
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 138
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 139
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 140
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 141
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 142
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 143
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 144
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 145
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 146
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 147
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 148
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 149
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 150
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 151
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 152
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 153
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 154
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 155
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 156
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 157
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 158
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 159
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 160
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 161
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 162
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 163
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 164
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 165
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]
+
+    Solution: 166
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    T1: Triangle : [Point_1(5.00, 6.00), Point_2(6.00, 10.00), Point_3(9.00, 11.00))]
+
+    Solution: 167
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+
+    Solution: 168
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+
+    Solution: 169
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    B2: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    T1: Triangle : [Point_1(5.00, 5.00), Point_2(6.00, 8.00), Point_3(9.00, 8.00))]

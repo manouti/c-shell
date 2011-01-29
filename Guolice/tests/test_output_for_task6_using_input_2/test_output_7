@@ -1,0 +1,359 @@
+
+Evaluating '(B1 BiggerThan C2) OR (B1 SmallerThan C2)'
+Number Of solutions: 71
+=======================
+
+    Solution: 1
+    ------------
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 2
+    ------------
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 3
+    ------------
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 4
+    ------------
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 5
+    ------------
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 6
+    ------------
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 7
+    ------------
+    B1: Box : [Corner(-25.00, -25.00), Width(50.00), Height(50.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 8
+    ------------
+    B1: Box : [Corner(-25.00, -25.00), Width(50.00), Height(50.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 9
+    ------------
+    B1: Box : [Corner(-25.00, -25.00), Width(50.00), Height(50.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 10
+    ------------
+    B1: Box : [Corner(-25.00, -25.00), Width(50.00), Height(50.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 11
+    ------------
+    B1: Box : [Corner(-25.00, -25.00), Width(50.00), Height(50.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 12
+    ------------
+    B1: Box : [Corner(-25.00, -25.00), Width(50.00), Height(50.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 13
+    ------------
+    B1: Box : [Corner(-25.00, -25.00), Width(50.00), Height(50.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+
+    Solution: 14
+    ------------
+    B1: Box : [Corner(-25.00, -25.00), Width(50.00), Height(50.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 15
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 16
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 17
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 18
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 19
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 20
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 21
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+
+    Solution: 22
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 23
+    ------------
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 24
+    ------------
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 25
+    ------------
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 26
+    ------------
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 27
+    ------------
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 28
+    ------------
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 29
+    ------------
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+
+    Solution: 30
+    ------------
+    B1: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 31
+    ------------
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 32
+    ------------
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 33
+    ------------
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 34
+    ------------
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 35
+    ------------
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 36
+    ------------
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 37
+    ------------
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+
+    Solution: 38
+    ------------
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 39
+    ------------
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 40
+    ------------
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 41
+    ------------
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 42
+    ------------
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 43
+    ------------
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 44
+    ------------
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+
+    Solution: 45
+    ------------
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 46
+    ------------
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 47
+    ------------
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 48
+    ------------
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 49
+    ------------
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 50
+    ------------
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 51
+    ------------
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 52
+    ------------
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+
+    Solution: 53
+    ------------
+    B1: Box : [Corner(5.00, 5.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 54
+    ------------
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 55
+    ------------
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 56
+    ------------
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 57
+    ------------
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 58
+    ------------
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 59
+    ------------
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 60
+    ------------
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+
+    Solution: 61
+    ------------
+    B1: Box : [Corner(10.00, 10.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 62
+    ------------
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 63
+    ------------
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(-2.00, -1.00), Radius(1.00)]
+
+    Solution: 64
+    ------------
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(2.00, 2.00), Radius(1.00)]
+
+    Solution: 65
+    ------------
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(4.00, 4.00), Radius(1.00)]
+
+    Solution: 66
+    ------------
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(-5.00, -5.00), Radius(1.00)]
+
+    Solution: 67
+    ------------
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 68
+    ------------
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+
+    Solution: 69
+    ------------
+    B1: Box : [Corner(8.00, 8.00), Width(1.00), Height(1.00)]
+    C2: Circle : [Center(10.00, 10.00), Radius(1.00)]
+
+    Solution: 70
+    ------------
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 71
+    ------------
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]

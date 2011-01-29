@@ -28,7 +28,7 @@ foo ();
 var2 := func1 (4);
 
 
-if  B1 Contains (B2 Intersect T3)  then
+if  B1 Contains (B2 Above T3)  then
 	message := "Wrong GUI!!"  ;
 end if
 
