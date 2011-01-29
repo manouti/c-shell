@@ -9,6 +9,10 @@
 #include <GuoliceUtil.h>
 #include <cmath>
 
+
+
+
+
 class AbstractGui{
 protected:
     Point* point;

@@ -1,21 +1,32 @@
+/** \file AbstractNodeFactory.h
+* Abstract Node Type Factory
+*
+*/
 #ifndef ABSTRACTNODEFACTORY_H
 #define ABSTRACTNODEFACTORY_H
 
-//used in inherited classes
 #include <map>
 #include "ParseTree.h"
-
 #include <iostream>
 using namespace std;
 
 enum FactoryType {guolice, standard};
 
+
+/**
+* \class AbstractNodeFactory
+* \brief Abstract Class which GuoliceNodeFactory and StandardNodeFactory inherit
+*
+*/
+
+
 class AbstractNodeFactory{
 	private:
-		FactoryType factoryType;
-		
+                FactoryType factoryType;        //! Class type
+
 	public:
-		AbstractNodeFactory();
+
+                AbstractNodeFactory();
 
 		void print();
 
