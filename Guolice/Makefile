@@ -133,6 +133,9 @@ GuoliceParser.o : $(GRMR_DIR)/GuoliceParser.c
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
 
+ 
+$(GRMR_DIR)/GuoliceLexer.c $(GRMR_DIR)/GuoliceLexer.h $(GRMR_DIR)/GuoliceParser.c $(GRMR_DIR)/GuoliceParser.h $(GRMR_DIR)/Guolice.tokens : $(GRAMMARFILE)
+	$(JAVA) $(JAVAFLAGS) $(ANTLR) $<
 
 
 debug : all
