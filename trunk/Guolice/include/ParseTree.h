@@ -8,6 +8,7 @@
 
 #include "Node.h"
 #include "graph.h"
+#include "GuiChecker.h"
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -153,6 +154,7 @@ class Graph {
     public:
         static ParseTree* pTree;                //!< static parced tree
         static progGraph* translatedGraph;      //!< static translated graph used by a translator
+        static GuiChecker* guiChecker;          //!< static GuiChecker
 };
 
 #endif
