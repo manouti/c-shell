@@ -1,6 +1,6 @@
 /**\file Geometry.h
  * \brief Holds any static fields and methods used in Segment.h or Line.h
- *
+ * This file was written to study the case where a triangle contains ather shapes
  */
 #ifndef GEOMETRY
 #define GEOMETRY
