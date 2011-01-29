@@ -52,9 +52,7 @@ As in the case of any language, the grammar is composed of two sets of rules: le
 of the language such as integer, a string, or an identifier, and thus is merely a few number of rules that the lexer detects. After tokenizing
 the input character stream, the output of the lexer is fed to the parser which figures out how a sequence of tokens forms a grammatically valid
 parser rule such as statement, which can be an assignment or a variable declaration. At the end of this phase, we were able to test a number of cases
-that apply the rule of Guolice's syntax and thus come up with a simple language that is mostly based on conventional high-level languages like C++, while
-adding some syntactic sugar to it. Also emphasizes in this phase was the need to hold the representation of the parse tree of a sample program in a special
-data structure. This work was not yet finished.
+that apply the rule of Guolice's syntax and thus come up with a simple language that is mostly based on conventional high-level languages like C++, while adding some syntactic sugar to it. Also emphasizes in this phase was the need to hold the representation of the parse tree of a sample program in a special data structure. This work was not yet finished.
 
 -----------------------------------
 2. Project Phase 2 (Tasks 2 and 3)
@@ -66,27 +64,32 @@ we separated the main logic of the program from the graphical aspect. Then we ad
 redirect to http://www.stack.nl/~dimitri/doxygen/), and this makes it easy to keep documentation attached to the code. Later, we had an important step
 in testing the so far obtained language with various cases, and several bugs appeared which required attention.
 
-We used aspect in order to add functionality around code we had already writen. Our aim was to procude a graph, in dot format.
-We used aspect for three fuctions, traverse, visitNode and visitEdge.
+We used aspect in order to add functionality around code we had already written. Our aim was to produce a graph, in dot format.
+We used aspect for three functions, traverse, visitNode and visitEdge.
 *Traverse is a recursive function, with out the aspect. We did tjp->proceed to let it finish created a dot file put the dot file in it. The dot stucture was created and saved while traversing
-*visitNode: when a node is visisted there is a check to see if it is a new or reccurent node, if it is new a variable id and color is saved for it, if it is old its color is retrieved from a map. Whatever nessesary dot output is generated and saved. 
+*visitNode: when a node is visited there is a check to see if it is a new or recurrent node, if it is new a variable id and color is saved for it, if it is old its color is retrieved from a map. Whatever necessary dot output is generated and saved. 
 *visitEdge: create and edge in dot format. 
 
 --------------------------------------
 3. Project Phase 3 (Tasks 4, 5 and 6)
 --------------------------------------
+Task 4:
+-------
 Task 4 consisted of restructuring the project directories to reflect a conventional release model. In this way, you will find all source code in the /src
 folder, while all other third-party libraries and other resources found in the /third folder. Another example is the /lib folder which we used to learn
 how to generated a static and a shared library file in order to present binaries as a plugin for others. Several makefiles were added, one in the top-level
 directory that can be used against different phony targets, or to build everything from scratch. Other makefiles do specific jobs like generating doc in the
 /doc folder and generating static libraries in /lib.
+
+Task 5:
+-------
 Task 5 is about translating 
-To do translation we used the factory design patern. 
+To do translation we used the factory design pattern. 
 To translate from GuoliceNode --> Standard Node defined in graph.h:
 1) traversed the graph 
 2) when met Node 
 	-checked type( VAR, OP, LITERAL)
-	-created coresponding Node
+	-created corresponding Node
 3) when met Edge
 	-created standard graph
 *traversal using methods in graph.h is used for verification
@@ -94,12 +97,41 @@ To translate from GuoliceNode --> Standard Node defined in graph.h:
 
 To translate from a standardNode -> Guolice Graph
 1) traversed graph using visitor function
-2) in visistor fuctions overwrote the (Node) and (Edge)
+2) in visitor functions overwrote the (Node) and (Edge)
 	-when visit is called on a Node and it is not already created, it is created
 	-when visit is called on an edge, and the second node it is connected to has not yet been created, it is created
 *Guolice Traversal is used to verify
 
 TASK 6:
+-------
+Task 6 consists of implementing the functionalities described earlier in the grammar for the Gui. 
+The user is given the means to compare the area and the placement of the Gui elements. 
+These elements can be of type “Circle”, “Triangle” or “Box”, and the properties of each type are provided by the user under the form of a metadata file, and should be written in a specific formatting in order to be correctly translated into shapes by the program. 
+Below is the proper format for each shape:
+	Circle : <center_point_X> , <center_point_Y> , <radius>
+	Box : <left_Bottom_corner_X> , <left_Bottom_corner_Y> , <width_on_the_X_axis>, <height_on_the_Y_axis>
+	Triangle: <point_1_X> , <point_1_Y> , <point_2_X> , <point_2_Y> , <point_3_X>  , <point_3_Y>
 
-Jallal
+The approach used to implement these shapes was to define a parent class named AbstractGui that implements all the functions common to the three types of shapes declared as virtual functions. Afterwards, each shape was implemented in a separate class, and the common functions were overridden accordingly. 
+
+After providing the desired shapes, the program allows the user to locate the shapes with respect to each other.  The operations implemented are:
+-	LeftOf:  		returns the shapes and the ones placed on their left
+-	RightOf: 		returns the shapes and the ones placed on their right
+-	Above:	 		returns the shapes and the ones placed above them
+-	Below: 	 		returns the shapes and the ones placed below them 
+-	Contains: 		returns the shapes and the ones contained in them
+-	SmallerThan: 	returns the shapes and the ones having a smaller area 
+-	BiggerThan: 	returns the shapes and the ones having a bigger area 
+-	EqualTo: 		returns the shapes and the ones having similar area
+
+In addition, the user can choose to verify an intersection or a union of the conditions listed above using the keywords “AND” and “OR” respectively. 
+For a more detailed description of these functions and the criteria used to define them, please refer to the file: "../Guolice/include/guiCompare.h"
+The user has no restriction on the combination of operations he chooses to use, as long as it is written in the acceptable format of our program.
+
+Finally, the user will obtain as a result of these operations, the number of solutions satisfying the conditions specified and which are the shapes satisfying them. If no solution is found, the program will return the number of solutions equal to zero.
+  
+A later version of this program will improve the algorithm used to verify whether a circle is contained in a triangle, since the approach now is to approximate the circle into a box. 
+Also, a good addition will be the rendering of these shapes and the implementation of events, such as onClick, onMouseOver etc…, and their corresponding event handlers.  
+A test scenario, along with the corresponding metadata files, is provided with the program for further examples.  
+
 
