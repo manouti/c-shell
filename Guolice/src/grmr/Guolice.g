@@ -17,8 +17,8 @@ options {
         #include	<ParseTree.h>
         #include	<Node.h>
         #include	<FunctionNode.h>
-        #include	<guiCompare.h>
-        #include	<guiConstruct.h>
+        #include	<GuiCompare.h>
+        #include	<GuiConstruct.h>
         #include	<AbstractGui.h>
         #include 	<Circle.h>
         #include 	<Box.h>
