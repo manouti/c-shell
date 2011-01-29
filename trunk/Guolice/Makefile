@@ -155,7 +155,7 @@ antlr-generate : $(GRAMMARFILE)
 compile : $(SOURCES) GuoliceLexer.h GuoliceParser.h Guolice.tokens
 	$(MKDIR) $(OBJECTS_DIR)
 	$(CPP) -c $(CPPFLAGS) $(INCPATH) $(SOURCES) -o $(SOURCES:.c=.o)
-	$(MOVE) $(<:.c=.o) $(OBJECTS_DIR)
+	$(MOVE) $(<:.cpp=.o) $(OBJECTS_DIR)
 	
 ####################### Link Target ########################
 . PHONY : link
