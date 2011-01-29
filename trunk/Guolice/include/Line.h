@@ -43,21 +43,21 @@ public:
  * @param p1
  * @param p2
  */
-	Line (Point p1, Point p2)
+	Line (Point* p1, Point* p2)
 	{
-		double dx = p1.getX() - p2.getX();
-		double dy = p1.getY() - p2.getY();
+		double dx = p1->getX() - p2->getX();
+		double dy = p1->getY() - p2->getY();
 
 		if (dx == 0)
 		{
 			a = 1;
 			b = 0;
-			c = p1.getX();
+			c = p1->getX();
 		}
 		else
 		{
 			double m = dy/dx;
-			double p = p1.getY() - (m * p1.getX());
+			double p = p1->getY() - (m * p1->getX());
 			
 			a = -m;
 			b = 1;
@@ -72,9 +72,9 @@ public:
  * @param p
  * @return <code>true</code> if the point is on the line.
  */
-	bool containsPoint(Point p)
+	bool containsPoint(Point* p)
 	{
-		return Geometry::isZero((a * p.getX() + b * p.getY() - c));
+		return Geometry::isZero((a * p->getX() + b * p->getY() - c));
 	}
 
 /**
@@ -83,16 +83,16 @@ public:
  * @param l2
  * @return the point at the intersection of <code>l1</code> and <code>l2</code>.
  */
-	static Point* getIntersection(Line l1, Line l2)
+	static Point* getIntersection(Line* l1, Line* l2)
 	{
-		if(!Geometry::isZero(l1.getB()))
+		if(!Geometry::isZero(l1->getB()))
 		{
-			double ap = l2.getA() - l2.getB() / l1.getB() * l1.getA();
+			double ap = l2->getA() - l2->getB() / l1->getB() * l1->getA();
 			if(!Geometry::isZero(ap))
 			{
-				double cp = l2.getC() - l2.getB() / l1.getB() * l1.getC();
+				double cp = l2->getC() - l2->getB() / l1->getB() * l1->getC();
 				double x = cp / ap;
-				double y = l1.getYFromX(x);
+				double y = l1->getYFromX(x);
 				Point* ret = new Point(x,y);
 				return ret;
 			}
@@ -101,12 +101,12 @@ public:
 		}
 		else
 		{
-			double x = l1.getC() / l1.getA();
-			if(Geometry::isZero(l2.getB()))
+			double x = l1->getC() / l1->getA();
+			if(Geometry::isZero(l2->getB()))
 			{
 				return NULL;
 			}
-			double y = l2.getYFromX(x);
+			double y = l2->getYFromX(x);
 			Point* ret = new Point(x,y);
 			return ret;
 		}
