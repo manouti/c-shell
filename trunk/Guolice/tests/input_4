@@ -1,8 +1,10 @@
 Circle 		: C1 ;
 Circle 		: C2 ;
 Box    		: B1 ;
-Box	   	: B2 ;
+Box	   		: B2 ;
 Triangle 	: T1 ;
+Triangle 	: T2 ;
+Triangle 	: T3 ;
 Label		: L1 ;
 
 constant int : const1 := 3 ;
@@ -17,6 +19,7 @@ procedure : foo ()
 end procedure
 
 B1 Contains ( (C1 LeftOf C2 ) Above ( B2 Below T1));
+(C1 Above C2) AND ((B1 Above B2) OR (T2 Above T3));
 
 function int : func1 ( int : x  )
 	var int : var3 ;	
