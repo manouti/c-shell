@@ -25,10 +25,10 @@ $(TARGET_STATIC) :  $(OBJECTS)
 	$(ARCHIVER) rcs $@ $<
 	mv -f $@ ../../lib
 	mkdir -p ../../.objs
-	mv -f $(OBJECTS) ../.objs
+	mv -f $(OBJECTS) ../../.objs
 	
 $(TARGET_SHARED) :  $(OBJECTS) 
-	$(CPP) -shared -Wl,-soname,libtranslate.so -o libtranslate.so $(OBJECTS)
+	$(CPP) $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) -shared -Wl,-soname,libtranslate.so -o libtranslate.so $(OBJECTS)
 	mv -f $@ ../../lib
 	mkdir -p ../../.objs
 	mv -f $(OBJECTS) ../../.objs
