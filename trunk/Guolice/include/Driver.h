@@ -1,4 +1,4 @@
-/** \file Driver.h
+/**\file Driver.h
 * Driver Class
 *
 */
@@ -34,7 +34,7 @@ class Driver{
     * /param int argc
     * /param char *argv[]
     */
-    int drive(int argc, char *argv[]);
+    void drive(int argc, char *argv[]);
 
 
 
