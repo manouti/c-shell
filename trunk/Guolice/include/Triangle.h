@@ -7,7 +7,7 @@
 
 
 /** 
-*\class Box
+*\class Triangle
 *\brief This class implements a GUI element of type "Triangle"
 *
 */ 

@@ -5,6 +5,11 @@
 #ifndef GEOMETRY
 #define GEOMETRY
 
+/**
+ * \class Geometry
+ * \brief Holds any static fields and methods used in Segment.h or Line.h
+ *
+ */
 class Geometry
 {
 public:

@@ -1,11 +1,15 @@
-
+/**\file Segment.h
+ * \brief contains a class that models a segment in 2-dimensional space
+ *
+ */
 #ifndef SEGMENT
 #define SEGMENT
 
 #include <cmath>
 #include <Line.h>
 /**
- * \class Class that models a line segment in 2-dimensional space.
+ * \class Segment
+ * \brief Class that models a segment in 2-dimensional space.
  *
  */
 class Segment{
