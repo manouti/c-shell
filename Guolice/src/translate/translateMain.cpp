@@ -7,6 +7,7 @@ using namespace std;
 
 ParseTree* Graph::pTree = new ParseTree();
 ProgGraph<string, string>* Graph::translatedGraph = new ProgGraph<string, string>();
+GuiChecker* Graph::guiChecker = new GuiChecker();
 
 StandardNodeFactory* StandardNodeFactory::staticInstance = 0;
 GuoliceNodeFactory* GuoliceNodeFactory::staticInstance = 0;
@@ -15,7 +16,7 @@ int main(int argc, char *argv[])
 {
     cout<<"This is the tranlator."<<endl;
     Driver driver;
-    int mainReturn =  driver.drive(argc, argv);
+    driver.drive(argc, argv);
 
     Graph::pTree->setRootNode(Graph::pTree->getRootNode());
 
