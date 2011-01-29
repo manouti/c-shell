@@ -27,16 +27,19 @@ void FunctionNode::setParameters( map<string, string>  param)
 
 string FunctionNode::printParameters()
 {
-	string params = "";
-	map<string, string>::iterator i;
-	
-	for (i = parameters.begin(); i != parameters.end(); ++i) {
-		params += i->first;
-		params += ": ";
-		params += i->second;
-		params += ";";
+	if(parameters.size() != 0) {
+		string params = "";
+		map<string, string>::iterator i;
+		
+		for (i = parameters.begin(); i != parameters.end(); ++i) {
+			params += i->first;
+			params += ": ";
+			params += i->second;
+			params += ";";
+		}
+		return params;
 	}
-	return params;
+	else return "";
 }
 
 string FunctionNode::printFunctionName()
@@ -68,4 +71,5 @@ string FunctionNode::toString()
 	nodeString += "\n\n";
 
 	return nodeString;
+	
 }

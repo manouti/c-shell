@@ -216,13 +216,14 @@ functionDec
 *		end function
 */
 }
-        : 'function' type ':' ID  { functionRootNode = new Node((string)(char*)($ID.text->chars), "functionNode"); }
+        : 'function' type ':' ID  { functionRootNode = new Node((string)(char*)($ID.text->chars), "functionNode");
+        				functionTree = new FunctionNode(functionRootNode); }
         '(' (parameters { functionTree->setParameters(functionParameters); } )? ')'  // here (type) is the return value type of the function
         ( statement
                 {
                         if($statement.node ->getValue() != "emptyMark")
                         {
-                                functionRootNode->addChild($statement.node, "functionStatment");
+                                functionRootNode->addChild($statement.node, "functionStatement");
                         }
                         for(int i = 0; i < variableDeclNodes.size(); i++)
                         {
