@@ -9,7 +9,8 @@
 #include <Point.h>
 
 /**
- * \class Class that models a line in 2-dimensional space.
+ * \class Line
+ * \brief Class that models a line in 2-dimensional space.
  *
  */
 
