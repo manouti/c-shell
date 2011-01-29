@@ -1,6 +1,6 @@
 /**\file Segment.h
  * \brief contains a class that models a segment in 2-dimensional space
- *
+ * This file was written to study the case where a triangle contains ather shapes
  */
 #ifndef SEGMENT
 #define SEGMENT

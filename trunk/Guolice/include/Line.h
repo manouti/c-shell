@@ -1,6 +1,6 @@
 /**\file Line.h
  * \brief contains a class that models a line in 2-dimensional space
- *
+ * This file was written to study the case where a triangle contains ather shapes
  */
 #ifndef LINE
 #define LINE
