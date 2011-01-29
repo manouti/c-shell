@@ -5,4 +5,4 @@ all : $(DOXYFILE)
 	$(DOC) $(DOXYFILE)
 	
 clean :
-	rmdir html
+	rm -r -f html
