@@ -14,7 +14,7 @@ without knowing the object file(s) to compile or link (e.g. compile target).
 Note: The project has been built and tested with the library provided for Windows and for Ubuntu 32bit. Sample graph output is in the Downloads section.
 
 
-*******************************************************************************************************************8
+*******************************************************************************************************************
 Commands:
 
 make:
@@ -29,4 +29,26 @@ make aspect:
 make translate:
 	Will translate the graph backwards and foward
 	A graph in form of graph.h should be placed in ./src/translate/translateMain.cpp in order to be translated
+
+
+*****************************************************************************************************************************
+TestCase:
+The test case should be written like this example:
+*******************************
+Circle : -2, 0, 1
+Box : 1, 2, 2, 1
+Triangle : 0,0 , 1 ,1 , 0 , 2
+
+*******************************
+
+where you put the name of the GUI_variable and the ':'
+followed by the parameters separated by comma.
+
+for the Circle 	:   'ID' : 'center_point_X' , 'center_point_Y' , 'radius'
+for the Box		:	'ID' : 'left_Bottom_corner_X' , 'left_Bottom_corner_Y' , 'length_(on_the_X_axis)' , 'width_(on_the_Y_axis)'
+for the triangle:	'ID' : 'point_1_X' , 'point_1_Y' , 'point_2_X' , 'point_2_Y' , 'point_3_X' , 'point_3_Y' 
+
+and then you put it the "../Guolice/tests/gui_metadata" file
+
+
 
