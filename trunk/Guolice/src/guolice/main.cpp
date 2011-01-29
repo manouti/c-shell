@@ -8,13 +8,19 @@
 using namespace std;
 
 // Initializing here will overwrite in grammar
-ParseTree* Graph::pTree = new ParseTree();
+ParseTree*  Graph::pTree = new ParseTree();
+GuiChecker* Graph::guiChecker = new GuiChecker();
 
 int ANTLR3_CDECL
 main	(int argc, char *argv[])
 {
 
     Driver driver;
-    return driver.drive(argc, argv);
+    driver.drive(argc, argv);
 
+    Graph::guiChecker->check();
+
+
+
+    return 0;
 }
