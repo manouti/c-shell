@@ -48,9 +48,9 @@ public:
 *
 * An integer holding the value of the X coordinate of the most left point of the Triangle element
 */
-	virtual int getLeftX() const
+	virtual double getLeftX() const
 	{
-		int leftX = point[0].getX();
+		double leftX = point[0].getX();
 		if (point[1].getX() < leftX)
 		{
 			leftX = point[1].getX();
@@ -69,9 +69,9 @@ public:
 *
 * An integer holding the value of the Y coordinate of the upper point of the Triangle element
 */
-	virtual int getUpperY() const
+	virtual double getUpperY() const
 	{
-		int upperY = point[0].getY();
+		double upperY = point[0].getY();
 		if (point[1].getY() > upperY)
 		{
 			upperY = point[1].getY();
@@ -90,9 +90,9 @@ public:
 *
 * An integer holding the value of the X coordinate of the most right point of the Triangle element
 */
-	virtual int getRightX() const
+	virtual double getRightX() const
 	{
-		int rightX = point[0].getX();
+		double rightX = point[0].getX();
 		if (point[1].getX() > rightX)
 		{
 			rightX = point[1].getX();
@@ -112,9 +112,9 @@ public:
 * An integer holding the value of the Y coordinate of the lower point of the Triangle element
 */
 	
-	virtual int getBottomY() const
+	virtual double getBottomY() const
 	{
-		int bottomY = point[0].getY();
+		double bottomY = point[0].getY();
 		if (point[1].getY() < bottomY)
 		{
 			bottomY = point[1].getY();
