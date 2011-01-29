@@ -36,7 +36,8 @@ using std::cout;
 using std::endl;
 
 /**
-* Returns the set of solutions of the Gui elements, ones being on the left of the others
+* Returns the set of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the elements of the first vector are on the left of the elements of the second vector
 * The condition is verified if the most left point of the first Gui element is on the left of the most left point of the second Gui element 
 * and the most right point of the first Gui element is on the left of the most right point of the second Gui element
 *
@@ -47,15 +48,22 @@ using std::endl;
 * the set of solutions to be tested, placed on the right of the comparison operation
 *
 *@return
-* A vector of solutions of all the groups of Gui elements located ones on the left of the others
+* A vector of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the elements of the first vector are on the left of the elements of the second vector. 
 */
+
 
 vector<vector<Solution> > guiIsLeftOf(vector<vector<Solution> > v1, vector<vector<Solution> > v2);
 
 
 
+
+
 /**
-* Returns the set of solutions of all the Gui elements that are located on the right of other elements
+* Returns the set of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the elements of the first vector are on the right of the elements of the second vector
+* The condition is verified if the most left point of the first Gui element is on the right of the most left point of the second Gui element 
+* and the most right point of the first Gui element is on the right of the most right point of the second Gui element
 *
 *@param v1
 * the set of solutions to be tested, placed on the left of the comparison operation
@@ -64,14 +72,18 @@ vector<vector<Solution> > guiIsLeftOf(vector<vector<Solution> > v1, vector<vecto
 * the set of solutions to be tested, placed on the right of the comparison operation
 *
 *@return
-* A vector of solutions of all the Gui elements that are located on the right of other elements
+* A vector of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the elements of the first vector are on the right of the elements of the second vector
 */
 vector<vector<Solution> > guiIsRightOf(vector<vector<Solution> > v1, vector<vector<Solution> > v2);
 
 
 
 /**
-* Returns the set of solutions of all the Gui elements that are located above other elements
+* Returns the set of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the elements of the first vector are above the elements of the second vector
+*The condition is verified if the upper point of the first Gui element is above the upper point of the second Gui element 
+*and the lower point of the first Gui element is above the lower point of the second Gui element
 *
 *@param v1
 * the set of solutions to be tested, placed on the left of the comparison operation
@@ -80,14 +92,18 @@ vector<vector<Solution> > guiIsRightOf(vector<vector<Solution> > v1, vector<vect
 * the set of solutions to be tested, placed on the right of the comparison operation
 *
 *@return
-* A vector of solutions of all the Gui elements that are located above other elements
+* A vector of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the elements of the first vector are above the elements of the second vector
 */
 vector<vector<Solution> > guiIsAbove(vector<vector<Solution> > v1, vector<vector<Solution> > v2);
 
 
 
 /**
-* Returns the set of solutions of all the Gui elements that are located below of other elements
+* Returns the set of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the elements of the first vector are below the elements of the second vector
+*The condition is verified if the upper point of the first Gui element is below the upper point of the second Gui element 
+*and the lower point of the first Gui element is below the lower point of the second Gui element
 *
 *@param v1
 * the set of solutions to be tested, placed on the left of the comparison operation
@@ -96,14 +112,26 @@ vector<vector<Solution> > guiIsAbove(vector<vector<Solution> > v1, vector<vector
 * the set of solutions to be tested, placed on the right of the comparison operation
 *
 *@return
-* A vector of solutions of all the Gui elements that are located below other elements
+* A vector of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the elements of the first vector are below of the elements of the second vector
 */
 vector<vector<Solution> > guiIsBelow(vector<vector<Solution> > v1, vector<vector<Solution> > v2);
 
 
 
-/**
-* Returns the set of solutions of all the Gui elements that contain other elements
+/*
+* Returns the set of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements contained in them
+* The condition verification depends on the Gui elements used and is as follows:
+* Case 1: The elements are of type "Circle": 
+*			The radius of the containing circle is bigger than the sum of the distance between the centers and the radius of the contained circle
+* Case 2: The containing element is of type "Circle" and the contained elements are of type "Triangle" or "Box":
+*		  	The distance between all the edges of the contained elements to the center of the circle is less than the radius of the containing circle
+* Case 3: The containing element is of type "Box":
+*			_The highest point of the contained element has a smaller Y coordinate than the the highest point of the containing element 
+*			_The lowest point of the contained element has a larger Y coordinate than the the lowest point of the containing element 
+*			_The most left point of the contained element has a larger X coordinate than the the most left point of the containing element 
+*			_The most right point of the contained element has a smaller X coordinate than the the most right point of the containing element
+* Case 4: The containing element is of type "Triangle": all contained elements are approximated to a "Boxes" and treated as such
 *
 *@param v1
 * the set of solutions to be tested, placed on the left of the comparison operation
@@ -112,14 +140,16 @@ vector<vector<Solution> > guiIsBelow(vector<vector<Solution> > v1, vector<vector
 * the set of solutions to be tested, placed on the right of the comparison operation
 *
 *@return
-* A vector of solutions of all the Gui elements that contain other elements
+* A vector of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements contained in them
 */
 vector<vector<Solution> > guiIsContains(vector<vector<Solution> > v1, vector<vector<Solution> > v2);
 
 
 
+
 /**
-* Returns the set of solutions of all the Gui elements having a smaller area compared to other elements
+* Returns the set of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the areas of the elements of the first vector are smaller than the areas of the elements of the second vector
 *
 *@param v1
 * the set of solutions to be tested, placed on the left of the comparison operation
@@ -128,14 +158,16 @@ vector<vector<Solution> > guiIsContains(vector<vector<Solution> > v1, vector<vec
 * the set of solutions to be tested, placed on the right of the comparison operation
 *
 *@return
-* A vector of solutions of all the Gui elements having a smaller area compared to other elements
+* A vector of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the areas of the elements of the first vector are smaller than the areas of the elements of the second vector
 */
 vector<vector<Solution> > guiSmallerThan(vector<vector<Solution> > v1, vector<vector<Solution> > v2);
 
 
 
 /**
-* Returns the set of solutions of all the Gui  elements having a larger area compared to other elements
+* Returns the set of solutionsformed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the areas of the elements of the first vector are larger than the areas of the elements of the second vector
 *
 *@param v1
 * the set of solutions to be tested, placed on the left of the comparison operation
@@ -144,14 +176,15 @@ vector<vector<Solution> > guiSmallerThan(vector<vector<Solution> > v1, vector<ve
 * the set of solutions to be tested, placed on the right of the comparison operation
 *
 *@return
-* A vector of solutions of all the Gui  elements having a larger area compared to other elements
+* A vector of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements, verifying the following: 
+* the areas of the elements of the first vector are larger than the areas of the elements of the second vector
 */
 vector<vector<Solution> > guiBiggerThan(vector<vector<Solution> > v1, vector<vector<Solution> > v2);
 
 
 
 /**
-* Returns the set of solutions of all the Gui  elements having equal areas
+* Returns the set of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements having equal areas
 *
 *@param v1
 * the set of solutions to be tested, placed on the left of the comparison operation
@@ -160,7 +193,7 @@ vector<vector<Solution> > guiBiggerThan(vector<vector<Solution> > v1, vector<vec
 * the set of solutions to be tested, placed on the right of the comparison operation
 *
 *@return
-* A vector of solutions of all the Gui  elements having a equal areas
+* A vector of solutions formed by the combination of members of a first vector of Gui elements, with the members of a second vector of Gui elements having equal areas
 */
 vector<vector<Solution> > guiEqualTo(vector<vector<Solution> > v1, vector<vector<Solution> > v2);
 
