@@ -1,6 +1,6 @@
 /**\file guiConstruct.cpp
 */
-#include <guiConstruct.h>
+#include <GuiConstruct.h>
 
 
 #ifndef capturedData
