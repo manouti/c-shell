@@ -1,6 +1,6 @@
 /**\file Line.h
  * \brief contains a class that models a line in 2-dimensional space
- * This file was written to study the case where a triangle contains ather shapes
+ * This file was written to study the case where a triangle contains other shapes
  */
 #ifndef LINE
 #define LINE
@@ -24,7 +24,7 @@ private:
 
 public:
 /**
- * A constructor that defines a line from three variavles.
+ * A constructor that defines a line from three variables.
  * @param a
  * @param b
  * @param c
@@ -112,6 +112,12 @@ public:
 		}
 	}
 
+/**
+ * Returns the Y coordinate corresponding to an X coordinate of the line.
+ * @param x
+ *
+ * @return Y as double 
+ */
 	double getYFromX(double x)
 	{
 		if(Geometry::isZero(b))
@@ -124,6 +130,12 @@ public:
 		}
 	}
 
+/**
+ * Returns the X coordinate corresponding to an Y coordinate of the line.
+ * @param y
+ *
+ * @return X as double 
+ */
 	double getXFromY(double y)
 	{
 		if(Geometry::isZero(a))
@@ -136,12 +148,23 @@ public:
 		}
 	}
 
-
+/**
+ * Checks whether two lines are perpendicular.
+ * @param l1
+ * @param l2
+ * @return <code>true</code> if the lines are perpendicular.
+ */
 	static bool arePerpendicular(Line l1, Line l2)
 	{
 		return Geometry::isZero(l1.getA() * l2.getA() + l1.getB() * l2.getB());
 	}
 
+/**
+ * Checks whether two lines are parallel.
+ * @param l1
+ * @param l2
+ * @return <code>true</code> if the lines are parallel.
+ */
 	static bool areParallel(Line l1, Line l2)
 	{
 		Line* nl1 = new Line(l1.getA(), l1.getB(), l1.getC());
@@ -152,6 +175,12 @@ public:
 		return (Geometry::areEqual(nl1->getA(), nl2->getA()) && Geometry::areEqual(nl1->getB(), nl2->getB()));
 	}
 
+/**
+ * Checks whether two lines are the same line.
+ * @param l1
+ * @param l2
+ * @return <code>true</code> if the lines are the same.
+ */
 	static bool areTheSame(Line l1, Line l2)
 	{
 		Line* nl1 = new Line(l1.getA(), l1.getB(), l1.getC());
