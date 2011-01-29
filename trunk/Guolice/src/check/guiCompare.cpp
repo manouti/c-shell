@@ -554,7 +554,10 @@ vector<vector<Solution> > guiEqualTo(vector<vector<Solution> > v1, vector<vector
 *			_The lowest point of the contained element has a larger Y coordinate than the the lowest point of the containing element 
 *			_The most left point of the contained element has a larger X coordinate than the the most left point of the containing element 
 *			_The most right point of the contained element has a smaller X coordinate than the the most right point of the containing element
-* Case 4: The containing element is of type "Triangle": all contained elements are approximated to a "Boxes" and treated as such
+* Case 4: The containing element is of type "Triangle": 
+*			_If the contained element is a "Box" or a "Triangle", the intersection of all the segments of the contained element with the containing 
+*             "Triangle" and then we will make sure that at least one point of the contained element is inside the triangle
+*			_If the contained element is a circle, it will be approximated to a "Box" and treated as such
 *
 *@param v1
 * the set of solutions to be tested, placed on the left of the comparison operation
