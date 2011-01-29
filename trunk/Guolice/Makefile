@@ -190,6 +190,11 @@ translate: $(TRANSLATEOBJECTS)
 	$(MOVE) $@ $(ARTIFACT_DIR)
 	cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./translate
 
+####################### Test Target #######################
+. PHONY : test
+
+test :
+	cd bin; ./Guolice
 	
 ####################### Clean Target #######################
 . PHONY : clean
@@ -216,6 +221,8 @@ help :
 	@echo "- compile will preprocess, compile and assemble the source files to object files and put them in the .objs directory."
 	@echo
 	@echo "- link will link the generated object files against the runtime library to produce a single executable file in the bin directory."
+	@echo
+	@echo "- test will run the program."
 	@echo
 	@echo "- clean will delete all generated object files and program generated from source."
 	@echo
