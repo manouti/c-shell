@@ -1,5 +1,5 @@
 #include "Driver.h"
-#include "translator.h"
+#include "Translator.h"
 
 #include <iostream>
 using namespace std;

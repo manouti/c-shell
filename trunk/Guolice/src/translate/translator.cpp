@@ -1,4 +1,4 @@
-#include "translator.h"
+#include "Translator.h"
 
 
 Translator::Translator(){

@@ -8,6 +8,7 @@
 #include <map>
 #include "ParseTree.h"
 #include <iostream>
+
 using namespace std;
 
 enum FactoryType {guolice, standard};
