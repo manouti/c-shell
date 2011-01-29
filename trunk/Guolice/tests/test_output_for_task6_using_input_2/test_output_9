@@ -1,0 +1,25 @@
+
+Evaluating '(C2 OR  (B1 Above B2)) Contains C1'
+Number Of solutions: 4
+=======================
+
+    Solution: 1
+    ------------
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 2
+    ------------
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    C1: Circle : [Center(0.00, 0.00), Radius(1.00)]
+
+    Solution: 3
+    ------------
+    C2: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    C1: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 4
+    ------------
+    B1: Box : [Corner(6.00, 8.00), Width(6.00), Height(6.00)]
+    B2: Box : [Corner(8.00, 6.00), Width(8.00), Height(6.00)]
+    C1: Circle : [Center(10.00, 10.00), Radius(1.00)]

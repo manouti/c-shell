@@ -1,3 +1,5 @@
+//please uncomment the formation that you want to evaluate.
+
 Circle 		: C1 ;
 Circle 		: C2 ;
 Box    		: B1 ;
@@ -7,28 +9,36 @@ Triangle 	: T2 ;
 Triangle 	: T3 ;
 Circle 		: C3 ;
 
+//Test 1
 B1 Contains T1;
-T2 Contains B1;
-C2 Contains T2;
 
-C1 Contains (C2 AND C3);
+//Test 2
+//T1 Contains B1;
 
-//
-(C2 OR  (B1 Above B2)) Contains C1 ;
+//Test 3
+//C1 Contains (C2 AND C3);
 
-C1 Contains (C2 OR (B1 Above B2))  ;
+//Test 4
+//(C1 Above C2) AND ((B1 Above B2) OR (T2 Above T3));
 
-C2 OR (C1 OR C3) ;
+//Test 5
+//C1 Contains (C2 OR (B1 Above B2))  ;
 
-(C1 Above C2) AND ((B1 Above B2) OR (T2 Above T3));
+//Test 6
+//C1 LeftOf (B1 Above (B2 RightOf T1));
 
-C1 LeftOf (B1 Above (B2 RightOf T1));
+//Test 7
+//(B1 BiggerThan C2) OR (B1 SmallerThan C2);
 
-B1 BiggerThan C2;
-B1 SmallerThan C2;
-B1 EqualTo C2;
+//Test 8
+//B2 Below ((C1 LeftOf C2) Above (B2 RightOf T1));
 
+//Test 9
+//the following setup will evaluate C2 contains C1 Or the boxes resulting from the solution
+// of the condition (B1 Above B2) Contains C1, meaning B1 contains C1 And B2 contains C1
+//(C2 OR  (B1 Above B2)) Contains C1 ;
 
-B2 Below ((C1 LeftOf C2) Above (B2 Below T1));
+//Test 10
+//B1 EqualTo C2;
 
 

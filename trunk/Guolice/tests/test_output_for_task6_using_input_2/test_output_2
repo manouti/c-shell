@@ -1,0 +1,39 @@
+
+Evaluating 'T1 Contains B1'
+Number Of solutions: 7
+=======================
+
+    Solution: 1
+    ------------
+    T1: Triangle : [Point_1(5.00, -3.00), Point_2(7.00, -3.00), Point_3(6.00, -2.00))]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+
+    Solution: 2
+    ------------
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+
+    Solution: 3
+    ------------
+    T1: Triangle : [Point_1(5.00, -5.00), Point_2(6.00, -8.00), Point_3(9.00, -8.00))]
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+
+    Solution: 4
+    ------------
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+    B1: Box : [Corner(5.00, 0.00), Width(4.00), Height(3.00)]
+
+    Solution: 5
+    ------------
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+    B1: Box : [Corner(10.00, -3.00), Width(2.00), Height(1.00)]
+
+    Solution: 6
+    ------------
+    T1: Triangle : [Point_1(-5.00, -5.00), Point_2(5.00, -6.00), Point_3(1.00, 10.00))]
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]
+
+    Solution: 7
+    ------------
+    T1: Triangle : [Point_1(-10.00, -2.00), Point_2(10.00, -2.00), Point_3(0.00, 10.00))]
+    B1: Box : [Corner(-1.00, -1.00), Width(2.00), Height(2.00)]

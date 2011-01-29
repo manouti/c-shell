@@ -1,0 +1,16 @@
+
+Evaluating 'C1 Contains (C2 AND C3)'
+Number Of solutions: 2
+=======================
+
+    Solution: 1
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(1.00)]
+    C3: Circle : [Center(0.00, 0.00), Radius(2.00)]
+
+    Solution: 2
+    ------------
+    C1: Circle : [Center(0.00, 0.00), Radius(3.00)]
+    C2: Circle : [Center(0.00, 0.00), Radius(2.00)]
+    C3: Circle : [Center(0.00, 0.00), Radius(1.00)]
