@@ -104,7 +104,7 @@ all :  $(TARGET)
 	cd $(MAIN_DIR) ; make;
 	cd $(CHECK_DIR) ; make;
 	cd $(TRANSLATE_DIR) ; make;
-   cd $(DOC_DIR) ;$(DOC) $(DOXYFILE) ;
+	cd $(DOC_DIR) ;$(DOC) $(DOXYFILE) ;
 	
 
 $(TARGET) : $(OBJECTS)
