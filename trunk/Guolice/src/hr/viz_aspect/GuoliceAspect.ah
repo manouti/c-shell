@@ -1,3 +1,10 @@
+/** \file GuoliceAspect.ah
+*
+* Contains aspect in order to procude visual got graph
+*
+*/
+
+
 #ifndef __GuoliceAspect_ah__
 #define __GuoliceAspect_ah__
 //
@@ -12,6 +19,20 @@
 #include <algorithm>
 #include <iostream>
 using namespace std;
+
+
+/**
+*
+* Will work around 3 functions:
+*traverse: after traverse has proceded will create a dot file with dot information in it. Will use dot command to translate
+*visitNode: when a node is visisted, dot outout will be added, keeping color coding between the same variables
+*visitEdge: create and edge in dot format
+*
+*/
+
+
+
+
 
 aspect GuolicelAspect{
 
