@@ -103,12 +103,8 @@ all :  $(TARGET)
 	cd $(GRMR_DIR) ; make;
 	cd $(GRAPH_DIR) ; make;
 	cd $(MAIN_DIR) ; make;
-	cd $(TRANSLATE_DIR) ; make;
 	cd $(CHECK_DIR) ; make;
-	
-
-
-	cd bin; export LD_LIBRARY_PATH=../third/antlr/libantlr3c-3.2/.libs:$(LD_PATH); ./Guolice
+	cd $(TRANSLATE_DIR) ; make;
 	
 
 $(TARGET) : $(OBJECTS)
@@ -119,7 +115,6 @@ $(TARGET) : $(OBJECTS)
 	$(MOVE) $@ $(ARTIFACT_DIR)
 
 
-	
 %.o : %.cpp
 	$(CPP) -c $(BUILDFLAG) $(CPPFLAGS) $(INCPATH) $< -o $@
 
