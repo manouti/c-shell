@@ -45,7 +45,8 @@ options {
 	map<string, vector<AbstractGui*> > guiObject ;
 
 	char* metadata_file = "../tests/gui_metadata";
-
+	char* comparison_output_file = "../tests/test_output";
+	string comparison_output_on_screen = "";	
 	string comparison_output = "";
 
 /** \function
@@ -124,7 +125,14 @@ program
 				cout << endl << endl;
 				cout << "****************************************************************************************************" << endl;
 				cout << endl << endl << "GUI Comparision Output:" << endl << endl;
-				cout << comparison_output << endl;
+				cout << comparison_output_on_screen << endl;
+
+				ofstream result(comparison_output_file);
+				if (result != NULL)
+				{
+					result << comparison_output;
+					result.close();
+				}
 			}
 			/****************************************************************************************************/
 	   }
@@ -866,11 +874,11 @@ guiCompareExpression returns [Node* node]
 
 			if ($g1.node->getMode() == "ERROR")
 			{
-				comparison_output += "*** error: '" + $g1.node->getValue() + "' was not declared.\n";
+				comparison_output_on_screen += "*** error: '" + $g1.node->getValue() + "' was not declared.\n";
 			}
 			if ($g2.node->getMode() == "ERROR")
 			{
-				comparison_output += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
+				comparison_output_on_screen += "*** error: '" + $g2.node->getValue() + "' was not declared.\n";
 			}
 		} )
 	;
@@ -892,21 +900,38 @@ guiStatement returns [Node* node]
 		{ 	
 			$node = $guiCompareExpression.node;
 			comparison_output += "\nEvaluating '" + (string)(char*)($guiCompareExpression.text->chars) + "'\n";
+			comparison_output_on_screen += "\nEvaluating '" + (string)(char*)($guiCompareExpression.text->chars) + "'\n";
 			vector<vector<Solution> > solutions;
 			solutions = node->evaluate(guiObject);
 			char cstr[25];
 			GuoliceUtil::int2str(cstr, solutions.size());
 			comparison_output += "Number Of solutions: " + string(cstr) + "\n";
 			comparison_output += "=======================\n";
+			comparison_output_on_screen += "Number Of solutions: " + string(cstr) + "\n";
+			comparison_output_on_screen += "=======================\n";
 			for (int solutionIt = 0 ; solutionIt < solutions.size() ; solutionIt++)
 			{
 				GuoliceUtil::int2str(cstr, solutionIt + 1);
+				if (solutionIt == 2)
+				{
+					comparison_output_on_screen += "\n    More solutions can be found on the output file ../tests/test_output.\n";
+				}
 				comparison_output += "\n    Solution: " + string(cstr) + "\n";
 				comparison_output += "    ------------\n";
+				if (solutionIt < 2)
+				{
+					comparison_output_on_screen += "\n    Solution: " + string(cstr) + "\n";
+					comparison_output_on_screen += "    ------------\n";
+				}
 				for (int solutionIt_sub = 0; solutionIt_sub < solutions.at(solutionIt).size() ; solutionIt_sub++)
 				{
 					comparison_output += "    " + solutions.at(solutionIt).at(solutionIt_sub).varName + ": " + 
 										solutions.at(solutionIt).at(solutionIt_sub).shape->toString() + "\n";
+					if (solutionIt < 2)
+					{
+						comparison_output_on_screen += "    " + solutions.at(solutionIt).at(solutionIt_sub).varName + ": " + 
+										solutions.at(solutionIt).at(solutionIt_sub).shape->toString() + "\n";
+					}
 				}
 			}
 		}  
