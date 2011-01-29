@@ -1,10 +1,33 @@
+/**\file Triangle.h
+*/
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
 #include "AbstractGui.h"
 
+
+/** 
+*\class Box
+*\brief This class implements a GUI element of type "Triangle"
+*
+*/ 
+
 class Triangle : public AbstractGui{
 public:
+/**
+* \brief The constructer of the Triangle class
+*@param A
+* The first corner of the triangle as point
+*
+*@param B
+* The second corner of the triangle as point
+*
+*@param C
+* The third corner of the triangle as point
+*
+*@param index
+* A integer used to create the identifier of the triangle element created
+*/
 
     Triangle(Point A, Point B, Point C, int index) : AbstractGui(3)
 	{
@@ -18,6 +41,13 @@ public:
     }
 
 
+/**
+* Returns the X coordinate of the most left point of the Triangle element
+*
+*@return
+*
+* An integer holding the value of the X coordinate of the most left point of the Triangle element
+*/
 	virtual int getLeftX() const
 	{
 		int leftX = point[0].getX();
@@ -32,6 +62,13 @@ public:
 		return leftX;
 	}
 	
+/**
+* Returns the Y coordinate of the upper point of the Triangle element
+*
+*@return
+*
+* An integer holding the value of the Y coordinate of the upper point of the Triangle element
+*/
 	virtual int getUpperY() const
 	{
 		int upperY = point[0].getY();
@@ -45,7 +82,14 @@ public:
 		}
 		return upperY; 
 	}
-	
+
+/**
+* Returns the X coordinate of the most right point of the Triangle element
+*
+*@return
+*
+* An integer holding the value of the X coordinate of the most right point of the Triangle element
+*/
 	virtual int getRightX() const
 	{
 		int rightX = point[0].getX();
@@ -59,6 +103,14 @@ public:
 		}
 		return rightX; 
 	}
+
+	/**
+* Returns the Y coordinate of the lower point of the Triangle element
+*
+*@return
+*
+* An integer holding the value of the Y coordinate of the lower point of the Triangle element
+*/
 	
 	virtual int getBottomY() const
 	{
@@ -73,7 +125,15 @@ public:
 		}
 		return bottomY; 
 	}
-	
+
+
+/**
+* Returns a string containing the information of a Triangle element in a specific format
+*
+*@return
+*
+* A string containing the information of a Triangle element as follows: "Triangle : [Point_1(Xa,Ya), Point_2(Xb,Yb), Point_3(Xc,Yc)]"
+*/
 	virtual string toString() const
 	{
 		string ret_str;
@@ -81,6 +141,13 @@ public:
 		return ret_str;
 	}
 
+/**
+* Calculates the area of the Triangle element
+*
+*@return
+*
+* The area of the Triangle element as double
+*/
 	virtual double getArea() const
 	{
 		double d1 = point[0].getDistanceTo(point[1]);

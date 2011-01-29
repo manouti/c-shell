@@ -1,25 +1,26 @@
+/**\file Guoliceutil.h
+*/
 #ifndef GUOLICE_UTIL
 #define GUOLICE_UTIL
 
-//#include <Point.h>
-//#include <cmath>
 #include <stdio.h>
 #include <string.h>
 
 
+/** 
+*
+*\brief This class implements the utility functions used accross the program
+*/ 
 class GuoliceUtil{
 public:
-	//double TOLERANCE = 1e-9;
-
-
-/*	
-	static Point getMidpoint(Point p1, Point p2) 
-	{
-		double x = (p1.getX() + p2.getX())/2.0;
-		double y = (p1.getY() + p2.getY())/2.0;
-		Point* newPoint = new Point(x , y);
-		return *newPoint;
-	}
+/**
+* Converts a number of type double to a string 
+*
+*@param str
+* A pointer to a string where the converted value will be stored
+*
+*@param number
+* A number of type double to be converted to string
 */
 	static void dbl2str (char* str, double number)
 	{
@@ -27,6 +28,15 @@ public:
 		sprintf(str, "%.2f", number);
 	}
 
+/**
+* Converts a number of type integer to a string 
+*
+*@param str
+* A pointer to a string where the converted value will be stored
+*
+*@param number
+* A number of type integer to be converted to string
+*/
 	static void int2str (char* str, int number)
 	{
 		memset(str, 0, 25);
@@ -34,4 +44,4 @@ public:
 	}
 };
 
-#endif
+#endif // GUOLICE_UTIL
