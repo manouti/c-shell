@@ -99,12 +99,12 @@ DIRECTORIES = ${wildcard ./src/*} .
 all :  $(TARGET) 
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
 	$(CHK_DIR_EXISTS) $(OBJECTS_DIR)
-	#$(DOC) $(DOXYFILE)
 	cd $(GRMR_DIR) ; make;
 	cd $(GRAPH_DIR) ; make;
 	cd $(MAIN_DIR) ; make;
 	cd $(CHECK_DIR) ; make;
 	cd $(TRANSLATE_DIR) ; make;
+   cd $(DOC_DIR) ;$(DOC) $(DOXYFILE) ;
 	
 
 $(TARGET) : $(OBJECTS)
@@ -167,7 +167,7 @@ link : $(OBJECTS)
 . PHONY : doc
 
 doc :
-	$(DOC) $(DOC_DIR)/$(DOXYFILE)
+	cd $(DOC_DIR) ;$(DOC) $(DOXYFILE) ;
 
 ###################### Aspect Target#######################
 
