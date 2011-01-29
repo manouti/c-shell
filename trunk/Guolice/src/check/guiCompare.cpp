@@ -601,15 +601,15 @@ vector<vector<Solution> > guiIsContains(vector<vector<Solution> > v1, vector<vec
 					Point* point;
 					Point* points1;
 					Point* points2[4];
-					Segment*  s1[3];
-					Segment*  s2[4];
+					Segment*  s1[3];// Segment*  s1_2; Segment*  s1_3;
+					Segment*  s2[4];//	Segment*  s2_2;	Segment*  s2_3; Segment*  s2_4; 
 	
 					if (gui_1.shape->getMode() == "Circle")
 					{
 						g1Radius = ((Circle*)(gui_1.shape))->getRadius();
 						g1Center = ((Circle*)(gui_1.shape))->getCenter();
 					}
-					else if (gui_1.shape->getMode() == "Box" )
+					else if (gui_1.shape->getMode() == "Box")
 					{
 						g1TopY = gui_1.shape->getUpperY();
 						g1BottomY = gui_1.shape->getBottomY();
@@ -672,7 +672,7 @@ vector<vector<Solution> > guiIsContains(vector<vector<Solution> > v1, vector<vec
 							met = condition1 && condition2 && condition3;
 						}
 					}
-					else if (gui_1.shape->getMode() == "Box")
+					else if (gui_1.shape->getMode() == "Box" )
 					{
 						bool condition1 = g1TopY >= g2TopY;
 						bool condition2 = g1BottomY <= g2BottomY;
@@ -688,10 +688,10 @@ vector<vector<Solution> > guiIsContains(vector<vector<Solution> > v1, vector<vec
 						points2[2] = new Point(g2RightX, g2TopY);
 						points2[3] = new Point(g2LeftX, g2TopY);
 
-						s2[0] = new Segment (&points1[0], &points1[1]);
-						s2[1] = new Segment (&points1[1], &points1[2]);
-						s2[2] = new Segment (&points1[2], &points1[3]);	
-						s2[3] = new Segment (&points1[0], &points1[3]);									
+						s2[0] = new Segment (points2[0], points2[1]);
+						s2[1] = new Segment (points2[1], points2[2]);
+						s2[2] = new Segment (points2[2], points2[3]);	
+						s2[3] = new Segment (points2[0], points2[3]);									
 						
 						Point* intersect;
 						for (int i = 0; i < 3 ; i++)
