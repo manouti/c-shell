@@ -1,9 +1,23 @@
-
+/**\file guiConstruct.cpp
+*/
 #include <guiConstruct.h>
 
 
 #ifndef capturedData
 #define capturedData atoi(str_metadata.substr(position1,position2).data())
+
+/**
+* Constructs the Circle element using metadata provided by the user
+*
+*@param metadata_file
+* the path of the file that contains the metadata of the element
+*
+*@param NodeValue
+* the identifier of the element
+*
+*@return
+* A vector containing all the circles listed in the metadata file 
+*/
 
 vector<AbstractGui*> guiConstruct::guiCircleConstruct(char* metadata_file, string NodeValue)
 {
@@ -52,6 +66,19 @@ vector<AbstractGui*> guiConstruct::guiCircleConstruct(char* metadata_file, strin
 
 	return circles;
 }
+
+/**
+* Constructs the Box element using metadata provided by the user
+*
+*@param metadata_file
+* the path of the file that contains the metadata of the element
+*
+*@param NodeValue
+* the identifier of the element
+*
+*@return
+* A vector containing all the boxes listed in the metadata file 
+*/
 
 vector<AbstractGui*> guiConstruct::guiBoxConstruct(char* metadata_file, string NodeValue)
 {
@@ -106,6 +133,19 @@ vector<AbstractGui*> guiConstruct::guiBoxConstruct(char* metadata_file, string N
 
 	return boxes;
 }
+
+/**
+* Constructs the Triangle element using metadata provided by the user
+*
+*@param metadata_file
+* the path of the file that contains the metadata of the element
+*
+*@param NodeValue
+* the identifier of the element
+*
+*@return
+* A vector containing all the triangles listed in the metadata file 
+*/
 
 vector<AbstractGui*> guiConstruct::guiTriangleConstruct(char* metadata_file, string NodeValue)
 {
